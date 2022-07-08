@@ -40,3 +40,11 @@ Roboto 700 400*/
     transform: rotate(360deg);
   }
 }
+
+.active{
+  border-bottom:1px solid #5ECE7B;
+}
+
+ .active > NavItem {
+   color: #5ECE7B;
+ }
