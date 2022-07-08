@@ -12,19 +12,39 @@ export default class Header extends Component{
     }
 
     componentDidMount() {
-        const currency = `{currencies{ label
-         symbol
+        const currency = `{currencies
+            { 
+        label
+        symbol
         }
     }`;
-        getInfo(currency).then(res => this.setState({currencies:res.currencies}))
+        getInfo(currency).then(res => this.setState({ currencies: res.currencies }))
+        window.addEventListener('keydown', this.closeCurrencyHandler)
+        window.addEventListener('click', this.closeCurrencyHandler)
+    }
+
+    componentDidUpdate() {
+        
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('keydown', this.closeCurrencyHandler)
+        window.addEventListener('click', this.closeCurrencyHandler)
     }
 
     currencyHandler = (e) => {
         const text = this.state.currencies.find(c => c.label === e.target.value);
         this.setState({ currency: text.symbol })
     }
+ 
+    closeCurrencyHandler = (e) => {
+        if (this.state.isVisible && e.code === "Escape") this.openCurrenciesHandler();
+        if(this.state.isVisible && e.target.nodeName === "DIV") this.setState({isVisible: false})
+    }
 
-    openCurrenciesHandler = () => this.setState({ isVisible: !this.state.isVisible });
+    openCurrenciesHandler = (e) => {
+        this.setState({ isVisible: !this.state.isVisible })
+    };
 
     setCurrencyHandler = (e) => this.setState({ currency: e.target.textContent.slice(0, 2), isVisible: !this.state.isVisible });
 

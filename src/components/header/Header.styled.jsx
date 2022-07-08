@@ -61,6 +61,9 @@ border-bottom:none;
 export const Logo = styled.div`
 width:41px;
 height:41px;
+& > a{
+    border-bottom:none;
+}
 `;
 
 export const Cart = styled.div`
