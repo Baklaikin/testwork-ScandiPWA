@@ -1,15 +1,18 @@
 {
   "files": {
-    "main.css": "/testwork-scandipwa/static/css/main.073c9b0a.css",
-    "main.js": "/testwork-scandipwa/static/js/main.f298e613.js",
+    "main.css": "/testwork-scandipwa/static/css/main.32c2ac44.css",
+    "main.js": "/testwork-scandipwa/static/js/main.60a928ec.js",
     "static/js/787.acee09f8.chunk.js": "/testwork-scandipwa/static/js/787.acee09f8.chunk.js",
+    "static/media/logo.svg": "/testwork-scandipwa/static/media/logo.6e0e5bc0083bc338881038d9cb56a3fb.svg",
+    "static/media/cart.svg": "/testwork-scandipwa/static/media/cart.8e092ad97ee064c38dbe887bcf036d1f.svg",
     "index.html": "/testwork-scandipwa/index.html",
-    "main.073c9b0a.css.map": "/testwork-scandipwa/static/css/main.073c9b0a.css.map",
-    "main.f298e613.js.map": "/testwork-scandipwa/static/js/main.f298e613.js.map",
+    "static/media/arrow-down.svg": "/testwork-scandipwa/static/media/arrow-down.766d7b11f183f77a1e40c47ea18dd7ee.svg",
+    "main.32c2ac44.css.map": "/testwork-scandipwa/static/css/main.32c2ac44.css.map",
+    "main.60a928ec.js.map": "/testwork-scandipwa/static/js/main.60a928ec.js.map",
     "787.acee09f8.chunk.js.map": "/testwork-scandipwa/static/js/787.acee09f8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.073c9b0a.css",
-    "static/js/main.f298e613.js"
+    "static/css/main.32c2ac44.css",
+    "static/js/main.60a928ec.js"
   ]
 }
