@@ -37,7 +37,11 @@ class App extends Component {
   }
 
   handleClick = (id) => {
-    this.setState({ inCart: [...this.state.inCart, id], product: id });
+    const data = this.state.categories[0].products.find(
+      (category) => category.id === id
+    );
+    console.log(data);
+    this.setState({ inCart: [...this.state.inCart, data], product: id });
     localStorage.setItem("product", `${JSON.stringify(id)}`);
   };
 
@@ -53,6 +57,16 @@ class App extends Component {
           <Route
             exact
             path="/"
+            element={
+              <ProductListPage
+                category={category}
+                handleClick={this.handleClick}
+              />
+            }
+          ></Route>
+          <Route
+            exact
+            path="/:routeName"
             element={
               <ProductListPage
                 category={category}

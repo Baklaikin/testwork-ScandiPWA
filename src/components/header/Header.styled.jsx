@@ -3,10 +3,11 @@ import styled from "styled-components";
 import ArrowDown from "../../images/arrow-down.svg";
 
 export const Container = styled.div`
+box-sizing:border-box;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:23px 101px;
+padding:0 101px;
 margin:0 auto;
 max-width:1440px;
 height:80px;
@@ -59,16 +60,37 @@ border-bottom:none;
 `;
 
 export const Logo = styled.div`
-width:41px;
-height:41px;
+width:33px;
+<height:3></height:3>1px;
 & > a{
     border-bottom:none;
 }
 `;
 
 export const Cart = styled.div`
+position:relative;
 height:20px;
 display:flex;
+cursor:pointer;
+`;
+
+export const CartQuantity = styled.div`
+position:absolute;
+top:-10px;
+right:-11px;
+display:flex;
+align-items:center;
+justify-content:center;
+width:20px;
+height:20px;
+margin-bottom:32px;
+border-radius:50%;
+background-color:black;
+`;
+
+export const CartQuantityText = styled.p`
+font-size:12px;
+color:white;
 `;
 
 export const Select = styled.ul`

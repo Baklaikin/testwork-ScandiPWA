@@ -3,12 +3,15 @@ import { NavLink } from "react-router-dom";
 import { ReactComponent as LogoIcon } from "../../images/logo.svg";
 import { ReactComponent as CartIcon } from "../../images/cart.svg";
 import { getInfo } from "../../api/api";
-import { Container, Navigation, List, Item, Logo, Cart, Select, Currency, CurrencyWrapper, CurrencyTitle, CurrencyItem, NavItem} from "./Header.styled";
+import Modal from "../modal/Modal";
+import { Container, Navigation, List, Item, Logo, Cart, Select, Currency, CurrencyWrapper, CurrencyTitle, CurrencyItem, NavItem, CartQuantity, CartQuantityText} from "./Header.styled";
 
 export default class Header extends Component{
     state = {
+        currencies:null,
         currency: "$",
-        isVisible: false
+        isVisible: false,
+        shouldModalOpen: false
     }
 
     componentDidMount() {
@@ -48,11 +51,16 @@ export default class Header extends Component{
 
     setCurrencyHandler = (e) => this.setState({ currency: e.target.textContent.slice(0, 2), isVisible: !this.state.isVisible });
 
+    cartModalHandler = () => {
+        this.setState({shouldModalOpen: !this.state.shouldModalOpen})
+    }
+
     render() {
         const { currencies, currency, isVisible } = this.state;
         return (
             <Container>
                 <Navigation>
+                    {/* Hide in diff component============= */}
                     <List>
                         {this.props &&
                             this.props.categories
@@ -63,16 +71,19 @@ export default class Header extends Component{
                                 </Item>
                             })}
                     </List>
+                    {/* ========================== */}
                 </Navigation>
 
                 {/* Logo component */}
                 <Logo>
-
                     <NavLink to="/" onClick={() => this.props.onChange("all")}>
                         <LogoIcon />
                     </NavLink>
                 </Logo>
+                 {/* Remove to diff component============ */}
                 <Cart>
+                    {this.props.inCart.length !== 0 && <CartQuantity><CartQuantityText>{this.props.inCart.length }</CartQuantityText></CartQuantity>}
+                    {this.state.shouldModalOpen && <Modal {...this.props } />}
                     <CurrencyWrapper>
                         {!isVisible ? <Currency onClick={this.openCurrenciesHandler}>
                             {currency}
@@ -88,8 +99,9 @@ export default class Header extends Component{
                            )}
                            </Select>                            
                     </CurrencyWrapper>
-                    <div><CartIcon /></div>
+                    <div><CartIcon  onClick={this.cartModalHandler}/></div>
                 </Cart>
+                {/* ========================================== */}
             </Container>
         )
     }
