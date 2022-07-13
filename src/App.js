@@ -41,6 +41,7 @@ class App extends Component {
       (category) => category.id === id
     );
     console.log(data);
+    // console.log(typeof id);
     this.setState({ inCart: [...this.state.inCart, data], product: id });
     localStorage.setItem("product", `${JSON.stringify(id)}`);
   };

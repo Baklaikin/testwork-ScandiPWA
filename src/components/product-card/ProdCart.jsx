@@ -18,7 +18,7 @@ export default class ProdCard extends Component {
                 </Thumb>
                 <Title>{name }</Title>
                 <Title>{prices[0].amount}</Title>
-                </Container>
+            </Container>
         )
     }
 

@@ -43,8 +43,9 @@ export const getCategory = (category) => {
 `};
 
 export const getProduct = (product) => {
+  const data = `"${product}"`;
  return `{
-  product(id:"${product}"){
+  product(id:${data}){
     id
     name
     inStock
