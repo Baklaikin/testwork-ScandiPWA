@@ -9,7 +9,7 @@ import { Container, Navigation, List, Item, Logo, Cart, Select, Currency, Curren
 export default class Header extends Component{
     state = {
         currencies:null,
-        currency: "$",
+        currency: "",
         isVisible: false,
         shouldModalOpen: false
     }
@@ -35,21 +35,22 @@ export default class Header extends Component{
         window.addEventListener('click', this.closeCurrencyHandler)
     }
 
-    currencyHandler = (e) => {
-        const text = this.state.currencies.find(c => c.label === e.target.value);
-        this.setState({ currency: text.symbol })
-    }
- 
     closeCurrencyHandler = (e) => {
+        // console.log(e);
         if (this.state.isVisible && e.code === "Escape") this.openCurrenciesHandler();
-        if(this.state.isVisible && e.target.nodeName === "DIV") this.setState({isVisible: false})
+        if (this.state.isVisible && e.target.nodeName === "DIV") this.setState({ isVisible: false });
+        if (this.state.shouldModalOpen && e.code === "Escape") this.cartModalHandler();
+        if (this.state.shouldModalOpen && e.target.nodeName === "DIV") this.cartModalHandler();
     }
 
     openCurrenciesHandler = (e) => {
         this.setState({ isVisible: !this.state.isVisible })
     };
 
-    setCurrencyHandler = (e) => this.setState({ currency: e.target.textContent.slice(0, 2), isVisible: !this.state.isVisible });
+    setCurrencyHandler = (e) => {
+        this.props.onChoice( e.target.textContent.slice(0, 2));
+        this.setState({ isVisible: !this.state.isVisible });
+    };
 
     cartModalHandler = () => {
         this.setState({shouldModalOpen: !this.state.shouldModalOpen})
@@ -57,6 +58,8 @@ export default class Header extends Component{
 
     render() {
         const { currencies, currency, isVisible } = this.state;
+        const currencyViewClosed = <Currency onClick={this.openCurrenciesHandler}>{this.props.currency}</Currency>;
+        const CurrencyViewOpened = <Currency className="is-open" onClick={this.openCurrenciesHandler}>{this.props.currency}</Currency>;
         return (
             <Container>
                 <Navigation>
@@ -83,13 +86,9 @@ export default class Header extends Component{
                  {/* Remove to diff component============ */}
                 <Cart>
                     {/* {this.props.inCart.length !== 0 && <CartQuantity><CartQuantityText>{this.props.inCart.length }</CartQuantityText></CartQuantity>} */}
-                    {this.state.shouldModalOpen && <Modal {...this.props } />}
+                    {/* {this.state.shouldModalOpen && <Modal {...this.props } />} */}
                     <CurrencyWrapper>
-                        {!isVisible ? <Currency onClick={this.openCurrenciesHandler}>
-                            {currency}
-                        </Currency>: <Currency className="is-open" onClick={this.openCurrenciesHandler}>
-                            {currency}
-                        </Currency>}
+                        {!isVisible ? currencyViewClosed : CurrencyViewOpened}
                             <Select>
                         {isVisible && currencies && currencies.map((cur) =>
                                 <CurrencyItem key={cur.label} >
@@ -100,8 +99,13 @@ export default class Header extends Component{
                            </Select>                            
                     </CurrencyWrapper>
                     <div onClick={this.cartModalHandler}>
-                        {this.props.inCart.length !== 0 && <CartQuantity><CartQuantityText>{this.props.inCart.length }</CartQuantityText></CartQuantity>}
-                        <CartIcon  /></div>
+                        {this.state.shouldModalOpen && <Modal {...this.props } />}
+                        {this.props.inCart.length !== 0 &&
+                            <CartQuantity>
+                                <CartQuantityText>{this.props.inCart.length}</CartQuantityText>
+                            </CartQuantity>}
+                        <CartIcon />
+                    </div>
                 </Cart>
                 {/* ========================================== */}
             </Container>

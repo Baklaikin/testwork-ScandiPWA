@@ -48,10 +48,10 @@ height:100%;
 :not(:last-of-type){
     margin-right:10px;
 }
+
 &.active{
     margin-bottom:-1px;
     color:#5ECE7B;
-}
 }
 `;
 
@@ -123,6 +123,11 @@ margin:0;
     right:0;
     transition: background-image, transform, 300ms, ease-in;
 }
+
+&.is-open{
+    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+
 &.is-open::after{
     transform: rotate(180deg);
 }

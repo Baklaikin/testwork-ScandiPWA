@@ -51,14 +51,14 @@ export default class ProuctPage extends Component{
     constructor() {
         super();
         this.state = {
-            product:null
+            product: null,
+            currency:''
         };
     }
 
     componentDidMount() {
         if (!this.props.product) {
              const product = JSON.parse(localStorage.getItem('product'));
-
             if (product !== null) {
                 getInfo(getProduct(product)).then(res => this.setState({ product: res.product }))
             }
@@ -67,18 +67,24 @@ export default class ProuctPage extends Component{
         if (this.props.product) {
             getInfo(getProduct(this.props.product)).then(res => this.setState({ product: res.product }))
         }
+        this.setState({currency: this.props.currency})
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState) {
         if (this.state.product === null) {
             const product = JSON.parse(localStorage.getItem('product'));
-            console.log("product:", product);
+            // console.log("product:", product);
             getInfo(getProduct(product)).then(res => this.setState({ product: res.product }))
+        }
+        if (this.props.currency !== prevProps.currency) {
+            console.log("updating currency");
+            this.setState({currency: this.props.currency})
         }
     }
 
     render() {
         const { product } = this.state;
+      
         return (
             //Main container
             <Container>
@@ -105,14 +111,17 @@ export default class ProuctPage extends Component{
                         <p>{product.attributes[0].name}</p>
                         <ul>
                             {product.attributes[0].items.map((item) => {
-                                return (<li>
+                                return (<li key={item.id}>
                                     <div>
                                     {item.value}
                                     </div>
                                     </li>)
                             })}
                         </ul>
-                         <p>{product.attributes[0].name}</p>
+                        <p>Price</p>
+                        <p>{(product.prices.map((price) => {
+                            if(price.currency.symbol == this.props.currency.trim()) return price.amount
+                        }))}</p>
                         </>
                     }
                 </div>

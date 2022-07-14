@@ -16,6 +16,7 @@ class App extends Component {
       category: "all",
       product: null,
       inCart: [],
+      currency: "$",
     };
   }
 
@@ -41,7 +42,6 @@ class App extends Component {
       (category) => category.id === id
     );
     console.log(data);
-    // console.log(typeof id);
     this.setState({ inCart: [...this.state.inCart, data], product: id });
     localStorage.setItem("product", `${JSON.stringify(id)}`);
   };
@@ -49,11 +49,19 @@ class App extends Component {
   handleCategoryChange = (category) =>
     this.setState({ category: `${category}` });
 
+  currencyHandler = (currency) => {
+    this.setState({ currency });
+  };
+
   render() {
     const { category, product } = this.state;
     return (
       <div className="App">
-        <Header {...this.state} onChange={this.handleCategoryChange} />
+        <Header
+          {...this.state}
+          onChange={this.handleCategoryChange}
+          onChoice={this.currencyHandler}
+        />
         <Routes>
           <Route
             exact
@@ -105,16 +113,22 @@ class App extends Component {
           ></Route>
           <Route
             path="/all/:id"
-            element={<ProductPage product={product} />}
+            element={
+              <ProductPage product={product} currency={this.state.currency} />
+            }
           ></Route>
           <Route
             exact
             path="/clothes/:id"
-            element={<ProductPage product={product} />}
+            element={
+              <ProductPage product={product} currency={this.state.currency} />
+            }
           ></Route>
           <Route
             path="/tech/:id"
-            element={<ProductPage product={product} />}
+            element={
+              <ProductPage product={product} currency={this.state.currency} />
+            }
           ></Route>
           <Route path="*" element={<NotFound />}></Route>
           <Route path={`${category}/*`} element={<NotFound />}></Route>
