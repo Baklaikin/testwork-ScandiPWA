@@ -82,7 +82,7 @@ export default class Header extends Component{
                 </Logo>
                  {/* Remove to diff component============ */}
                 <Cart>
-                    {this.props.inCart.length !== 0 && <CartQuantity><CartQuantityText>{this.props.inCart.length }</CartQuantityText></CartQuantity>}
+                    {/* {this.props.inCart.length !== 0 && <CartQuantity><CartQuantityText>{this.props.inCart.length }</CartQuantityText></CartQuantity>} */}
                     {this.state.shouldModalOpen && <Modal {...this.props } />}
                     <CurrencyWrapper>
                         {!isVisible ? <Currency onClick={this.openCurrenciesHandler}>
@@ -99,7 +99,9 @@ export default class Header extends Component{
                            )}
                            </Select>                            
                     </CurrencyWrapper>
-                    <div><CartIcon  onClick={this.cartModalHandler}/></div>
+                    <div onClick={this.cartModalHandler}>
+                        {this.props.inCart.length !== 0 && <CartQuantity><CartQuantityText>{this.props.inCart.length }</CartQuantityText></CartQuantity>}
+                        <CartIcon  /></div>
                 </Cart>
                 {/* ========================================== */}
             </Container>

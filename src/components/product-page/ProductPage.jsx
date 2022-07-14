@@ -99,7 +99,22 @@ export default class ProuctPage extends Component{
                 </MainPictureWrapper>
                 {/* Container for main info */}
                 <div>
-                    <h2>Product info here</h2>
+                    {product &&
+                        <>
+                        <h2>{product.brand}</h2>
+                        <p>{product.attributes[0].name}</p>
+                        <ul>
+                            {product.attributes[0].items.map((item) => {
+                                return (<li>
+                                    <div>
+                                    {item.value}
+                                    </div>
+                                    </li>)
+                            })}
+                        </ul>
+                         <p>{product.attributes[0].name}</p>
+                        </>
+                    }
                 </div>
             </Container>
         );
