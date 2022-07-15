@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React,{ Component } from "react";
 import styled from "styled-components";
 import { getInfo } from "../../api/api";
 import { getProduct } from "../../queries/queries";
@@ -15,11 +15,13 @@ export const MiniPicturesWrapper = styled.div`
 display:flex;
 flex-direction:column;
 /* border:1px solid green; */
+margin-right:20px;
 `;
 
 export const MainPictureWrapper = styled.div`
 width:610px;
 height:511px;
+margin-right:100px;
 overflow:hidden;
 /* border:1px solid black; */
 `;
@@ -45,6 +47,69 @@ export const Item = styled.li`
 &:not(:last-of-type){
     margin-bottom:32px;
 }
+`;
+
+export const ProductContainer = styled.div`
+text-align:left;
+`;
+
+export const AttributesList = styled.ul`
+// display:flex;
+// flex-wrap:wrap;
+// align-items:center;
+padding:0;
+margin-bottom:24px;
+list-style:none;
+`;
+
+export const ItemsList = styled.ul`
+display:flex;
+flex-wrap:wrap;
+align-items:center;
+`;
+
+export const AttributeItem = styled.li`
+display:flex;
+align-items:center;
+justify-content:center;
+// width:63px;
+height:45px;
+border:1px solid black;
+&:not(:last-of-type){
+    margin-right:12px;
+}
+`;
+
+export const AttributeItemContainer = styled.div`
+display:flex;
+align-items:center;
+justify-content:center;
+`;
+
+export const ProductTitle = styled.h2`
+// text-align: left;
+margin-bottom:43px;
+margin-top:0;
+`;
+
+export const ProductText = styled.p`
+// text-align: left;
+color: #1D1F22;
+font-weight:700;
+font-family: 'Roboto', sans-serif;
+`;
+
+export const DescriptionText = styled.p`
+color: #1D1F22;
+font-weight:400;
+font-family: 'Roboto', sans-serif;
+`;
+
+export const AddToCartButton = styled.button`
+width:100%;
+height:52px;
+background-color:green;
+margin-bottom:40px;
 `;
 
 export default class ProuctPage extends Component{
@@ -104,27 +169,36 @@ export default class ProuctPage extends Component{
                     {product && <Image src={product.gallery[0]} alt={product.description} />}
                 </MainPictureWrapper>
                 {/* Container for main info */}
-                <div>
+                <ProductContainer>
                     {product &&
                         <>
-                        <h2>{product.brand}</h2>
-                        <p>{product.attributes[0].name}</p>
-                        <ul>
-                            {product.attributes[0].items.map((item) => {
-                                return (<li key={item.id}>
-                                    <div>
-                                    {item.value}
-                                    </div>
-                                    </li>)
+                        <ProductTitle>{product.brand}</ProductTitle>
+                        <ProductText>{product.attributes.name}</ProductText>
+                        {product.attributes && <AttributesList>
+                            {product.attributes.map((item) => {
+                                return (<AttributeItem key={item.id}>
+                                    <AttributeItemContainer>
+                                        <p>{item.id}</p>
+                                        <ItemsList>
+                                            {item.items.map((it) => {
+                                                return <AttributeItem key={it.id}>{it.value}
+                                                </AttributeItem> 
+                                            })}
+                                        </ItemsList>
+                                    </AttributeItemContainer>
+                                </AttributeItem>)
                             })}
-                        </ul>
-                        <p>Price</p>
+                        </AttributesList>
+                        }
+                        <ProductText>Price</ProductText>
                         <p>{(product.prices.map((price) => {
-                            if(price.currency.symbol == this.props.currency.trim()) return price.amount
+                            if(price.currency.symbol === this.props.currency.trim()) return price.amount
                         }))}</p>
+                        <AddToCartButton type="button">Add to cart</AddToCartButton>
+                        <DescriptionText dangerouslySetInnerHTML={{__html:product.description}}></DescriptionText>
                         </>
                     }
-                </div>
+                </ProductContainer>
             </Container>
         );
     }
