@@ -36,7 +36,6 @@ export default class Header extends Component{
     }
 
     closeCurrencyHandler = (e) => {
-        // console.log(e);
         if (this.state.isVisible && e.code === "Escape") this.openCurrenciesHandler();
         if (this.state.isVisible && e.target.nodeName === "DIV") this.setState({ isVisible: false });
         if (this.state.shouldModalOpen && e.code === "Escape") this.cartModalHandler();

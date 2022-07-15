@@ -70,6 +70,7 @@ class App extends Component {
               <ProductListPage
                 category={category}
                 handleClick={this.handleClick}
+                currency={this.state.currency}
               />
             }
           ></Route>
@@ -80,6 +81,7 @@ class App extends Component {
               <ProductListPage
                 category={category}
                 handleClick={this.handleClick}
+                currency={this.state.currency}
               />
             }
           ></Route>
@@ -89,6 +91,7 @@ class App extends Component {
               <ProductListPage
                 category={"all"}
                 handleClick={this.handleClick}
+                currency={this.state.currency}
               />
             }
           ></Route>
@@ -99,6 +102,7 @@ class App extends Component {
               <ProductListPage
                 category={"clothes"}
                 handleClick={this.handleClick}
+                currency={this.state.currency}
               />
             }
           ></Route>
@@ -108,6 +112,7 @@ class App extends Component {
               <ProductListPage
                 category={"tech"}
                 handleClick={this.handleClick}
+                currency={this.state.currency}
               />
             }
           ></Route>

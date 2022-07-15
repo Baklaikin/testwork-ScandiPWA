@@ -61,7 +61,6 @@ border-bottom:none;
 
 export const Logo = styled.div`
 width:33px;
-<height:3></height:3>1px;
 & > a{
     border-bottom:none;
 }
@@ -106,7 +105,8 @@ z-index:1;
 `;
 
 export const Currency = styled.p`
-width:40px;
+display:flex;
+align-items:end;
 height:20px;
 margin:0;
 
@@ -118,9 +118,6 @@ margin:0;
     background-image: url(${ArrowDown});
     background-repeat:no-repeat;
     background-position:center;
-    position:absolute;
-    top:25%;
-    right:0;
     transition: background-image, transform, 300ms, ease-in;
 }
 
