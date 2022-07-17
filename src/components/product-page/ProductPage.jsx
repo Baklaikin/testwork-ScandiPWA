@@ -4,8 +4,8 @@ import { getProduct } from "../../queries/queries";
 import {
     Container, MiniPicturesWrapper, MainPictureWrapper, MiniImageThumb, Image, List, Item,
     ProductContainer, AttributesList, ItemsList, AttItem, ListItemTitle, AttributeItem,
-    AttributeItemContainer, ProductTitle,
-    ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton
+    AttributeItemContainer, ProductTitle, AttItemColor,
+    ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, ColorText
 } from "./ProductPage.styled";
 
 export default class ProuctPage extends Component{
@@ -40,6 +40,7 @@ export default class ProuctPage extends Component{
             this.setState({currency: this.props.currency})
         }
     }
+    
 
     render() {
         const { product } = this.state;
@@ -78,10 +79,10 @@ export default class ProuctPage extends Component{
                                             {item.items.map((it) => {
                                                 return item.id.includes("Color")
                                                     ?
-                                                    <AttItem key={it.id} style={{ backgroundColor: `${it.value}`, width:"36px", height: "36px" }}
-                                                    ></AttItem>
+                                                    <AttItemColor key={it.id} name={item.id} style={{ backgroundColor: `${it.value}`, width:"36px", height: "36px" }}
+                                                    >{ it.value}</AttItemColor>
                                                     :
-                                                    <AttItem key={it.id}>{it.value}</AttItem>
+                                                    <AttItem key={it.id} name={item.id}>{it.value}</AttItem>
                                             })}
                                         </ItemsList>
                                     </AttributeItemContainer>
@@ -93,7 +94,7 @@ export default class ProuctPage extends Component{
                         <ProductPrice>{(product.prices.map((price) => {
                             if(price.currency.symbol === this.props.currency.trim()) return `${this.state.currency} ${price.amount}`
                         }))}</ProductPrice>
-                        <AddToCartButton type="button">Add to cart</AddToCartButton>
+                        <AddToCartButton type="button" onClick={()=>this.props.handleClick(product)}>Add to cart</AddToCartButton>
                         <DescriptionText dangerouslySetInnerHTML={{__html:product.description}}></DescriptionText>
                         </>
                     }

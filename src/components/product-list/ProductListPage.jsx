@@ -29,10 +29,11 @@ export default class ProductListPage extends Component{
           <CategoryTitle>{ this.props.category}</CategoryTitle>
             <List> 
             {this.state.products && this.state.products.map(prod => {
+              const price = prod.prices.find(price => price.currency.symbol === this.props.currency.trim())
               return(
               <ItemLi key={prod.id}>
                 <Item to={`/${this.props.category}/${prod.id}`} key={prod.id}>
-                  <ProdCard value={prod} currency={this.props.currency} handleClick={this.props.handleClick} />
+                  <ProdCard value={prod} price={price.amount} currency={this.props.currency} handleClick={this.props.setProduct} />
                 </Item>
               </ItemLi>)
             })}

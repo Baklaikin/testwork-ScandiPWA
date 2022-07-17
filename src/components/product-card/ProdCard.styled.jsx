@@ -26,9 +26,19 @@ object-fit:cover;
 
 export const Title = styled.p`
 text-align:left;
+font-family: 'Raleway', sans-serif;
+font-weight: 500;
+font-size: 18px;
+line-height: 1.6;
+color: #1D1F22;
 `;
 
 export const OutOfStockText = styled.p`
+font-family: 'Raleway';
+font-weight: 400;
+font-size: 24px;
+line-height: 1.6;
+color: #8D8F9A;
 
 `;
 

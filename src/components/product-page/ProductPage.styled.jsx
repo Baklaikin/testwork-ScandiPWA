@@ -83,6 +83,10 @@ color: #292929;
 }
 `;
 
+export const AttItemColor = styled(AttItem)`
+color:transparent;
+`;
+
 export const ListItemTitle = styled.p`
 font-family: 'Roboto Condensed';
 font-weight: 700;
@@ -127,8 +131,9 @@ export const ProductText = styled.p`
 font-family: 'Roboto Condensed';
 font-weight: 700;
 font-size: 18px;
-line-height: 1x;
+line-height: 1;
 color: #1D1F22;
+margin-top:0;
 margin-bottom:10px;
 `;
 
@@ -136,12 +141,12 @@ export const ProductPrice = styled.p`
 font-family: 'Raleway';
 font-weight: 700;
 font-size: 24px;
-line-height: 18px;
+/* line-height: 18px; */
 color: #1D1F22;
 margin-bottom:20px;
 `;
 
-export const DescriptionText = styled.p`
+export const DescriptionText = styled.div`
 font-family: 'Roboto', sans-serif;
 font-weight: 400;
 font-size: 16px;
@@ -157,4 +162,8 @@ color: white;
 border:none;
 padding:16px 32px;
 margin-bottom:40px;
+`;
+
+export const ColorText = styled.p`
+visibility:hidden;
 `;

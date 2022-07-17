@@ -25,9 +25,13 @@ class App extends Component {
     getInfo(getAllProductsQuerry).then((res) =>
       this.setState({ categories: [...res.categories] })
     );
+    const cartData = JSON.parse(localStorage.getItem("cart"));
+    if (cartData) {
+      this.setState({ inCart: cartData });
+    }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     //Checking if there is previos product in localStorage and setting it to state, because App provides it to ProductPage
     if (this.state.product === null) {
       const prod = JSON.parse(localStorage.getItem("product"));
@@ -35,14 +39,24 @@ class App extends Component {
         this.setState({ product: prod });
       }
     }
+    if (this.state.inCart.length !== prevState.inCart.length) {
+      localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
+    }
+    // const cartData = JSON.parse(localStorage.getItem("cart"));
+    // if (cartData !== null && this.state.inCart.length === 0) {
+    //   this.setState({ inCart: [...this.state.inCart, cartData] });
+    //   console.log("updating cart");
+    // }
   }
 
-  handleClick = (id) => {
-    const data = this.state.categories[0].products.find(
-      (category) => category.id === id
-    );
+  handleClick = (data) => {
     console.log(data);
-    this.setState({ inCart: [...this.state.inCart, data], product: id });
+    this.setState({ inCart: [...this.state.inCart, data] });
+    // localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
+  };
+
+  handleProduct = (id) => {
+    this.setState({ product: id });
     localStorage.setItem("product", `${JSON.stringify(id)}`);
   };
 
@@ -69,8 +83,8 @@ class App extends Component {
             element={
               <ProductListPage
                 category={category}
-                handleClick={this.handleClick}
                 currency={this.state.currency}
+                setProduct={this.handleProduct}
               />
             }
           ></Route>
@@ -80,8 +94,8 @@ class App extends Component {
             element={
               <ProductListPage
                 category={category}
-                handleClick={this.handleClick}
                 currency={this.state.currency}
+                setProduct={this.handleProduct}
               />
             }
           ></Route>
@@ -90,8 +104,8 @@ class App extends Component {
             element={
               <ProductListPage
                 category={"all"}
-                handleClick={this.handleClick}
                 currency={this.state.currency}
+                setProduct={this.handleProduct}
               />
             }
           ></Route>
@@ -101,8 +115,8 @@ class App extends Component {
             element={
               <ProductListPage
                 category={"clothes"}
-                handleClick={this.handleClick}
                 currency={this.state.currency}
+                setProduct={this.handleProduct}
               />
             }
           ></Route>
@@ -111,28 +125,40 @@ class App extends Component {
             element={
               <ProductListPage
                 category={"tech"}
-                handleClick={this.handleClick}
                 currency={this.state.currency}
+                setProduct={this.handleProduct}
               />
             }
           ></Route>
           <Route
             path="/all/:id"
             element={
-              <ProductPage product={product} currency={this.state.currency} />
+              <ProductPage
+                product={product}
+                currency={this.state.currency}
+                handleClick={this.handleClick}
+              />
             }
           ></Route>
           <Route
             exact
             path="/clothes/:id"
             element={
-              <ProductPage product={product} currency={this.state.currency} />
+              <ProductPage
+                product={product}
+                currency={this.state.currency}
+                handleClick={this.handleClick}
+              />
             }
           ></Route>
           <Route
             path="/tech/:id"
             element={
-              <ProductPage product={product} currency={this.state.currency} />
+              <ProductPage
+                product={product}
+                currency={this.state.currency}
+                handleClick={this.handleClick}
+              />
             }
           ></Route>
           <Route path="*" element={<NotFound />}></Route>
