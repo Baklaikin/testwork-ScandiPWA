@@ -46,7 +46,7 @@ margin-right: 12px;
 width:140px;
 height:43px;
 padding:13px;
-font-family: 'Raleway';
+font-family: 'Raleway', sans-serif;
 font-weight: 600;
 font-size: 14px;
 line-height: 1.2;

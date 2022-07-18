@@ -33,7 +33,8 @@ export default class ProductListPage extends Component{
               return(
               <ItemLi key={prod.id}>
                 <Item to={`/${this.props.category}/${prod.id}`} key={prod.id}>
-                  <ProdCard value={prod} price={price.amount} currency={this.props.currency} handleClick={this.props.setProduct} />
+                    <ProdCard value={prod} price={price.amount} currency={this.props.currency} handleClick={
+                      this.props.setProduct} />
                 </Item>
               </ItemLi>)
             })}
