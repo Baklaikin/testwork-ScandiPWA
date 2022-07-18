@@ -96,8 +96,8 @@ export const Select = styled.ul`
 list-style:none;
 position:absolute;
 top:30px;
-left:-17px;
-padding:0;
+left:-31px;
+padding: 0;
 margin:0;
 width:114px;
 box-shadow:0px 4px 35px rgba(168, 172, 176, 0.19);
@@ -146,8 +146,10 @@ line-height:1.6;
 `;
 
 export const CurrencyItem = styled.li`
+text-align:center;
 margin-bottom:13px;
 &:first-of-type{
     margin-top:13px;
 }
+
 `;

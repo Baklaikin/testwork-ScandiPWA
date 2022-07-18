@@ -92,7 +92,8 @@ export default class ProuctPage extends Component{
                         }
                         <ProductText>Price:</ProductText>
                         <ProductPrice>{(product.prices.map((price) => {
-                            if(price.currency.symbol === this.props.currency.trim()) return `${this.state.currency} ${price.amount}`
+                            if (price.currency.symbol === this.props.currency.trim()) return `${this.state.currency} ${price.amount}`
+                            return null;
                         }))}</ProductPrice>
                         <AddToCartButton type="button" onClick={()=>this.props.handleClick(product)}>Add to cart</AddToCartButton>
                         <DescriptionText dangerouslySetInnerHTML={{__html:product.description}}></DescriptionText>

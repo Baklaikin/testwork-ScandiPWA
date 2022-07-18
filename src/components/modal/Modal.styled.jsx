@@ -22,7 +22,6 @@ height: 600px;
 overflow:auto;
 padding: 32px 16px;
 background-color: white;
-border:1px solid red;
 `;
 
 export const ModalTitle = styled.h3`
@@ -70,7 +69,7 @@ display: flex;
 align-items: center;
 `;
 
-export const ModalList = styled.ul`
+export const ModalList = styled.div`
 display: flex;
 flex-direction: column;
 `;

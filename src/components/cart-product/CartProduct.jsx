@@ -1,47 +1,60 @@
 import { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { Container, CartList, CartListItem, CartTitle } from "./CartProduct.styled";
+import {
+    Container, CartList, CartListItem, CartTitle, CartContainer, QuantityContainer, Plus, Minus,
+AttributesList, TextContainer, Price, Size, AttributesItem,List, AttributesColorItem, PhotoImage, PhotoThumb} from "./CartProduct.styled";
 
 export default class CartProduct extends Component{
     render() {
-        console.log(uuidv4());
+        const items = [...this.props.cart];
+        let cart = [];
+        for (let item of items) {
+            if (!cart.includes(item)) {
+                cart.push(item); 
+            }
+        }
+        console.log("cart:",cart);
         return (
-            <Container>
+            // <Container>
                 <CartList>
-                    {this.props && this.props.cart.map((item) => {
+                    {this.props && cart.map((item) => {
                         return <CartListItem key={uuidv4()}>
-                            <div>
-                                <div>
-                                    <CartTitle>{item.brand}</CartTitle>
-                                    <p>{item.name}</p>
-                                    <p>{item.prices.map((price) => {
+                            <CartContainer>
+                                <TextContainer>
+                                    <CartTitle>{item.name}</CartTitle>
+                                    <Price>{item.prices.map((price) => {
                                         if (price.currency.symbol === this.props.currency.trim()) return `${this.props.currency} ${price.amount}`
-                                    })}</p>
-                                    <p>{item.size}</p>
-                                    <ul className="size">
+                                    })}
+                                    </Price>
+                                    <List>
                                         {item.attributes.map((i) => {
                                             return <li key={uuidv4()}>
-                                                <p>{i.name}</p>
-                                                <ul>
-                                                    {i.items.map(item => <li key={uuidv4()}>{ item.value}</li>)}
-                                                </ul>
+                                                <Size>{i.name}:</Size>
+                                                <AttributesList>
+                                                    {i.items.map(item => {
+                                                        return i.id.includes("Color") ? <AttributesColorItem key={uuidv4()} style={{ backgroundColor: `${item.value}`, minWidth:"16px",width:"16px",  height:"16px" }}>{item.value}</AttributesColorItem> :
+                                                            <AttributesItem key={uuidv4()}>{item.value}</AttributesItem>
+                                                    })}
+                                                </AttributesList>
                                             </li>
                                         })}
-                                    </ul>
+                                    </List>
                                     
-                                    <ul className="color"></ul>
-                                    </div>
-                                    <div className="plus-minus">
-                                    <div>+</div>
-                                    <div>0</div>
-                                    <div>-</div>
-                                </div>
-                                <div className="photo"></div>
-                            </div>
+                                    {/* <ul className="color"></ul> */}
+                                    </TextContainer>
+                                    <QuantityContainer>
+                                        <Plus></Plus>
+                                        <div>{this.props.cart.filter(prod => prod.id === item.id).length}</div>
+                                        <Minus></Minus>
+                                    </QuantityContainer>
+                                <PhotoThumb>
+                                    <PhotoImage src={item.gallery[0]} alt={item.id} />
+                                </PhotoThumb>
+                            </CartContainer>
                         </CartListItem>
                     })}
                 </CartList>
-            </Container>
+            // </Container>
         );
 }
 }
