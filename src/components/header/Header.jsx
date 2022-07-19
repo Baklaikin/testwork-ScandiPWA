@@ -1,10 +1,11 @@
 import { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { ReactComponent as LogoIcon } from "../../images/logo.svg";
 import { ReactComponent as CartIcon } from "../../images/cart.svg";
 import { getInfo } from "../../api/api";
 import Modal from "../modal/Modal";
-import { Container, Navigation, List, Item, Logo, Cart, Select, Currency, CurrencyWrapper, CurrencyTitle, CurrencyItem, NavItem, CartQuantity, CartQuantityText} from "./Header.styled";
+import NavigationList from "components/navigation-list/NavigationList";
+import Logotype from "components/logo/Logo";
+import { Container, Navigation, Cart, CartQuantity, CartQuantityText} from "./Header.styled";
+import CurrencyPicker from "components/currency/CurrencyPicker";
 
 export default class Header extends Component{
     state = {
@@ -56,47 +57,19 @@ export default class Header extends Component{
     }
 
     render() {
-        const { currencies, currency, isVisible } = this.state;
-        const currencyViewClosed = <Currency onClick={this.openCurrenciesHandler}>{this.props.currency}</Currency>;
-        const CurrencyViewOpened = <Currency className="is-open" onClick={this.openCurrenciesHandler}>{this.props.currency}</Currency>;
         return (
             <Container>
                 <Navigation>
-                    {/* Hide in diff component============= */}
-                    <List>
-                        {this.props &&
-                            this.props.categories
-                            .map(prop => {
-                                const activeLink = this.props.category === prop.name ? "active" : '';
-                                return <Item key={prop.name} className={activeLink}>
-                                    <NavItem to={`/${prop.name}`} onClick={() => this.props.onChange(`${prop.name}`)}> {prop.name.toUpperCase()}</NavItem>
-                                </Item>
-                            })}
-                    </List>
-                    {/* ========================== */}
+                    <NavigationList { ...this.props} />
                 </Navigation>
-
-                {/* Logo component */}
-                <Logo>
-                    <NavLink to="/" onClick={() => this.props.onChange("all")}>
-                        <LogoIcon />
-                    </NavLink>
-                </Logo>
-                 {/* Remove to diff component============ */}
+                <Logotype onChange={this.props.onChange} />
                 <Cart>
-                    {/* {this.props.inCart.length !== 0 && <CartQuantity><CartQuantityText>{this.props.inCart.length }</CartQuantityText></CartQuantity>} */}
-                    {/* {this.state.shouldModalOpen && <Modal {...this.props } />} */}
-                    <CurrencyWrapper>
-                        {!isVisible ? currencyViewClosed : CurrencyViewOpened}
-                            <Select>
-                        {isVisible && currencies && currencies.map((cur) =>
-                                <CurrencyItem key={cur.label} >
-                                    <CurrencyTitle onClick={this.setCurrencyHandler}>{cur.symbol} {cur.label}</CurrencyTitle>
-                                </CurrencyItem>
-                           
-                           )}
-                           </Select>                            
-                    </CurrencyWrapper>
+                    <CurrencyPicker
+                        onClick={this.setCurrencyHandler}
+                        openCurrencyHandler={this.openCurrenciesHandler}
+                        currencies={this.state.currencies} isVisible={this.state.isVisible}
+                        currency={this.props.currency}
+                    />
                     <div onClick={this.cartModalHandler}>
                         {this.state.shouldModalOpen && <Modal {...this.props } />}
                         {this.props.inCart.length !== 0 &&
@@ -106,7 +79,6 @@ export default class Header extends Component{
                         <CartIcon />
                     </div>
                 </Cart>
-                {/* ========================================== */}
             </Container>
         )
     }

@@ -1,8 +1,12 @@
 import { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
-    Container, CartList, CartListItem, CartTitle, CartContainer, QuantityContainer, Plus, Minus,
-AttributesList, TextContainer, Price,Item, Size, AttributesItem,List, AttributesColorItem, PhotoImage, PhotoThumb} from "./CartProduct.styled";
+    CartList, CartListItem, CartTitle,
+    CartContainer, QuantityContainer,
+    Plus, Minus, AttributesList, TextContainer,
+    Price, Item, Size, AttributesItem, List,
+    AttributesColorItem, PhotoImage, PhotoThumb
+} from "./CartProduct.styled";
 
 export default class CartProduct extends Component{
     render() {
@@ -14,18 +18,15 @@ export default class CartProduct extends Component{
                 cart.push(item); 
             }
         }
-        console.log("cart:",cart);
         return (
-            // <Container>
                 <CartList>
                     {this.props && cart.map((item) => {
                         return <CartListItem key={uuidv4()}>
                             <CartContainer>
                                 <TextContainer>
                                     <CartTitle>{item.name}</CartTitle>
-                                    <Price>{item.prices.map((price) => {
-                                        if (price.currency.symbol === this.props.currency.trim()) return `${this.props.currency} ${price.amount}`
-                                    })}
+                                    <Price>{this.props.currency}{item.prices.find((price) => 
+                                        price.currency.symbol === this.props.currency.trim()).amount}                                        
                                     </Price>
                                     <List>
                                         {item.attributes.map((i) => {
@@ -53,7 +54,6 @@ export default class CartProduct extends Component{
                         </CartListItem>
                     })}
                 </CartList>
-            // </Container>
         );
 }
 }

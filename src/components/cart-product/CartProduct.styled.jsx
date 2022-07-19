@@ -13,11 +13,6 @@ overflow: auto;
 }
 `;
 
-export const Container = styled.div`
-width: 100%;
-padding: 32px 16px;
-`;
-
 export const CartTitle = styled.h2`
 width:128px;
 margin-top:0;

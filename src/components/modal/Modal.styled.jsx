@@ -73,7 +73,3 @@ export const ModalList = styled.div`
 display: flex;
 flex-direction: column;
 `;
-
-export const ModalListItem = styled.li`
-align-items: flex-end;
-`;
