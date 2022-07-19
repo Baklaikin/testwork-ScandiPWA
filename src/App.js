@@ -3,6 +3,7 @@ import Header from "./components/header/Header";
 import ProductListPage from "./components/product-list/ProductListPage";
 import ProductPage from "./components/product-page/ProductPage";
 import NotFound from "./components/not-found/NotFound";
+import CartPage from "components/cart-page/CartPage";
 import { getInfo } from "./api/api";
 import { getAllProductsQuerry } from "./queries/queries";
 import { Routes, Route } from "react-router-dom";
@@ -50,7 +51,7 @@ class App extends Component {
   }
 
   handleClick = (data) => {
-    console.log(data);
+    // console.log(data);
     this.setState({ inCart: [...this.state.inCart, data] });
     // localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
   };
@@ -129,6 +130,10 @@ class App extends Component {
                 setProduct={this.handleProduct}
               />
             }
+          ></Route>
+          <Route
+            path="/cart"
+            element={<CartPage currency={this.state.currency} />}
           ></Route>
           <Route
             path="/all/:id"

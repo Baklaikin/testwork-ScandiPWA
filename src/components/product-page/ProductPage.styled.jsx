@@ -164,6 +164,10 @@ padding:16px 32px;
 margin-bottom:40px;
 `;
 
+export const AddToCartButtonDisabled = styled(AddToCartButton)`
+background-color:grey;
+`;
+
 export const ColorText = styled.p`
 visibility:hidden;
 `;

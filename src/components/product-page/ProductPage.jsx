@@ -5,7 +5,7 @@ import {
     Container, MiniPicturesWrapper, MainPictureWrapper, MiniImageThumb, Image, List, Item,
     ProductContainer, AttributesList, ItemsList, AttItem, ListItemTitle, AttributeItem,
     AttributeItemContainer, ProductTitle, AttItemColor,
-    ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, ColorText
+    ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, AddToCartButtonDisabled, ColorText
 } from "./ProductPage.styled";
 
 export default class ProuctPage extends Component{
@@ -95,7 +95,8 @@ export default class ProuctPage extends Component{
                             if (price.currency.symbol === this.props.currency.trim()) return `${this.state.currency} ${price.amount}`
                             return null;
                         }))}</ProductPrice>
-                        <AddToCartButton type="button" onClick={()=>this.props.handleClick(product)}>Add to cart</AddToCartButton>
+                        {product.inStock === true ? <AddToCartButton type="button" onClick={() => this.props.handleClick(product)}>Add to cart</AddToCartButton> : 
+                        <AddToCartButtonDisabled type="button" disabled onClick={()=>this.props.handleClick(product)}>Add to cart</AddToCartButtonDisabled>}
                         <DescriptionText dangerouslySetInnerHTML={{__html:product.description}}></DescriptionText>
                         </>
                     }

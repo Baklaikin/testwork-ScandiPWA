@@ -7,6 +7,7 @@ export const CartList = styled.ul`
 `;
 
 export const CartListItem = styled.li`
+overflow: auto;
 &:not(:last-of-type){
     margin-bottom:40px;
 }
@@ -30,7 +31,7 @@ color: #1D1F22;
 
 export const CartContainer = styled.div`
 display:flex;
-height:190px;
+// height:190px;
 `;
 
 export const TextContainer = styled.div`
@@ -134,4 +135,10 @@ flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+`;
+
+export const ListItem = styled.li`
+&:not(:last-of-type){
+    margin-bottom:8px;
+}
 `;

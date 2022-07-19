@@ -2,14 +2,15 @@ import { Component } from "react";
 import { v4 as uuidv4 } from "uuid";
 import {
     Container, CartList, CartListItem, CartTitle, CartContainer, QuantityContainer, Plus, Minus,
-AttributesList, TextContainer, Price, Size, AttributesItem,List, AttributesColorItem, PhotoImage, PhotoThumb} from "./CartProduct.styled";
+AttributesList, TextContainer, Price, Size, AttributesItem,List,ListItem, AttributesColorItem, PhotoImage, PhotoThumb} from "./CartProduct.styled";
 
 export default class CartProduct extends Component{
     render() {
         const items = [...this.props.cart];
         let cart = [];
         for (let item of items) {
-            if (!cart.includes(item)) {
+            const inCart = cart.find(prod => prod.id === item.id)
+            if (!inCart) {
                 cart.push(item); 
             }
         }
@@ -28,7 +29,7 @@ export default class CartProduct extends Component{
                                     </Price>
                                     <List>
                                         {item.attributes.map((i) => {
-                                            return <li key={uuidv4()}>
+                                            return <ListItem key={uuidv4()}>
                                                 <Size>{i.name}:</Size>
                                                 <AttributesList>
                                                     {i.items.map(item => {
@@ -36,11 +37,9 @@ export default class CartProduct extends Component{
                                                             <AttributesItem key={uuidv4()}>{item.value}</AttributesItem>
                                                     })}
                                                 </AttributesList>
-                                            </li>
+                                            </ListItem>
                                         })}
                                     </List>
-                                    
-                                    {/* <ul className="color"></ul> */}
                                     </TextContainer>
                                     <QuantityContainer>
                                         <Plus></Plus>
