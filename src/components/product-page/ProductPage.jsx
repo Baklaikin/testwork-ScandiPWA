@@ -5,7 +5,7 @@ import {
     Container, MiniPicturesWrapper, MainPictureWrapper, MiniImageThumb, Image, List, Item,
     ProductContainer, AttributesList, ItemsList, AttItem, ListItemTitle, AttributeItem,
     AttributeItemContainer, ProductTitle, AttItemColor,
-    ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, AddToCartButtonDisabled, ColorText
+    ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, ColorText, AddToCartButtonDisabled
 } from "./ProductPage.styled";
 
 export default class ProuctPage extends Component{
@@ -70,6 +70,7 @@ export default class ProuctPage extends Component{
                         <ProductTitle>{product.brand}</ProductTitle>
                         <ProductSubTitle>{product.name}</ProductSubTitle>
                         <ProductText>{product.attributes.name}</ProductText>
+
                         {product.attributes && <AttributesList>
                             {product.attributes.map((item) => {
                                 return (<AttributeItem key={item.id}>

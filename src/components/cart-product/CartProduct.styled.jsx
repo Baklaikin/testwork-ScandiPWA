@@ -31,7 +31,7 @@ color: #1D1F22;
 
 export const CartContainer = styled.div`
 display:flex;
-// height:190px;
+height:auto;
 `;
 
 export const TextContainer = styled.div`
@@ -137,7 +137,7 @@ flex-grow: 1;
     justify-content: flex-end;
 `;
 
-export const ListItem = styled.li`
+export const Item = styled.li`
 &:not(:last-of-type){
     margin-bottom:8px;
 }
