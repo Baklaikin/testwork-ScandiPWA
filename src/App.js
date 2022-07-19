@@ -133,7 +133,12 @@ class App extends Component {
           ></Route>
           <Route
             path="/cart"
-            element={<CartPage currency={this.state.currency} />}
+            element={
+              <CartPage
+                currency={this.state.currency}
+                cart={this.state.inCart}
+              />
+            }
           ></Route>
           <Route
             path="/all/:id"
