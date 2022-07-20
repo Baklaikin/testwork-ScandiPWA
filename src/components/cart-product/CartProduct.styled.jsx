@@ -8,9 +8,9 @@ export const CartList = styled.ul`
 
 export const CartListItem = styled.li`
 overflow: auto;
-&:not(:last-of-type){
+// &:not(:last-of-type){
     margin-bottom:40px;
-}
+// }
 `;
 
 export const CartTitle = styled.h2`
@@ -21,7 +21,7 @@ font-family: 'Raleway', sans-serif;
 font-weight: 300;
 font-size: 16px;
 line-height: 1.6;
-color: #1D1F22;
+color: var(--text-color);
 `;
 
 export const CartContainer = styled.div`
@@ -73,7 +73,7 @@ export const Paragraph = styled.p`
 margin-top:0;
 margin-bottom: 8px;
 font-family: 'Raleway', sans-serif;
-color: #1D1F22;
+color: var(--text-color);
 `;
 
 export const Price = styled(Paragraph)`
@@ -94,8 +94,8 @@ align-items:center;
 justify-content:center;
 min-width:24px;
 height: 24px;
-color: #1D1F22;
-border: 1px solid #1D1F22;
+color: var(--text-color);
+border: 1px solidvar(--text-color);
 &:not(:last-of-type){
     margin-right:8px;
 }
@@ -103,7 +103,7 @@ font-family: 'Source Sans Pro';
 font-weight: 400;
 font-size: 14px;
 line-height: 1.6;
-color: #1D1F22;
+color: var(--text-color);
 `;
 
 export const AttributesColorItem = styled(AttributesItem)`

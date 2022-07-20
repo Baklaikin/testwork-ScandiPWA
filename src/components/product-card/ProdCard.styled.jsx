@@ -30,7 +30,7 @@ font-family: 'Raleway', sans-serif;
 font-weight: 500;
 font-size: 18px;
 line-height: 1.6;
-color: #1D1F22;
+color: var(--text-color);
 `;
 
 export const OutOfStockText = styled.p`
@@ -51,7 +51,6 @@ width:100%;
 height:100%;
 top: 0;
 left: 0;
-// transform: translate(-50%, -50%);
 background-color: rgba(255,255,255,0.5);
 `;
 

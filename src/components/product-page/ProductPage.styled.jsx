@@ -67,7 +67,7 @@ export const AttItem = styled.li`
 display:flex;
 align-items:center;
 justify-content:center;
-border:1px solid #1D1F22;
+border:1px solid var(--text-color);
 width:63px;
 height:45px;
 margin-bottom:12px;
@@ -114,7 +114,7 @@ font-family: 'Raleway', sans-serif;
 font-weight:600;
 font-size: 30px;
 line-height: 27px;
-color: #1D1F22;
+color: var(--text-color);
 `;
 
 export const ProductSubTitle = styled.h3`
@@ -124,7 +124,7 @@ font-family: 'Raleway', sans-serif;
 font-weight:400;
 font-size: 30px;
 line-height: 27px;
-color: #1D1F22;
+color: var(--text-color);
 `;
 
 export const ProductText = styled.p`
@@ -132,7 +132,7 @@ font-family: 'Roboto Condensed';
 font-weight: 700;
 font-size: 18px;
 line-height: 1;
-color: #1D1F22;
+color: var(--text-color);
 margin-top:0;
 margin-bottom:10px;
 `;
@@ -142,7 +142,7 @@ font-family: 'Raleway';
 font-weight: 700;
 font-size: 24px;
 /* line-height: 18px; */
-color: #1D1F22;
+color: var(--text-color);
 margin-bottom:20px;
 `;
 
@@ -151,7 +151,7 @@ font-family: 'Roboto', sans-serif;
 font-weight: 400;
 font-size: 16px;
 line-height: 1.6;
-color: #1D1F22;
+color: var(--text-color);
 `;
 
 export const AddToCartButton = styled.button`

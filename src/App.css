@@ -8,6 +8,10 @@ html{
   overflow-y: overlay;
 }
 
+:root{
+  --text-color: #1D1F22;
+}
+
 ul{
   list-style:none;
   padding:0;

@@ -29,7 +29,7 @@ font-family: 'Raleway', sans-serif;
 font-weight: 700;
 font-size: 16px;
 line-height: 1.6;
-color: #1D1F22;
+color: var(--text-color);
 margin-top:0;
 `;
 
@@ -38,7 +38,7 @@ font-family: 'Raleway', sans-serif;
 font-weight: 500;
 font-size: 16px;
 line-height: 1.6;
-color: #1D1F22;
+color: var(--text-color);
 `;
 
 export const Button = styled.button`
@@ -51,9 +51,9 @@ font-weight: 600;
 font-size: 14px;
 line-height: 1.2;
 text-transform: uppercase;
-color: #1D1F22;
+color: var(--text-color);
 background: #FFFFFF;
-border: 1px solid #1D1F22;
+border: 1px solid var(--text-color);
 cursor: pointer;
 `;
 
@@ -72,4 +72,29 @@ align-items: center;
 export const ModalList = styled.div`
 display: flex;
 flex-direction: column;
+`;
+
+export const TotalContainer = styled.div`
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 32px;
+`;
+
+export const TotalTitle = styled.h3`
+margin: 0;
+font-family: 'Roboto', sans-serif;
+font-weight: 500;
+font-size: 16px;
+line-height: 1.125;
+color: var(--text-color);
+`;
+
+export const TotalParagraph = styled.p`
+margin: 0;
+font-family: 'Raleway', sans-serif;
+font-weight: 700;
+font-size: 16px;
+line-height: 1.6;
+color: var(--text-color);
 `;
