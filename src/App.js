@@ -68,6 +68,30 @@ class App extends Component {
     this.setState({ currency });
   };
 
+  cartAmountHandler = (e, id) => {
+    const plus = e.target.id === "plus";
+    const minus = e.target.id === "minus";
+    if (minus) {
+      const cart = [...this.state.inCart];
+      const data = this.state.inCart.indexOf(
+        this.state.inCart.find((item) => item.id === id.id)
+      );
+      cart.map((item) => {
+        const idx = cart.indexOf(item);
+        if (idx === data) {
+          cart.splice(idx, 1);
+        }
+        return cart;
+      });
+      this.setState({
+        inCart: cart,
+      });
+    }
+    if (plus) {
+      this.handleClick(id);
+    }
+  };
+
   render() {
     const { category, product } = this.state;
     return (
@@ -76,6 +100,7 @@ class App extends Component {
           {...this.state}
           onChange={this.handleCategoryChange}
           onChoice={this.currencyHandler}
+          cartAmountHandler={this.cartAmountHandler}
         />
         <Routes>
           <Route
@@ -86,6 +111,7 @@ class App extends Component {
                 category={category}
                 currency={this.state.currency}
                 setProduct={this.handleProduct}
+                inCart={this.state.inCart}
               />
             }
           ></Route>
@@ -97,6 +123,7 @@ class App extends Component {
                 category={category}
                 currency={this.state.currency}
                 setProduct={this.handleProduct}
+                inCart={this.state.inCart}
               />
             }
           ></Route>
@@ -107,6 +134,7 @@ class App extends Component {
                 category={"all"}
                 currency={this.state.currency}
                 setProduct={this.handleProduct}
+                inCart={this.state.inCart}
               />
             }
           ></Route>
@@ -118,6 +146,7 @@ class App extends Component {
                 category={"clothes"}
                 currency={this.state.currency}
                 setProduct={this.handleProduct}
+                inCart={this.state.inCart}
               />
             }
           ></Route>
@@ -128,6 +157,7 @@ class App extends Component {
                 category={"tech"}
                 currency={this.state.currency}
                 setProduct={this.handleProduct}
+                inCart={this.state.inCart}
               />
             }
           ></Route>

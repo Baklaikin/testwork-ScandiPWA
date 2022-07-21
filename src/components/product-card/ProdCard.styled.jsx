@@ -1,20 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+position: relative;
 height: auto;
 flex-grow: 1;
 padding:16px;
 cursor: pointer;
-:hover{
-    box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-}
+// :hover{
+//     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+// }
 `;
 
 export const Thumb = styled.div`
 position: relative;
 width:100%;
-height:346px;
+width: 354px;
+height:330px;
 overflow: hidden;
+margin-bottom: 24px;
 `;
 
 export const Image = styled.img`
@@ -25,19 +28,15 @@ object-fit:cover;
 `;
 
 export const Title = styled.p`
+margin: 0;
 text-align:left;
-font-family: 'Raleway', sans-serif;
 font-weight: 500;
 font-size: 18px;
-line-height: 1.6;
 color: var(--text-color);
 `;
 
 export const OutOfStockText = styled.p`
-font-family: 'Raleway';
-font-weight: 400;
 font-size: 24px;
-line-height: 1.6;
 color: #8D8F9A;
 
 `;
@@ -61,4 +60,17 @@ export const Item = styled.li`
   flex-basis: calc((100% / 3) - 30px);
   margin-left: 10px;
   margin-top: 10px;
+`;
+
+export const InCart = styled.div`
+position: absolute;
+bottom: 74px;
+right: 31px;
+display:flex;
+align-items: center;
+justify-content: center;
+width:52px;
+height: 52px;
+border-radius: 50%;
+background-color: var(--button-color);
 `;

@@ -2,12 +2,11 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
-box-sizing:border-box;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:0 101px;
 margin:0 auto;
+padding:0 101px;
 max-width:1440px;
 height:80px;
 `;
@@ -37,9 +36,9 @@ right:-11px;
 display:flex;
 align-items:center;
 justify-content:center;
+margin-bottom:32px;
 width:20px;
 height:20px;
-margin-bottom:32px;
 border-radius:50%;
 background-color:black;
 `;

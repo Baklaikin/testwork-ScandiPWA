@@ -43,9 +43,9 @@ export default class CartProduct extends Component{
                                     </List>
                                     </TextContainer>
                                     <QuantityContainer>
-                                        <Plus></Plus>
+                                        <Plus id="plus" onClick={e=>this.props.cartAmountHandler(e,item)}></Plus>
                                         <div>{this.props.cart.filter(prod => prod.id === item.id).length}</div>
-                                        <Minus></Minus>
+                                        <Minus id="minus" onClick={e=>this.props.cartAmountHandler(e,item)}></Minus>
                                     </QuantityContainer>
                                 <PhotoThumb>
                                     <PhotoImage src={item.gallery[0]} alt={item.id} />

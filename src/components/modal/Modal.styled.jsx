@@ -1,36 +1,33 @@
 import styled from "styled-components";
 
 export const ModalBackground = styled.div`
- position: fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  top: 80px;
-  left: 0;
-  z-index: 3;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(57, 55, 72, 0.22);
+position: fixed;
+display: flex;
+justify-content: center;
+align-items: center;
+top: 80px;
+left: 0;
+z-index: 3;
+width: 100vw;
+height: 100vh;
+background-color: rgba(57, 55, 72, 0.22);
 `;
 
 export const ModalWindow = styled.div`
 position:absolute;
 top:0px;
 right:72px;
+padding: 32px 16px;
 width: 325px;
 height: 600px;
 overflow:auto;
-padding: 32px 16px;
 background-color: white;
 `;
 
 export const ModalTitle = styled.h3`
-font-family: 'Raleway', sans-serif;
-font-weight: 700;
-font-size: 16px;
-line-height: 1.6;
-color: var(--text-color);
 margin-top:0;
+font-weight: 700;
+color: var(--text-color);
 `;
 
 export const Span = styled.span`
@@ -58,10 +55,10 @@ cursor: pointer;
 `;
 
 export const CheckButton = styled(Button)`
+margin-right:0;
+border-color: transparent;
 background: #5ECE7B;
 color: white;
-border-color: transparent;
-margin-right:0;
 `;
 
 export const ButtonsList = styled.ul`
@@ -85,16 +82,12 @@ export const TotalTitle = styled.h3`
 margin: 0;
 font-family: 'Roboto', sans-serif;
 font-weight: 500;
-font-size: 16px;
 line-height: 1.125;
 color: var(--text-color);
 `;
 
 export const TotalParagraph = styled.p`
 margin: 0;
-font-family: 'Raleway', sans-serif;
 font-weight: 700;
-font-size: 16px;
-line-height: 1.6;
 color: var(--text-color);
 `;

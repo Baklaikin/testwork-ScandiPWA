@@ -26,11 +26,8 @@ height:100%;
 `;
 
 export const NavItem = styled(NavLink)`
-font-family:'Raleway', sans-serif;
-font-size:16px;
 line-height:1.2;
 font-weight:600;
-text-decoration:none;
 border-bottom: none;
 color: inherit;
 color:inherit;

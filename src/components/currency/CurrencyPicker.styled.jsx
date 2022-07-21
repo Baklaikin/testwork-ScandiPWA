@@ -33,8 +33,8 @@ margin-right:10px;
 `;
 
 export const CurrencyItem = styled.li`
-text-align:center;
 margin-bottom:13px;
+text-align:center;
 &:first-of-type{
     margin-top:13px;
 }
@@ -42,23 +42,22 @@ margin-bottom:13px;
 `;
 
 export const CurrencyTitle = styled.p`
-cursor:pointer;
 margin:0;
 font-size:18px;
-line-height:1.6;
+cursor:pointer;
 &:hover{
     background-color:#EEEEEE;
 }
 `;
 
 export const Select = styled.ul`
-list-style:none;
 position:absolute;
 top:30px;
 left:-31px;
 padding: 0;
 margin:0;
 width:114px;
+list-style:none;
 box-shadow:0px 4px 35px rgba(168, 172, 176, 0.19);
 z-index:1;
 `;

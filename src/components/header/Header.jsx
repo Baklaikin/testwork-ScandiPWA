@@ -52,8 +52,13 @@ export default class Header extends Component{
         this.setState({ isVisible: !this.state.isVisible });
     };
 
-    cartModalHandler = () => {
-        this.setState({shouldModalOpen: !this.state.shouldModalOpen})
+    cartModalHandler = (e) => {
+        console.log("modal event", e.currentTarget);
+        if (this.state.shouldModalOpen && e.currentTarget !== "modal") {
+            this.setState({ shouldModalOpen: !this.state.shouldModalOpen })
+        } else if (!this.state.shouldModalOpen && e.currentTarget.id === "modal") {
+            this.setState({ shouldModalOpen: !this.state.shouldModalOpen })
+        }
     }
 
     render() {
@@ -64,13 +69,13 @@ export default class Header extends Component{
                 </Navigation>
                 <Logotype onChange={this.props.onChange} />
                 <Cart>
-                    <CurrencyPicker
+                    <CurrencyPicker id="currency"
                         onClick={this.setCurrencyHandler}
                         openCurrencyHandler={this.openCurrenciesHandler}
                         currencies={this.state.currencies} isVisible={this.state.isVisible}
                         currency={this.props.currency}
                     />
-                    <div onClick={this.cartModalHandler}>
+                    <div id="modal" name="modal" onClick={e => this.cartModalHandler(e)}>
                         {this.state.shouldModalOpen && <Modal {...this.props } />}
                         {this.props.inCart.length !== 0 &&
                             <CartQuantity>

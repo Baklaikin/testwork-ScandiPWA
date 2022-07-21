@@ -8,19 +8,14 @@ export const CartList = styled.ul`
 
 export const CartListItem = styled.li`
 overflow: auto;
-// &:not(:last-of-type){
-    margin-bottom:40px;
-// }
+margin-bottom:40px;
 `;
 
 export const CartTitle = styled.h2`
 width:128px;
 margin-top:0;
 margin-bottom:4px;
-font-family: 'Raleway', sans-serif;
 font-weight: 300;
-font-size: 16px;
-line-height: 1.6;
 color: var(--text-color);
 `;
 
@@ -72,20 +67,16 @@ flex-wrap: wrap;
 export const Paragraph = styled.p`
 margin-top:0;
 margin-bottom: 8px;
-font-family: 'Raleway', sans-serif;
 color: var(--text-color);
 `;
 
 export const Price = styled(Paragraph)`
 font-weight: 500;
-font-size: 16px;
-line-height: 1.6;
 `;
 
 export const Size = styled(Paragraph)`
-font-weight: 400;
 font-size: 14px;
-line-height: 16px;
+line-height: 1.1428;
 `;
 
 export const AttributesItem = styled.li`
@@ -95,7 +86,7 @@ justify-content:center;
 min-width:24px;
 height: 24px;
 color: var(--text-color);
-border: 1px solidvar(--text-color);
+border: 1px solid var(--text-color);
 &:not(:last-of-type){
     margin-right:8px;
 }

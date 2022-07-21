@@ -6,7 +6,7 @@ import { CartList, CartListItem, CartTitle,
     CartContainer, QuantityContainer,
     Plus, Minus, AttributesList, TextContainer,
     Price, Item, Size, AttributesItem, List,
-    AttributesColorItem, PhotoImage, PhotoThumb, CartModel} from "./CartPage.styled"
+    AttributesColorItem, PhotoImage, PhotoThumb, CartModel, PageName} from "./CartPage.styled"
 
 export default class CartPage extends Component{
 
@@ -20,7 +20,7 @@ export default class CartPage extends Component{
             }
         }
         return <Container>
-            <h1>Cart</h1>
+            <PageName>Cart</PageName>
             {/* <CartProduct cart={this.props.cart } currency={this.props.currency} /> */}
             <CartList>
                     {this.props && cart.map((item) => {
