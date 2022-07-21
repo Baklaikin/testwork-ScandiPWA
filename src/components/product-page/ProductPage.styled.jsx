@@ -76,6 +76,7 @@ font-weight: 400;
 font-size: 16px;
 line-height: 18px;
 letter-spacing: 0.05em;
+cursor: pointer;
 color: #292929;
 
 &:not(:last-of-type){

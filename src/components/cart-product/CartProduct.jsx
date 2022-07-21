@@ -10,6 +10,7 @@ import {
 
 export default class CartProduct extends Component{
     render() {
+        // const spec = this.props.cart
         let items = [...this.props.cart];
         let cart = [];
         for (let item of items) {
@@ -30,12 +31,15 @@ export default class CartProduct extends Component{
                                     </Price>
                                     <List>
                                         {item.attributes.map((i) => {
+                                            console.log("item in attributeS:", i);
+                                            console.log("props in attributeS:", item.size);
                                             return <Item key={uuidv4()}>
                                                 <Size>{i.name}:</Size>
                                                 <AttributesList>
-                                                    {i.items.map(item => {
-                                                        return i.id.includes("Color") ? <AttributesColorItem key={uuidv4()} style={{ backgroundColor: `${item.value}`, minWidth:"16px",width:"16px",  height:"16px" }}>{item.value}</AttributesColorItem> :
-                                                            <AttributesItem key={uuidv4()}>{item.value}</AttributesItem>
+                                                    {i.items.map(att => {
+                                                        const size = att.value === item.size ? <AttributesItem key={uuidv4()} style={{backgroundColor:"Black", color:"white"}}>{att.value}</AttributesItem> : <AttributesItem key={uuidv4()}>{att.value}</AttributesItem>
+                                                        return i.id.includes("Color") ? <AttributesColorItem onClick={e=>this.props.cartAmountHandler(e,item)} key={uuidv4()} style={{ backgroundColor: `${att.value}`, minWidth:"16px",width:"16px",  height:"16px" }}>{item.value}</AttributesColorItem> :
+                                                            size
                                                     })}
                                                 </AttributesList>
                                             </Item>
@@ -43,9 +47,13 @@ export default class CartProduct extends Component{
                                     </List>
                                     </TextContainer>
                                     <QuantityContainer>
-                                        <Plus id="plus" onClick={e=>this.props.cartAmountHandler(e,item)}></Plus>
+                                    <Plus
+                                        id="plus" onClick={e => this.props.cartAmountHandler(e, item)}
+                                    ></Plus>
                                         <div>{this.props.cart.filter(prod => prod.id === item.id).length}</div>
-                                        <Minus id="minus" onClick={e=>this.props.cartAmountHandler(e,item)}></Minus>
+                                    <Minus
+                                        id="minus" onClick={e => this.props.cartAmountHandler(e, item)}
+                                    ></Minus>
                                     </QuantityContainer>
                                 <PhotoThumb>
                                     <PhotoImage src={item.gallery[0]} alt={item.id} />

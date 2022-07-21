@@ -10,6 +10,10 @@ import { CartList, CartListItem, CartTitle,
 
 export default class CartPage extends Component{
 
+    colorPicker = () => {
+
+    }
+
     render() {
         let items = [...this.props.cart];
         let cart = [];
@@ -21,36 +25,41 @@ export default class CartPage extends Component{
         }
         return <Container>
             <PageName>Cart</PageName>
-            {/* <CartProduct cart={this.props.cart } currency={this.props.currency} /> */}
+            {/* Checking the cart and rendering product to a page */}
             <CartList>
                     {this.props && cart.map((item) => {
                         return <CartListItem key={uuidv4()}>
                             <CartContainer>
+                                {/* Text info block  */}
                                 <TextContainer>
                                     <CartTitle>{item.brand}</CartTitle>
                                     <CartModel>{item.name}</CartModel>
                                     <Price>{this.props.currency}{item.prices.find((price) => 
                                         price.currency.symbol === this.props.currency.trim()).amount}                                        
                                     </Price>
+                                    {/* Rendering attributes of a product to its container */}
                                     <List>
                                         {item.attributes.map((i) => {
                                             return <Item key={uuidv4()}>
                                                 <Size>{i.name}:</Size>
                                                 <AttributesList>
                                                     {i.items.map(item => {
-                                                        return i.id.includes("Color") ? <AttributesColorItem key={uuidv4()} style={{ backgroundColor: `${item.value}`}}>{item.value}</AttributesColorItem> :
+                                                        return i.id.includes("Color") ? <AttributesColorItem onClick={e => this.props.cartAmountHandler(e, item)}
+                                                            key={uuidv4()} style={{ backgroundColor: `${item.value}` }}>{item.value}</AttributesColorItem> :
                                                             <AttributesItem key={uuidv4()}>{item.value}</AttributesItem>
                                                     })}
                                                 </AttributesList>
                                             </Item>
                                         })}
                                     </List>
-                                    </TextContainer>
+                                </TextContainer>
+                                {/* Block with quantitiy and add/delete buttons */}
                                     <QuantityContainer>
-                                        <Plus></Plus>
+                                        <Plus id="add" onClick={e=>this.props.cartAmountHandler(e,item)}></Plus>
                                         <div>{this.props.cart.filter(prod => prod.id === item.id).length}</div>
-                                        <Minus></Minus>
-                                    </QuantityContainer>
+                                        <Minus id="delete" onClick={e=>this.props.cartAmountHandler(e,item)}></Minus>
+                                </QuantityContainer>
+                                {/* Photo block  */}
                                 <PhotoThumb>
                                     <PhotoImage src={item.gallery[0]} alt={item.id} />
                                 </PhotoThumb>

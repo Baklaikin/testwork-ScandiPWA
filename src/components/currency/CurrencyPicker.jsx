@@ -6,7 +6,7 @@ export default class CurrencyPicker extends Component{
         const { currencies, isVisible } = this.props;
         const currencyViewClosed = <Currency onClick={this.props.openCurrencyHandler}>{this.props.currency}</Currency>;
         const CurrencyViewOpened = <Currency className="is-open" onClick={this.props.openCurrencyHandler}>{this.props.currency}</Currency>;
-        return  <CurrencyWrapper>
+        return  <CurrencyWrapper id="currency">
                         {!isVisible ? currencyViewClosed : CurrencyViewOpened}
                             <Select>
                         {isVisible && currencies && currencies.map((cur) =>

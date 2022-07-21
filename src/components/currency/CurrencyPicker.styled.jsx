@@ -3,9 +3,12 @@ import ArrowDown from "../../images/arrow-down.svg";
 
 export const Currency = styled.p`
 display:flex;
-align-items:end;
+align-items: end;
 height:20px;
 margin:0;
+font-weight: 500;
+font-size: 18px;
+line-height: 1;
 
 &::after{
     content:'';

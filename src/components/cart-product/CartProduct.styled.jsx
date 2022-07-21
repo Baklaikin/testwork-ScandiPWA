@@ -7,7 +7,7 @@ export const CartList = styled.ul`
 `;
 
 export const CartListItem = styled.li`
-overflow: auto;
+overflow: inherit;
 margin-bottom:40px;
 `;
 

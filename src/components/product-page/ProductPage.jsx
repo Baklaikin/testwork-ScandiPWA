@@ -13,7 +13,8 @@ export default class ProuctPage extends Component{
         super();
         this.state = {
             product: null,
-            currency:''
+            currency: '',
+            modifiedProduct:{}
         };
     }
 
@@ -40,10 +41,20 @@ export default class ProuctPage extends Component{
             this.setState({currency: this.props.currency})
         }
     }
-    
+
+    productSpecsChoise = (e) => {
+    console.log(e);
+        this.setState({
+            modifiedProduct:{
+            [e.currentTarget.dataset.name.toLowerCase()]: e.target.textContent
+        }
+        }
+    );
+  };
 
     render() {
-        const { product } = this.state;
+        const { product, modifiedProduct } = this.state;
+        
       
         return (
             //Main container
@@ -80,10 +91,10 @@ export default class ProuctPage extends Component{
                                             {item.items.map((it) => {
                                                 return item.id.includes("Color")
                                                     ?
-                                                    <AttItemColor key={it.id} name={item.id} style={{ backgroundColor: `${it.value}`, width:"36px", height: "36px" }}
+                                                    <AttItemColor onClick={(e) => this.productSpecsChoise(e)} key={it.id} data-name={item.id} style={{ backgroundColor: `${it.value}`, width: "36px", height: "36px" }}
                                                     >{ it.value}</AttItemColor>
                                                     :
-                                                    <AttItem key={it.id} name={item.id}>{it.value}</AttItem>
+                                                    <AttItem onClick={(e) => this.productSpecsChoise(e)} key={it.id} data-name={item.id}>{it.value}</AttItem>
                                             })}
                                         </ItemsList>
                                     </AttributeItemContainer>
@@ -97,7 +108,7 @@ export default class ProuctPage extends Component{
                             return null;
                         }))}</ProductPrice>
                         {product.inStock === true ? <AddToCartButton type="button" onClick={() => this.props.handleClick(product)}>Add to cart</AddToCartButton> : 
-                        <AddToCartButtonDisabled type="button" disabled onClick={()=>this.props.handleClick(product)}>Add to cart</AddToCartButtonDisabled>}
+                        <AddToCartButtonDisabled type="button" disabled >Add to cart</AddToCartButtonDisabled>}
                         <DescriptionText dangerouslySetInnerHTML={{__html:product.description}}></DescriptionText>
                         </>
                     }

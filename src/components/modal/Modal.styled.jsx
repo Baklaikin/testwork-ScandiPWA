@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { NavLink } from "react-router-dom";
 
 export const ModalBackground = styled.div`
 position: fixed;
@@ -7,7 +8,7 @@ justify-content: center;
 align-items: center;
 top: 80px;
 left: 0;
-z-index: 3;
+/* z-index: 3; */
 width: 100vw;
 height: 100vh;
 background-color: rgba(57, 55, 72, 0.22);
@@ -22,6 +23,7 @@ width: 325px;
 height: 600px;
 overflow:auto;
 background-color: white;
+z-index: 1;
 `;
 
 export const ModalTitle = styled.h3`
@@ -64,6 +66,10 @@ color: white;
 export const ButtonsList = styled.ul`
 display: flex;
 align-items: center;
+`;
+
+export const ViewBagButton = styled(NavLink)`
+border-bottom: none;
 `;
 
 export const ModalList = styled.div`

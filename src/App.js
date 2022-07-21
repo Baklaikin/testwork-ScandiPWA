@@ -18,6 +18,7 @@ class App extends Component {
       product: null,
       inCart: [],
       currency: "$",
+      color: null,
     };
   }
 
@@ -70,27 +71,41 @@ class App extends Component {
 
   cartAmountHandler = (e, id) => {
     const plus = e.target.id === "plus";
+    const add = e.target.id === "add";
     const minus = e.target.id === "minus";
-    if (minus) {
+    const del = e.target.id === "delete";
+    console.log("id:", id);
+
+    if (minus || del) {
       const cart = [...this.state.inCart];
       const data = this.state.inCart.indexOf(
         this.state.inCart.find((item) => item.id === id.id)
       );
-      cart.map((item) => {
-        const idx = cart.indexOf(item);
-        if (idx === data) {
-          cart.splice(idx, 1);
-        }
-        return cart;
-      });
+      const filteredCart = cart.filter((item, index) => index !== data);
+      console.log(filteredCart);
       this.setState({
-        inCart: cart,
+        inCart: filteredCart,
       });
     }
-    if (plus) {
+    if (plus || add) {
       this.handleClick(id);
     }
+    // this.productSpecsChoise(e);
+    // const color = id.value;
+    // attributes.find((item) => item.id === "Color");
+    // console.log("color:", color);
+    // const chosenColor =
   };
+
+  // productSpecsChoise = (e) => {
+  //   console.log(e);
+  //   this.setState({
+  //     product: {
+  //       ...this.state.product,
+  //       [e.currentTarget.dataset.name.toLowerCase()]: e.target.textContent,
+  //     },
+  //   });
+  // };
 
   render() {
     const { category, product } = this.state;
@@ -167,6 +182,7 @@ class App extends Component {
               <CartPage
                 currency={this.state.currency}
                 cart={this.state.inCart}
+                cartAmountHandler={this.cartAmountHandler}
               />
             }
           ></Route>
@@ -177,6 +193,7 @@ class App extends Component {
                 product={product}
                 currency={this.state.currency}
                 handleClick={this.handleClick}
+                cartHandler={this.cartAmountHandler}
               />
             }
           ></Route>
@@ -188,6 +205,7 @@ class App extends Component {
                 product={product}
                 currency={this.state.currency}
                 handleClick={this.handleClick}
+                cartHandler={this.cartAmountHandler}
               />
             }
           ></Route>
@@ -198,6 +216,7 @@ class App extends Component {
                 product={product}
                 currency={this.state.currency}
                 handleClick={this.handleClick}
+                cartHandler={this.cartAmountHandler}
               />
             }
           ></Route>
