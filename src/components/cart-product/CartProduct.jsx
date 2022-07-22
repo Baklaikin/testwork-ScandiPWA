@@ -8,9 +8,33 @@ import {
     AttributesColorItem, PhotoImage, PhotoThumb
 } from "./CartProduct.styled";
 
-export default class CartProduct extends Component{
+export default class CartProduct extends Component {
+
+    attributesSearch=(attributes, item)=> {
+       return attributes.map((attribute) => {
+            // li 
+            console.log("item in attributeS:", attribute);
+            console.log("props in attributeS:", item.size);
+            return <Item key={uuidv4()}>
+                <Size>{attribute.name}:</Size>
+                {/* ul  */}
+                <AttributesList>
+                    {attribute.items.map(att => {
+                        // li
+                        const size = att.value === item.size ? <AttributesItem key={uuidv4()} itemSize>{att.value}</AttributesItem>
+                            :
+                            <AttributesItem key={uuidv4()}>{att.value}</AttributesItem>
+                        return attribute.id.includes("Color") ? <AttributesColorItem onClick={e => this.props.cartAmountHandler(e, item)}
+                            key={uuidv4()} style={{ backgroundColor: `${att.value}`, minWidth: "16px", width: "16px", height: "16px" }}
+                        >{item.value}</AttributesColorItem> : size
+                    })}
+              </AttributesList>
+            </Item>
+    })
+    }
+             
+
     render() {
-        // const spec = this.props.cart
         let items = [...this.props.cart];
         let cart = [];
         for (let item of items) {
@@ -30,20 +54,8 @@ export default class CartProduct extends Component{
                                         price.currency.symbol === this.props.currency.trim()).amount}                                        
                                     </Price>
                                     <List>
-                                        {item.attributes.map((i) => {
-                                            console.log("item in attributeS:", i);
-                                            console.log("props in attributeS:", item.size);
-                                            return <Item key={uuidv4()}>
-                                                <Size>{i.name}:</Size>
-                                                <AttributesList>
-                                                    {i.items.map(att => {
-                                                        const size = att.value === item.size ? <AttributesItem key={uuidv4()} style={{backgroundColor:"Black", color:"white"}}>{att.value}</AttributesItem> : <AttributesItem key={uuidv4()}>{att.value}</AttributesItem>
-                                                        return i.id.includes("Color") ? <AttributesColorItem onClick={e=>this.props.cartAmountHandler(e,item)} key={uuidv4()} style={{ backgroundColor: `${att.value}`, minWidth:"16px",width:"16px",  height:"16px" }}>{item.value}</AttributesColorItem> :
-                                                            size
-                                                    })}
-                                                </AttributesList>
-                                            </Item>
-                                        })}
+                                        {/* Cheking attributes and render them in cart  */}
+                                        {this.attributesSearch(item.attributes, item)}
                                     </List>
                                     </TextContainer>
                                     <QuantityContainer>
@@ -65,3 +77,21 @@ export default class CartProduct extends Component{
         );
 }
 }
+
+  {/* {item.attributes.map((i) => { */}
+                                            {/* // li 
+                                            console.log("item in attributeS:", i);
+                                            console.log("props in attributeS:", item.size);
+                                            return <Item key={uuidv4()}>
+                                                <Size>{i.name}:</Size>
+                                                {/* ul  */}
+                                                {/* <AttributesList>
+                                                    {i.items.map(att => {
+                                                        // li
+                                                        const size = att.value === item.size ? <AttributesItem key={uuidv4()} style={{backgroundColor:"Black", color:"white"}}>{att.value}</AttributesItem> : <AttributesItem key={uuidv4()}>{att.value}</AttributesItem>
+                                                        return i.id.includes("Color") ? <AttributesColorItem onClick={e=>this.props.cartAmountHandler(e,item)} key={uuidv4()} style={{ backgroundColor: `${att.value}`, minWidth:"16px",width:"16px",  height:"16px" }}>{item.value}</AttributesColorItem> :
+                                                            size
+                                                    })}
+                                                </AttributesList>
+                                            </Item>
+                                        })}  */}

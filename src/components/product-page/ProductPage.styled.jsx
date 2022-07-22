@@ -163,6 +163,7 @@ color: white;
 border:none;
 padding:16px 32px;
 margin-bottom:40px;
+cursor: pointer;
 `;
 
 export const AddToCartButtonDisabled = styled(AddToCartButton)`

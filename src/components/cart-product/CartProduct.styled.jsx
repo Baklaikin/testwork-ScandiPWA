@@ -94,7 +94,8 @@ font-family: 'Source Sans Pro';
 font-weight: 400;
 font-size: 14px;
 line-height: 1.6;
-color: var(--text-color);
+color: ${props => props.itemSize ? "white" : "var(--text-color)"};
+background-color: ${props=>props.itemSize ? "black" : "white"};
 `;
 
 export const AttributesColorItem = styled(AttributesItem)`

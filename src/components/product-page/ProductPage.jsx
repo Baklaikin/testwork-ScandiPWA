@@ -45,9 +45,9 @@ export default class ProuctPage extends Component{
     productSpecsChoise = (e) => {
     console.log(e);
         this.setState({
-            modifiedProduct:{
+           
             [e.currentTarget.dataset.name.toLowerCase()]: e.target.textContent
-        }
+
         }
     );
   };
@@ -82,13 +82,18 @@ export default class ProuctPage extends Component{
                         <ProductSubTitle>{product.name}</ProductSubTitle>
                         <ProductText>{product.attributes.name}</ProductText>
 
-                        {product.attributes && <AttributesList>
+                        {product.attributes &&
+                            <AttributesList>
                             {product.attributes.map((item) => {
-                                return (<AttributeItem key={item.id}>
+                                console.log(this.state[item.id]);
+                                return (
+                                    <AttributeItem key={item.id}>
                                     <AttributeItemContainer>
                                         <ListItemTitle>{item.id}:</ListItemTitle>
-                                        <ItemsList>
-                                            {item.items.map((it) => {
+                                            <ItemsList>
+                                                {item.items.map((it) => {
+                                                    // console.log(this.state[`${item.id}`]);
+                                                if(this.state[`${item.id}`]===it.id)console.log("found", it);
                                                 return item.id.includes("Color")
                                                     ?
                                                     <AttItemColor onClick={(e) => this.productSpecsChoise(e)} key={it.id} data-name={item.id} style={{ backgroundColor: `${it.value}`, width: "36px", height: "36px" }}

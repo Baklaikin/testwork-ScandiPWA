@@ -26,10 +26,10 @@ export default class ProdCard extends Component {
                         </OutOfStockContainer>
                         }
                 </Thumb>
-                {inCart && <InCart>
+                <InCart>
                     <CartIcon/>
                 </InCart>
-                }
+                
                 <Title>{name }</Title>
                 <Title>{this.props.currency}{this.props.price}</Title>
             </Container >
@@ -45,10 +45,6 @@ export default class ProdCard extends Component {
                         </OutOfStockContainer>
                         }
                 </Thumb>
-                {inCart && <InCart>
-                    <CartIcon/>
-                </InCart>
-                }
                 <Title>{name }</Title>
                 <Title>{this.props.currency}{this.props.price}</Title>
         </Container>

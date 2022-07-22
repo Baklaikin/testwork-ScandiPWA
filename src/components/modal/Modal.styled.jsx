@@ -20,7 +20,7 @@ top:0px;
 right:72px;
 padding: 32px 16px;
 width: 325px;
-height: 600px;
+max-height: 700px;
 overflow:auto;
 background-color: white;
 z-index: 1;
