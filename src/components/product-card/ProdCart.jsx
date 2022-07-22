@@ -13,9 +13,9 @@ export default class ProdCard extends Component {
  
     render() {
         const { gallery, description, name, inStock, id } = this.props.value;
-        const inCart = this.props.inCart.length>0 ? this.props.inCart.find(prod => prod.id === id): null
-        return (
-            <Container onClick={()=>this.props.handleClick(id)}>
+        const inCart = this.props.inCart.length > 0 ? this.props.inCart.find(prod => prod.id === id) : null
+        if (inCart) {
+            return <Container inCart onClick={()=>this.props.handleClick(id)}>
                 <Thumb>
                     <Image src={gallery[0]} alt={description} />
                         {!inStock &&
@@ -32,8 +32,27 @@ export default class ProdCard extends Component {
                 }
                 <Title>{name }</Title>
                 <Title>{this.props.currency}{this.props.price}</Title>
-            </Container>
-        )
+            </Container >
+        } else {
+        return <Container onClick={() => this.props.handleClick(id)}>
+                <Thumb>
+                    <Image src={gallery[0]} alt={description} />
+                        {!inStock &&
+                            <OutOfStockContainer>
+                                <OutOfStockText>
+                                    Out of Stock
+                                </OutOfStockText>
+                        </OutOfStockContainer>
+                        }
+                </Thumb>
+                {inCart && <InCart>
+                    <CartIcon/>
+                </InCart>
+                }
+                <Title>{name }</Title>
+                <Title>{this.props.currency}{this.props.price}</Title>
+        </Container>
+    }
     }
 
 }

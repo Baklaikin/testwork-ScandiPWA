@@ -6,9 +6,7 @@ height: auto;
 flex-grow: 1;
 padding:16px;
 cursor: pointer;
-// :hover{
-//     box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-// }
+box-shadow: ${props => props.inCart ? "0px 4px 35px rgba(168, 172, 176, 0.19)": "0"};
 `;
 
 export const Thumb = styled.div`
@@ -73,4 +71,8 @@ width:52px;
 height: 52px;
 border-radius: 50%;
 background-color: var(--button-color);
+
+& Container{
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
 `;
