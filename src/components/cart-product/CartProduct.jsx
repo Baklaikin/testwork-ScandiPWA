@@ -10,7 +10,7 @@ import {
 
 export default class CartProduct extends Component {
 
-    attributesSearch=(attributes, item)=> {
+    attributesSearch = (attributes, item) => {
        return attributes.map((attribute) => {
             // li 
             console.log("item in attributeS:", attribute);
@@ -35,6 +35,7 @@ export default class CartProduct extends Component {
              
 
     render() {
+        const { currency, cartAmountHandler } = this.props;
         let items = [...this.props.cart];
         let cart = [];
         for (let item of items) {
@@ -50,8 +51,8 @@ export default class CartProduct extends Component {
                             <CartContainer>
                                 <TextContainer>
                                     <CartTitle>{item.name}</CartTitle>
-                                    <Price>{this.props.currency}{item.prices.find((price) => 
-                                        price.currency.symbol === this.props.currency.trim()).amount}                                        
+                                    <Price>{currency}{item.prices.find((price) => 
+                                        price.currency.symbol === currency.trim()).amount}                                        
                                     </Price>
                                     <List>
                                         {/* Cheking attributes and render them in cart  */}
@@ -60,11 +61,11 @@ export default class CartProduct extends Component {
                                     </TextContainer>
                                     <QuantityContainer>
                                     <Plus
-                                        id="plus" onClick={e => this.props.cartAmountHandler(e, item)}
+                                        id="plus" onClick={e => cartAmountHandler(e, item)}
                                     ></Plus>
                                         <div>{this.props.cart.filter(prod => prod.id === item.id).length}</div>
                                     <Minus
-                                        id="minus" onClick={e => this.props.cartAmountHandler(e, item)}
+                                        id="minus" onClick={e => cartAmountHandler(e, item)}
                                     ></Minus>
                                     </QuantityContainer>
                                 <PhotoThumb>

@@ -78,6 +78,8 @@ line-height: 18px;
 letter-spacing: 0.05em;
 cursor: pointer;
 color: #292929;
+color: ${props => props.chosen ? "white" : "#292929"};
+background-color: ${props => props.chosen ? "#292929" : "white"};
 
 &:not(:last-of-type){
     margin-right:12px;
@@ -85,7 +87,11 @@ color: #292929;
 `;
 
 export const AttItemColor = styled(AttItem)`
+width: 36px;
+height: 36px;
+background-color: ${props => props.color ? props.color : "null"};
 color:transparent;
+border: ${props => props.border ? "5px solid {props.color}" : ""}
 `;
 
 export const ListItemTitle = styled.p`
