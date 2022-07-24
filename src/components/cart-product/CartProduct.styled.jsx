@@ -88,18 +88,37 @@ height: 24px;
 color: var(--text-color);
 border: 1px solid var(--text-color);
 &:not(:last-of-type){
-    margin-right:8px;
+    margin-right:6px;
 }
 font-family: 'Source Sans Pro';
 font-weight: 400;
 font-size: 14px;
 line-height: 1.6;
-color: ${props => props.itemSize ? "white" : "var(--text-color)"};
-background-color: ${props=>props.itemSize ? "black" : "white"};
+color: ${props => props.chosen ? "white" : "var(--text-color)"};
+background-color: ${props=>props.chosen ? "black" : "white"};
+`;
+
+export const ColorWrapper = styled.div`
+
+width:16px;
+height: 16px;
+color:transparent;
+background-color: ${props => props.color ? props.color : "none"};
+box-shadow:${props => props.color === "#FFFFFF" ? "0px 0px 1px 2px rgba(250,229,255,0.51)" : "none"}
 `;
 
 export const AttributesColorItem = styled(AttributesItem)`
+background-color: transparent;
 color:transparent;
+display:flex;
+align-items:center;
+justify-content:center;
+min-width: 20px;
+width: 20px;
+height: 20px;
+border: 1px solid ${props => props.border ? "#5ECE7B" : "transparent"};
+cursor: pointer;
+/* background-color: ${props => props.color ? props.color : "transparent"} */
 `;
 
 export const PhotoThumb = styled.div`

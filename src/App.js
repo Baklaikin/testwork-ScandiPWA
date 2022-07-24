@@ -74,7 +74,6 @@ class App extends Component {
     const add = e.target.id === "add";
     const minus = e.target.id === "minus";
     const del = e.target.id === "delete";
-    console.log("id:", id);
 
     if (minus || del) {
       const cart = [...this.state.inCart];
@@ -82,7 +81,6 @@ class App extends Component {
         this.state.inCart.find((item) => item.id === id.id)
       );
       const filteredCart = cart.filter((item, index) => index !== data);
-      console.log(filteredCart);
       this.setState({
         inCart: filteredCart,
       });

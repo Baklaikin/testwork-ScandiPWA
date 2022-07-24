@@ -1,6 +1,7 @@
 import React,{ Component } from "react";
 import { getInfo } from "../../api/api";
 import { getProduct } from "../../queries/queries";
+import Attributtes from "components/attributes/Attributes";
 import {
     Container, MiniPicturesWrapper, MainPictureWrapper, MiniImageThumb, Image, List, Item,
     ProductContainer, AttributesList, ItemsList, AttItem, ListItemTitle, AttributeItem,
@@ -9,26 +10,12 @@ import {
 } from "./ProductPage.styled";
 
 export default class ProuctPage extends Component {
-    constructor() {
-        super();
-        this.state = {
-            product: null,
-            currency: '',
-            activeIndex: null,
-            color: {
-                id: "color",
-                value: null
-            },
-            size: {
-                id: "size",
-                value: null
-            },
-            capacity: {
-                id: "capacity",
-                value: null
-            }
-        };
-    }
+   
+    state = {
+        product: null,
+        currency: '',
+    };
+    
 
     componentDidMount() {
         if (!this.props.product) {
@@ -53,109 +40,62 @@ export default class ProuctPage extends Component {
             this.setState({ currency: this.props.currency })
         }
         // if (this.state !== prevState.state) {
-        //     console.log("should copy state");
+            // console.log("should copy state");
             
-        //          this.setState({
-        //              custom: [
-        //                  ...this.state.custom,
-        //                  {id:this.state.attribute, value: this.state.activeIndex}
-        //              ]
-        //          })
+            // localStorage.setItem("product", JSON.stringify(this.state))    
         // }
     }
 
-    productSpecsChoise = (e, idx, item) => {
-        console.log(item);
+    productSpecsChoise = (e, idx) => {
         this.setState({
-            [e.currentTarget.dataset.name.toLowerCase()]: {
+            product: {
+                ...this.state.product,
+                [e.currentTarget.dataset.name.toLowerCase()]: {
                 id: e.currentTarget.dataset.name.toLowerCase(),
                 value: idx
             }
-    
+            }
         })
-        // console.log(e.currentTarget);
-        // console.log(idx);
-        // if (this.state.product.custom) {
-        //     this.setState({
-        //         product: {
-        //             ...this.state.product,
-        //             custom: [
-        //                 ...this.state.product.custom,
-        //                 { id: e.currentTarget.dataset.name.toLowerCase(), value: idx }
-        //             ]
-        //         }
-        //     })} else {
-        //     this.setState({
-        //         product: {
-        //             ...this.state.product,
-        //             custom: [
-        //                 { id: e.currentTarget.dataset.name.toLowerCase(), value: idx }
-        //             ]
-        //         }})}}
-        // e.target.textContent
     }
+
+    mainImageHandler = (index) => {
+        const { product } = this.state;
+        const img = document.getElementById("main-image");
+        img.src=`${product.gallery[index]}`;
+    }
+
     render() {
         const { product } = this.state;
         
         return (
-            //Main container
+         
             <Container>
-                {/* Container for small images column */}
                 <MiniPicturesWrapper>
                     <div>
                         <List>
-                            {product && product.gallery.map(item => <Item key={item}>
-                                <MiniImageThumb>{<Image src={item} alt={product.description} />}</MiniImageThumb>
-                            </Item>)}
+                            {product && product.gallery.map((item, index) => {
+                                return (<Item key={item} >
+                                    <MiniImageThumb>
+                                        <Image src={item} alt={product.description} onClick={()=>this.mainImageHandler(index)} />
+                                </MiniImageThumb>
+                                </Item>)
+                            })}
                         </List>
                     </div>
                 </MiniPicturesWrapper>
-                {/* Container for main picture  */}
                 <MainPictureWrapper>
-                    {product && <Image src={product.gallery[0]} alt={product.description} />}
+                    {product && <Image id="main-image" src={product.gallery[0]} alt={product.description} />}
                 </MainPictureWrapper>
-                {/* Container for main info */}
                 <ProductContainer>
                     {product &&
                         <>
                             <ProductTitle>{product.brand}</ProductTitle>
                             <ProductSubTitle>{product.name}</ProductSubTitle>
                             <ProductText>{product.attributes.name}</ProductText>
-
                             {product.attributes &&
-                                <AttributesList>
-                                {product.attributes.map((item) => {
-                                    // console.log("itm:", this.state[`${item.id.toLowerCase()}`].value);
-
-                                    return (
-                                            <AttributeItem key={item.id}>
-                                                <AttributeItemContainer>
-                                                    <ListItemTitle>{item.id}:</ListItemTitle>
-                                                    <ItemsList>
-                                                        {item.items.map((it, idx) => {
-                                                            console.log(this.state[`${item.id}`]);
-                                                            // if (idx === this.state[`${item.id.toLowerCase()}`].value && item.id.toLowerCase() === this.state[`${item.id.toLowerCase()}`].id && item.id !== "Color") {
-                                                            //     return <AttItem onClick={(e) => this.productSpecsChoise(e, idx, item)} chosen key={it.id} data-name={item.id}>{it.value}</AttItem>
-                                                            // }
-                                                            if (item.id === "Color") {
-                                                                return idx === this.state.color.value ? <AttItemColor  key={it.id} onClick={(e) => this.productSpecsChoise(e, idx, item)} data-name={item.id}  
-                                                                    border color={`${it.value}`}>
-                                                                    <ColorWrapper color={()=>`${it.value}`!=="#FFFFFF" ? `${it.value}`: "#F2F2F2"}
-                                                                    >{it.value}
-                                                                    </ColorWrapper>
-                                                                </AttItemColor>
-                                                                 : <AttItemColor onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id} color={`${it.value}`}
-                                                                > <ColorWrapper color={()=>`${it.value}`!=="#FFFFFF" ? `${it.value}`: "#F2F2F2"}
-                                                                    >{it.value}
-                                                                    </ColorWrapper></AttItemColor>
-                                                            } else {
-                                                                return <AttItem onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id}>{it.value}</AttItem>
-                                                            }
-                                                        })}
-                                                    </ItemsList>
-                                                </AttributeItemContainer>
-                                            </AttributeItem>)
-                                    })}
+                            <AttributesList>
+                                <Attributtes attributes={product.attributes} state={this.state} productSpecsChoise={this.productSpecsChoise} />
+                                    {/* {this.attributesRender(product.attributes)} */}
                                 </AttributesList>
                             }
                             <ProductText>Price:</ProductText>
@@ -173,16 +113,3 @@ export default class ProuctPage extends Component {
         );
     }
 }
-
-// {item.items.map((it, idx) => {
-//                                                             if (idx === this.state.activeIndex && item.id === this.state.attribute && item.id !== "Color") {
-//                                                                 return <AttItem onClick={(e) => this.productSpecsChoise(e, idx, item)} chosen key={it.id} data-name={item.id}>{it.value}</AttItem>
-//                                                             }
-//                                                             if (item.id === "Color") {
-//                                                                 return idx === this.state.activeIndex ? <AttItemColor type="radio" onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id} color={`${it.value}`}
-//                                                                 border>{it.value}</AttItemColor> : <AttItemColor onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id} color={`${it.value}`}
-//                                                                 >{it.value}</AttItemColor>
-//                                                             } else {
-//                                                                 return <AttItem onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id}>{it.value}</AttItem>
-//                                                             }
-//                                                         })}
