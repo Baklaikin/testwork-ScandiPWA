@@ -4,7 +4,7 @@ import { getProduct } from "../../queries/queries";
 import {
     Container, MiniPicturesWrapper, MainPictureWrapper, MiniImageThumb, Image, List, Item,
     ProductContainer, AttributesList, ItemsList, AttItem, ListItemTitle, AttributeItem,
-    AttributeItemContainer, ProductTitle, AttItemColor,
+    AttributeItemContainer, ProductTitle, AttItemColor, ColorWrapper,
     ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, ColorText, AddToCartButtonDisabled
 } from "./ProductPage.styled";
 
@@ -126,15 +126,6 @@ export default class ProuctPage extends Component {
                                 <AttributesList>
                                 {product.attributes.map((item) => {
                                     // console.log("itm:", this.state[`${item.id.toLowerCase()}`].value);
-                                    if (item.id.toLowerCase() ==='color') {
-                                        console.log("color");
-                                    }
-                                    if (item.id.toLowerCase() ==='capacity') {
-                                        console.log('capacity');
-                                    }
-                                    if (item.id.toLowerCase() ==='size') {
-                                        console.log('size');
-                                    }
 
                                     return (
                                             <AttributeItem key={item.id}>
@@ -142,14 +133,21 @@ export default class ProuctPage extends Component {
                                                     <ListItemTitle>{item.id}:</ListItemTitle>
                                                     <ItemsList>
                                                         {item.items.map((it, idx) => {
-                                                            // console.log(this.state[`${item.id.toLowerCase()}`]);
-                                                            if (idx === this.state[`${item.id.toLowerCase()}`].value && item.id.toLowerCase() === this.state[`${item.id.toLowerCase()}`].id && item.id !== "Color") {
-                                                                return <AttItem onClick={(e) => this.productSpecsChoise(e, idx, item)} chosen key={it.id} data-name={item.id}>{it.value}</AttItem>
-                                                            }
+                                                            console.log(this.state[`${item.id}`]);
+                                                            // if (idx === this.state[`${item.id.toLowerCase()}`].value && item.id.toLowerCase() === this.state[`${item.id.toLowerCase()}`].id && item.id !== "Color") {
+                                                            //     return <AttItem onClick={(e) => this.productSpecsChoise(e, idx, item)} chosen key={it.id} data-name={item.id}>{it.value}</AttItem>
+                                                            // }
                                                             if (item.id === "Color") {
-                                                                return idx === this.state.color.value ? <AttItemColor onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id} color={`${it.value}`}
-                                                                border>{it.value}</AttItemColor> : <AttItemColor onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id} color={`${it.value}`}
-                                                                >{it.value}</AttItemColor>
+                                                                return idx === this.state.color.value ? <AttItemColor  key={it.id} onClick={(e) => this.productSpecsChoise(e, idx, item)} data-name={item.id}  
+                                                                    border color={`${it.value}`}>
+                                                                    <ColorWrapper color={()=>`${it.value}`!=="#FFFFFF" ? `${it.value}`: "#F2F2F2"}
+                                                                    >{it.value}
+                                                                    </ColorWrapper>
+                                                                </AttItemColor>
+                                                                 : <AttItemColor onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id} color={`${it.value}`}
+                                                                > <ColorWrapper color={()=>`${it.value}`!=="#FFFFFF" ? `${it.value}`: "#F2F2F2"}
+                                                                    >{it.value}
+                                                                    </ColorWrapper></AttItemColor>
                                                             } else {
                                                                 return <AttItem onClick={(e) => this.productSpecsChoise(e, idx, item)} key={it.id} data-name={item.id}>{it.value}</AttItem>
                                                             }

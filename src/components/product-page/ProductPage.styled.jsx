@@ -61,6 +61,7 @@ flex-wrap:wrap;
 align-items:center;
 list-style:none;
 padding:0;
+min-height:36px;
 `;
 
 export const AttItem = styled.li`
@@ -86,12 +87,28 @@ background-color: ${props => props.chosen ? "#292929" : "white"};
 }
 `;
 
-export const AttItemColor = styled(AttItem)`
+export const ColorWrapper = styled.div`
+width:32px;
+height: 32px;
+color:transparent;
+background-color: ${props => props.color ? props.color : "none"};
+box-shadow:${props=> props.color==="#FFFFFF" ? "0px 0px 1px 2px rgba(250,229,255,0.51)" : "none"}
+`;
+
+export const AttItemColor = styled.li`
+display:flex;
+align-items:center;
+justify-content:center;
 width: 36px;
 height: 36px;
-background-color: ${props => props.color ? props.color : "null"};
+background-color: transparent;
 color:transparent;
-border: ${props => props.border ? "5px solid {props.color}" : ""}
+border: 1px solid red;
+border: 1px solid ${props => props.border ? "#5ECE7B" : "transparent"};
+cursor: pointer;
+&:not(:last-of-type){
+    margin-right:12px;
+}
 `;
 
 export const ListItemTitle = styled.p`
