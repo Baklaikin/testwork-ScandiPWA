@@ -2,7 +2,7 @@
   "name": "testwork-scandipwa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://Baklaikin.github.io/testwork-scandipwa",
+  "homepage": "https://Baklaikin.github.io/testwork-scandipwa/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
