@@ -212,7 +212,7 @@ export const Item = styled.li`
 
 export const CartTotalContainer = styled.div`
 display: flex;
-width: 210px;
+min-width: 210px;
 flex-direction: column;
 
 `;
