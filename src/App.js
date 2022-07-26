@@ -30,6 +30,10 @@ class App extends Component {
     if (cartData) {
       this.setState({ inCart: cartData });
     }
+    const previousCategory = JSON.parse(localStorage.getItem("category"));
+    if (previousCategory) {
+      this.setState({ category: previousCategory });
+    }
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -42,6 +46,13 @@ class App extends Component {
     }
     if (this.state.inCart.length !== prevState.inCart.length) {
       localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
+    }
+    if (this.state.category !== prevState.category) {
+      console.log("changed category");
+      localStorage.setItem(
+        "category",
+        `${JSON.stringify(this.state.category)}`
+      );
     }
   }
 
@@ -107,7 +118,7 @@ class App extends Component {
               }
             ></Route>
             <Route
-              // exact
+              exact
               path="/:routeName"
               element={
                 <ProductListPage
@@ -119,6 +130,7 @@ class App extends Component {
               }
             ></Route>
             <Route
+              exact
               path="/all"
               element={
                 <ProductListPage
@@ -130,7 +142,7 @@ class App extends Component {
               }
             ></Route>
             <Route
-              // exact
+              exact
               path="/clothes"
               element={
                 <ProductListPage
@@ -142,6 +154,7 @@ class App extends Component {
               }
             ></Route>
             <Route
+              exact
               path="/tech"
               element={
                 <ProductListPage
@@ -153,6 +166,7 @@ class App extends Component {
               }
             ></Route>
             <Route
+              exact
               path="/cart"
               element={
                 <CartPage
@@ -163,6 +177,7 @@ class App extends Component {
               }
             ></Route>
             <Route
+              exact
               path="/all/:id"
               element={
                 <ProductPage
@@ -186,6 +201,7 @@ class App extends Component {
               }
             ></Route>
             <Route
+              exact
               path="/tech/:id"
               element={
                 <ProductPage

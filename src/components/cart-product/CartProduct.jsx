@@ -37,7 +37,6 @@ export default class CartProduct extends Component {
     })
     }
              
-
     render() {
         const { currency, cartAmountHandler } = this.props;
         let items = [...this.props.cart];
