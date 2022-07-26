@@ -1,7 +1,12 @@
 {
   "files": {
-    "main.css": "/testwork-scandipwa/static/css/main.419128f0.css",
-    "main.js": "/testwork-scandipwa/static/js/main.a0b20c7a.js",
+    "main.css": "/testwork-scandipwa/static/css/main.a6f9a33f.css",
+    "main.js": "/testwork-scandipwa/static/js/main.5adbc531.js",
+    "static/js/203.0f53317f.chunk.js": "/testwork-scandipwa/static/js/203.0f53317f.chunk.js",
+    "static/js/152.31a1ac4e.chunk.js": "/testwork-scandipwa/static/js/152.31a1ac4e.chunk.js",
+    "static/js/926.1741e322.chunk.js": "/testwork-scandipwa/static/js/926.1741e322.chunk.js",
+    "static/js/291.d6b5f901.chunk.js": "/testwork-scandipwa/static/js/291.d6b5f901.chunk.js",
+    "static/js/949.420340f1.chunk.js": "/testwork-scandipwa/static/js/949.420340f1.chunk.js",
     "static/js/787.acee09f8.chunk.js": "/testwork-scandipwa/static/js/787.acee09f8.chunk.js",
     "static/media/logo.svg": "/testwork-scandipwa/static/media/logo.6e0e5bc0083bc338881038d9cb56a3fb.svg",
     "static/media/cart.svg": "/testwork-scandipwa/static/media/cart.8e092ad97ee064c38dbe887bcf036d1f.svg",
@@ -9,12 +14,17 @@
     "static/media/plus-square.svg": "/testwork-scandipwa/static/media/plus-square.833f4b1a407e7eeb3054aafbace2b267.svg",
     "static/media/minus-square.svg": "/testwork-scandipwa/static/media/minus-square.bd51caf92e9a39b4a988a7600e8bca6f.svg",
     "static/media/arrow-down.svg": "/testwork-scandipwa/static/media/arrow-down.766d7b11f183f77a1e40c47ea18dd7ee.svg",
-    "main.419128f0.css.map": "/testwork-scandipwa/static/css/main.419128f0.css.map",
-    "main.a0b20c7a.js.map": "/testwork-scandipwa/static/js/main.a0b20c7a.js.map",
+    "main.a6f9a33f.css.map": "/testwork-scandipwa/static/css/main.a6f9a33f.css.map",
+    "main.5adbc531.js.map": "/testwork-scandipwa/static/js/main.5adbc531.js.map",
+    "203.0f53317f.chunk.js.map": "/testwork-scandipwa/static/js/203.0f53317f.chunk.js.map",
+    "152.31a1ac4e.chunk.js.map": "/testwork-scandipwa/static/js/152.31a1ac4e.chunk.js.map",
+    "926.1741e322.chunk.js.map": "/testwork-scandipwa/static/js/926.1741e322.chunk.js.map",
+    "291.d6b5f901.chunk.js.map": "/testwork-scandipwa/static/js/291.d6b5f901.chunk.js.map",
+    "949.420340f1.chunk.js.map": "/testwork-scandipwa/static/js/949.420340f1.chunk.js.map",
     "787.acee09f8.chunk.js.map": "/testwork-scandipwa/static/js/787.acee09f8.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.419128f0.css",
-    "static/js/main.a0b20c7a.js"
+    "static/css/main.a6f9a33f.css",
+    "static/js/main.5adbc531.js"
   ]
 }
