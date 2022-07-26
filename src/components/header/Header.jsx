@@ -70,7 +70,6 @@ export default class Header extends Component{
         if (this.state.isVisible) {
             this.setState({ isVisible: !this.state.isVisible })
         }
-        
         if (e.target.id === "modalWindow" ) {
             return;
         }
@@ -92,14 +91,12 @@ export default class Header extends Component{
                         currencies={this.state.currencies} isVisible={this.state.isVisible}
                         currency={this.props.currency}
                     />
-                    {/* <div id="modal-wrapper" onClick={this.openModal}> */}
                         {this.state.shouldModalOpen && <Modal id="modal"{...this.props } onClose={this.closeModal} />}
                         {this.props.inCart.length !== 0 &&
                             <CartQuantity onClick={this.openModal}>
                                 <CartQuantityText>{this.props.inCart.length}</CartQuantityText>
                             </CartQuantity>}
                         <CartIcon onClick={this.openModal}/>
-                    {/* </div> */}
                 </Cart>
             </Container>
         )

@@ -53,9 +53,17 @@ export default class ProuctPage extends Component {
     }
 
     mainImageHandler = (index) => {
-        // const { product } = this.state;
         const img = document.getElementById("main-image");
         img.src=`${this.state.product.gallery[index]}`;
+    }
+
+    productPriceHandler = (prices) => {
+      return prices.map((price) => {
+            if (price.currency.symbol === this.props.currency.trim()) {
+                return `${this.state.currency} ${price.amount}`
+          }
+          return null;
+      })
     }
 
     render() {
@@ -96,12 +104,11 @@ export default class ProuctPage extends Component {
                                 </AttributesList>
                             }
                             <ProductText>Price:</ProductText>
-                            <ProductPrice>{(product.prices.map((price) => {
-                                if (price.currency.symbol === this.props.currency.trim()) return `${this.state.currency} ${price.amount}`
-                                return null;
-                            }))}</ProductPrice>
-                            {product.inStock === true ? <AddToCartButton type="button" onClick={() => this.props.handleClick(product)}>Add to cart</AddToCartButton> :
-                                <AddToCartButtonDisabled type="button" disabled >Add to cart</AddToCartButtonDisabled>}
+                        <ProductPrice>{(this.productPriceHandler(product.prices))}</ProductPrice>
+                        {product.inStock === true ?
+                            <AddToCartButton type="button" onClick={() => this.props.handleClick(product)}>Add to cart</AddToCartButton>
+                            :
+                            <AddToCartButtonDisabled type="button" disabled >Add to cart</AddToCartButtonDisabled>}
                             <DescriptionText dangerouslySetInnerHTML={{ __html: product.description }}></DescriptionText>
                         </>
                     }

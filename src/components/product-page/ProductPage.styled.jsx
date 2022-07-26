@@ -112,6 +112,11 @@ background-color:#5ECE7B;
 color: white;
 border:none;
 cursor: pointer;
+transform: scale(1);
+transition: transform 0.5s ease;
+&:active {
+ transform: scale(0.9);
+}
 `;
 
 export const AddToCartButtonDisabled = styled(AddToCartButton)`

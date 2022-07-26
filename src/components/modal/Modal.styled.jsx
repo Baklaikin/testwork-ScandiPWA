@@ -8,7 +8,6 @@ justify-content: center;
 align-items: center;
 top: 80px;
 left: 0;
-/* z-index: 3; */
 width: 100vw;
 height: 100vh;
 background-color: rgba(57, 55, 72, 0.22);

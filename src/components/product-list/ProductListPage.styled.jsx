@@ -2,15 +2,12 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const List = styled.ul`
-  // display: flex;
-  // flex-wrap: wrap;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 40px;
   grid-row-gap:40px;
   list-style: none;
   padding:0;
-  // margin: -40px 0 0 -40px;
   width: 100%;
 `;
 
@@ -38,7 +35,4 @@ export const ItemLi = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  // flex-basis: calc((100% / 3) - 120px);
-  // margin-left: 10px;
-  // margin-top: 10px;
 `;
