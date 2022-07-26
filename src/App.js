@@ -107,7 +107,7 @@ class App extends Component {
               }
             ></Route>
             <Route
-              exact
+              // exact
               path="/:routeName"
               element={
                 <ProductListPage
@@ -130,7 +130,7 @@ class App extends Component {
               }
             ></Route>
             <Route
-              exact
+              // exact
               path="/clothes"
               element={
                 <ProductListPage
