@@ -4,12 +4,16 @@ import { getInfo } from "./api/api";
 import { getAllProductsQuerry } from "./queries/queries";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-const ProductListPage = lazy(() =>
-  import("./components/product-list/ProductListPage")
-);
-const ProductPage = lazy(() => import("./components/product-page/ProductPage"));
-const CartPage = lazy(() => import("./components/cart-page/CartPage"));
-const NotFound = lazy(() => import("./components/not-found/NotFound"));
+// const ProductListPage = lazy(() =>
+//   import("./components/product-list/ProductListPage")
+// );
+// const ProductPage = lazy(() => import("./components/product-page/ProductPage"));
+// const CartPage = lazy(() => import("./components/cart-page/CartPage"));
+// const NotFound = lazy(() => import("./components/not-found/NotFound"));
+import ProductListPage from "components/product-list/ProductListPage";
+import ProductPage from "components/product-page/ProductPage";
+import CartPage from "components/cart-page/CartPage";
+import NotFound from "components/not-found/NotFound";
 
 class App extends Component {
   state = {
