@@ -1,13 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
 import Header from "./components/header/Header";
-import ProductListPage from "./components/product-list/ProductListPage";
-import ProductPage from "./components/product-page/ProductPage";
-import NotFound from "./components/not-found/NotFound";
-import CartPage from "components/cart-page/CartPage";
 import { getInfo } from "./api/api";
 import { getAllProductsQuerry } from "./queries/queries";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+const ProductListPage = lazy(() =>
+  import("./components/product-list/ProductListPage")
+);
+const ProductPage = lazy(() => import("./components/product-page/ProductPage"));
+const CartPage = lazy(() => import("./components/cart-page/CartPage"));
+const NotFound = lazy(() => import("./components/not-found/NotFound"));
 
 class App extends Component {
   state = {
@@ -90,112 +92,114 @@ class App extends Component {
           onChoice={this.currencyHandler}
           cartAmountHandler={this.cartAmountHandler}
         />
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <ProductListPage
-                category={category}
-                currency={currency}
-                setProduct={this.handleProduct}
-                inCart={inCart}
-              />
-            }
-          ></Route>
-          <Route
-            exact
-            path="/:routeName"
-            element={
-              <ProductListPage
-                category={category}
-                currency={currency}
-                setProduct={this.handleProduct}
-                inCart={inCart}
-              />
-            }
-          ></Route>
-          <Route
-            path="/all"
-            element={
-              <ProductListPage
-                category={"all"}
-                currency={currency}
-                setProduct={this.handleProduct}
-                inCart={inCart}
-              />
-            }
-          ></Route>
-          <Route
-            exact
-            path="/clothes"
-            element={
-              <ProductListPage
-                category={"clothes"}
-                currency={currency}
-                setProduct={this.handleProduct}
-                inCart={inCart}
-              />
-            }
-          ></Route>
-          <Route
-            path="/tech"
-            element={
-              <ProductListPage
-                category={"tech"}
-                currency={currency}
-                setProduct={this.handleProduct}
-                inCart={inCart}
-              />
-            }
-          ></Route>
-          <Route
-            path="/cart"
-            element={
-              <CartPage
-                currency={currency}
-                cart={inCart}
-                cartAmountHandler={this.cartAmountHandler}
-              />
-            }
-          ></Route>
-          <Route
-            path="/all/:id"
-            element={
-              <ProductPage
-                product={product}
-                currency={currency}
-                handleClick={this.handleClick}
-                cartHandler={this.cartAmountHandler}
-              />
-            }
-          ></Route>
-          <Route
-            exact
-            path="/clothes/:id"
-            element={
-              <ProductPage
-                product={product}
-                currency={currency}
-                handleClick={this.handleClick}
-                cartHandler={this.cartAmountHandler}
-              />
-            }
-          ></Route>
-          <Route
-            path="/tech/:id"
-            element={
-              <ProductPage
-                product={product}
-                currency={currency}
-                handleClick={this.handleClick}
-                cartHandler={this.cartAmountHandler}
-              />
-            }
-          ></Route>
-          <Route path="*" element={<NotFound />}></Route>
-          <Route path={`${category}/*`} element={<NotFound />}></Route>
-        </Routes>
+        <Suspense fallback={<h1 className="suspense"></h1>}>
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <ProductListPage
+                  category={category}
+                  currency={currency}
+                  setProduct={this.handleProduct}
+                  inCart={inCart}
+                />
+              }
+            ></Route>
+            <Route
+              exact
+              path="/:routeName"
+              element={
+                <ProductListPage
+                  category={category}
+                  currency={currency}
+                  setProduct={this.handleProduct}
+                  inCart={inCart}
+                />
+              }
+            ></Route>
+            <Route
+              path="/all"
+              element={
+                <ProductListPage
+                  category={"all"}
+                  currency={currency}
+                  setProduct={this.handleProduct}
+                  inCart={inCart}
+                />
+              }
+            ></Route>
+            <Route
+              exact
+              path="/clothes"
+              element={
+                <ProductListPage
+                  category={"clothes"}
+                  currency={currency}
+                  setProduct={this.handleProduct}
+                  inCart={inCart}
+                />
+              }
+            ></Route>
+            <Route
+              path="/tech"
+              element={
+                <ProductListPage
+                  category={"tech"}
+                  currency={currency}
+                  setProduct={this.handleProduct}
+                  inCart={inCart}
+                />
+              }
+            ></Route>
+            <Route
+              path="/cart"
+              element={
+                <CartPage
+                  currency={currency}
+                  cart={inCart}
+                  cartAmountHandler={this.cartAmountHandler}
+                />
+              }
+            ></Route>
+            <Route
+              path="/all/:id"
+              element={
+                <ProductPage
+                  product={product}
+                  currency={currency}
+                  handleClick={this.handleClick}
+                  cartHandler={this.cartAmountHandler}
+                />
+              }
+            ></Route>
+            <Route
+              exact
+              path="/clothes/:id"
+              element={
+                <ProductPage
+                  product={product}
+                  currency={currency}
+                  handleClick={this.handleClick}
+                  cartHandler={this.cartAmountHandler}
+                />
+              }
+            ></Route>
+            <Route
+              path="/tech/:id"
+              element={
+                <ProductPage
+                  product={product}
+                  currency={currency}
+                  handleClick={this.handleClick}
+                  cartHandler={this.cartAmountHandler}
+                />
+              }
+            ></Route>
+            <Route path="*" element={<NotFound />}></Route>
+            <Route path={`${category}/*`} element={<NotFound />}></Route>
+          </Routes>
+        </Suspense>
       </div>
     );
   }

@@ -51,3 +51,9 @@ img{
  .active > NavItem {
    color: #5ECE7B;
  }
+
+ .suspense{
+  font-size:24px;
+  font-weight:700;
+  text-align: center;
+ }

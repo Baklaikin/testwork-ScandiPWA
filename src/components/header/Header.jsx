@@ -1,11 +1,11 @@
-import { Component } from "react";
+import { Component, lazy } from "react";
 import { ReactComponent as CartIcon } from "../../images/cart.svg";
 import { getInfo } from "../../api/api";
-import Modal from "../modal/Modal";
+import { Container, Navigation, Cart, CartQuantity, CartQuantityText} from "./Header.styled";
 import NavigationList from "components/navigation-list/NavigationList";
 import Logotype from "components/logo/Logo";
-import { Container, Navigation, Cart, CartQuantity, CartQuantityText} from "./Header.styled";
-import CurrencyPicker from "components/currency/CurrencyPicker";
+import Modal from "components/modal/Modal";
+const CurrencyPicker = lazy(() => import("../currency/CurrencyPicker"));
 
 export default class Header extends Component{
     state = {
