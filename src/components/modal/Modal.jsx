@@ -8,18 +8,19 @@ import {
 
 export default class Modal extends Component {
     render() {
+        const { inCart, currency, onClose } = this.props;
         return ReactDOM.createPortal(
-               ( <ModalBackground id="modalBackground" onClick={this.props.onClose}>
+               ( <ModalBackground id="modalBackground" onClick={onClose}>
                     <ModalWindow id="modalWindow">
                     <ModalList>
-                        <ModalTitle>My bag, <Span>{this.props.inCart.length !== 0 ? this.props.inCart.length : 0} items</Span></ModalTitle>
-                        <CartProduct cart={this.props.inCart} currency={this.props.currency} cartAmountHandler={this.props.cartAmountHandler} />
+                        <ModalTitle>My bag, <Span>{inCart.length !== 0 ? inCart.length : 0} {inCart.length === 1 ? "item" : "items" }</Span></ModalTitle>
+                        <CartProduct cart={inCart} currency={currency} cartAmountHandler={this.props.cartAmountHandler} />
                         <TotalContainer>
                             <TotalTitle>Total</TotalTitle>
-                            <TotalParagraph>{this.props.currency }{this.props && this.props.inCart.map((item) => item.prices.find(it => it.currency.symbol === this.props.currency.trim())).reduce((acc, item) => acc + item.amount, 0).toFixed(2)}</TotalParagraph>
+                            <TotalParagraph>{currency }{this.props && inCart.map((item) => item.prices.find(it => it.currency.symbol === currency.trim())).reduce((acc, item) => acc + item.amount, 0).toFixed(2)}</TotalParagraph>
                         </TotalContainer>
                         <ButtonsList>
-                            <li><ViewBagButton to="/cart" onClick={this.props.onClose}><Button id="view-bag">View Bag</Button></ViewBagButton></li>
+                            <li><ViewBagButton to="/cart" onClick={onClose}><Button id="view-bag">View Bag</Button></ViewBagButton></li>
                             <li><CheckButton>Check out</CheckButton></li>
                         </ButtonsList>
                     </ModalList>

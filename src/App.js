@@ -10,17 +10,14 @@ import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      categories: [],
-      category: "all",
-      product: null,
-      inCart: [],
-      currency: "$",
-      color: null,
-    };
-  }
+  state = {
+    categories: [],
+    category: "all",
+    product: null,
+    inCart: [],
+    currency: "$",
+    color: null,
+  };
 
   componentDidMount() {
     //Basicly fetching "all" category of goods to our page
@@ -44,17 +41,10 @@ class App extends Component {
     if (this.state.inCart.length !== prevState.inCart.length) {
       localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
     }
-    // const cartData = JSON.parse(localStorage.getItem("cart"));
-    // if (cartData !== null && this.state.inCart.length === 0) {
-    //   this.setState({ inCart: [...this.state.inCart, cartData] });
-    //   console.log("updating cart");
-    // }
   }
 
   handleClick = (data) => {
-    // console.log(data);
     this.setState({ inCart: [...this.state.inCart, data] });
-    // localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
   };
 
   handleProduct = (id) => {
@@ -88,25 +78,10 @@ class App extends Component {
     if (plus || add) {
       this.handleClick(id);
     }
-    // this.productSpecsChoise(e);
-    // const color = id.value;
-    // attributes.find((item) => item.id === "Color");
-    // console.log("color:", color);
-    // const chosenColor =
   };
 
-  // productSpecsChoise = (e) => {
-  //   console.log(e);
-  //   this.setState({
-  //     product: {
-  //       ...this.state.product,
-  //       [e.currentTarget.dataset.name.toLowerCase()]: e.target.textContent,
-  //     },
-  //   });
-  // };
-
   render() {
-    const { category, product } = this.state;
+    const { category, product, inCart, currency } = this.state;
     return (
       <div className="App">
         <Header
@@ -122,9 +97,9 @@ class App extends Component {
             element={
               <ProductListPage
                 category={category}
-                currency={this.state.currency}
+                currency={currency}
                 setProduct={this.handleProduct}
-                inCart={this.state.inCart}
+                inCart={inCart}
               />
             }
           ></Route>
@@ -134,9 +109,9 @@ class App extends Component {
             element={
               <ProductListPage
                 category={category}
-                currency={this.state.currency}
+                currency={currency}
                 setProduct={this.handleProduct}
-                inCart={this.state.inCart}
+                inCart={inCart}
               />
             }
           ></Route>
@@ -145,9 +120,9 @@ class App extends Component {
             element={
               <ProductListPage
                 category={"all"}
-                currency={this.state.currency}
+                currency={currency}
                 setProduct={this.handleProduct}
-                inCart={this.state.inCart}
+                inCart={inCart}
               />
             }
           ></Route>
@@ -157,9 +132,9 @@ class App extends Component {
             element={
               <ProductListPage
                 category={"clothes"}
-                currency={this.state.currency}
+                currency={currency}
                 setProduct={this.handleProduct}
-                inCart={this.state.inCart}
+                inCart={inCart}
               />
             }
           ></Route>
@@ -168,9 +143,9 @@ class App extends Component {
             element={
               <ProductListPage
                 category={"tech"}
-                currency={this.state.currency}
+                currency={currency}
                 setProduct={this.handleProduct}
-                inCart={this.state.inCart}
+                inCart={inCart}
               />
             }
           ></Route>
@@ -178,8 +153,8 @@ class App extends Component {
             path="/cart"
             element={
               <CartPage
-                currency={this.state.currency}
-                cart={this.state.inCart}
+                currency={currency}
+                cart={inCart}
                 cartAmountHandler={this.cartAmountHandler}
               />
             }
@@ -189,7 +164,7 @@ class App extends Component {
             element={
               <ProductPage
                 product={product}
-                currency={this.state.currency}
+                currency={currency}
                 handleClick={this.handleClick}
                 cartHandler={this.cartAmountHandler}
               />
@@ -201,7 +176,7 @@ class App extends Component {
             element={
               <ProductPage
                 product={product}
-                currency={this.state.currency}
+                currency={currency}
                 handleClick={this.handleClick}
                 cartHandler={this.cartAmountHandler}
               />
@@ -212,7 +187,7 @@ class App extends Component {
             element={
               <ProductPage
                 product={product}
-                currency={this.state.currency}
+                currency={currency}
                 handleClick={this.handleClick}
                 cartHandler={this.cartAmountHandler}
               />

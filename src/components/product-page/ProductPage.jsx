@@ -4,9 +4,8 @@ import { getProduct } from "../../queries/queries";
 import Attributtes from "components/attributes/Attributes";
 import {
     Container, MiniPicturesWrapper, MainPictureWrapper, MiniImageThumb, Image, List, Item,
-    ProductContainer, AttributesList, ItemsList, AttItem, ListItemTitle, AttributeItem,
-    AttributeItemContainer, ProductTitle, AttItemColor, ColorWrapper,
-    ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, ColorText, AddToCartButtonDisabled
+    ProductContainer, AttributesList, ProductTitle,
+    ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, AddToCartButtonDisabled
 } from "./ProductPage.styled";
 
 export default class ProuctPage extends Component {
@@ -39,11 +38,6 @@ export default class ProuctPage extends Component {
         if (this.props.currency !== prevProps.currency) {
             this.setState({ currency: this.props.currency })
         }
-        // if (this.state !== prevState.state) {
-            // console.log("should copy state");
-            
-            // localStorage.setItem("product", JSON.stringify(this.state))    
-        // }
     }
 
     productSpecsChoise = (e, idx) => {
@@ -59,9 +53,9 @@ export default class ProuctPage extends Component {
     }
 
     mainImageHandler = (index) => {
-        const { product } = this.state;
+        // const { product } = this.state;
         const img = document.getElementById("main-image");
-        img.src=`${product.gallery[index]}`;
+        img.src=`${this.state.product.gallery[index]}`;
     }
 
     render() {
@@ -94,8 +88,11 @@ export default class ProuctPage extends Component {
                             <ProductText>{product.attributes.name}</ProductText>
                             {product.attributes &&
                             <AttributesList>
-                                <Attributtes attributes={product.attributes} state={this.state} productSpecsChoise={this.productSpecsChoise} />
-                                    {/* {this.attributesRender(product.attributes)} */}
+                                <Attributtes
+                                    attributes={product.attributes}
+                                    state={this.state}
+                                    productSpecsChoise={this.productSpecsChoise}
+                                />
                                 </AttributesList>
                             }
                             <ProductText>Price:</ProductText>

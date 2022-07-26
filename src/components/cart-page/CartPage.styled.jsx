@@ -16,6 +16,12 @@ font-size: 32px;
 line-height: 1.25;
 `;
 
+export const NoProductTitle = styled.h2`
+font-weight: 600;
+font-size: 28px;
+line-height: 1.25;
+`;
+
 export const CartList = styled.ul`
 
 `;
@@ -23,6 +29,10 @@ export const CartList = styled.ul`
 export const CartListItem = styled.li`
 overflow: auto;
 margin-bottom:40px;
+border-top: 1px solid #E5E5E5;
+&:last-of-type{
+    border-bottom: 1px solid #E5E5E5
+}
 `;
 
 export const CartTitle = styled.h2`
@@ -42,9 +52,34 @@ margin-bottom: 20px;
 
 export const CartContainer = styled.div`
 display: flex;
-height: 326px;
 padding: 24px 0;
-border-top: 1px solid #E5E5E5
+`;
+
+export const CartTotal = styled.p`
+display: inline-flex;
+margin-top: 0; 
+margin-bottom:8px;
+font-weight: 700;
+font-size: 24px;
+line-height: 1.1666;
+`; 
+
+export const CartTotalSpan = styled.span`
+display:inline-flex;
+width:108px;
+font-weight: 400;
+font-size: 24px;
+line-height: 1.1666;
+
+`;
+
+export const CartButton = styled.button`
+margin-top: 16px;
+width: 279px;
+height: 43px;
+color: white;
+background-color: var(--button-color);
+border: none;
 `;
 
 export const TextContainer = styled.div`
@@ -87,6 +122,15 @@ align-items: center;
 flex-wrap: wrap;
 `;
 
+export const ColorWrapper = styled.div`
+
+width:32px;
+height: 32px;
+color:transparent;
+background-color: ${props => props.color ? props.color : "none"};
+box-shadow:${props => props.color === "#FFFFFF" ? "0px 0px 1px 2px rgba(250,229,255,0.51)" : "none"}
+`;
+
 export const Paragraph = styled.p`
 margin-top:0;
 margin-bottom: 8px;
@@ -94,13 +138,16 @@ color: var(--text-color);
 `;
 
 export const Price = styled(Paragraph)`
-font-weight: 500;
+font-weight: 700;
+font-size: 24;
+line-height: 1;
 margin-bottom: 20px;
 `;
 
 export const Size = styled(Paragraph)`
-font-size: 14px;
-line-height: 1.1428;
+font-weight:700;
+font-size: 18px;
+line-height: 1;
 `;
 
 export const AttributesItem = styled.li`
@@ -119,13 +166,19 @@ font-weight: 400;
 font-size: 14px;
 line-height: 1.6;
 color: var(--text-color);
+color: ${props => props.chosen ? "white" : "var(--text-color)"};
+background-color: ${props=>props.chosen ? "black" : "white"};
 `;
 
 export const AttributesColorItem = styled(AttributesItem)`
+display:flex;
+align-items:center;
+justify-content:center;
 color:transparent;
 min-width:36px;
 width:36px;
 height:36px;
+border: 1px solid ${props => props.border ? "#5ECE7B" : "transparent"};
 `;
 
 export const PhotoThumb = styled.div`
@@ -155,4 +208,11 @@ export const Item = styled.li`
 &:not(:last-of-type){
     margin-bottom: 16px;
 }
+`;
+
+export const CartTotalContainer = styled.div`
+display: flex;
+width: 210px;
+flex-direction: column;
+
 `;

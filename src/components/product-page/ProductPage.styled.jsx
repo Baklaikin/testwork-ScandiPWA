@@ -1,23 +1,23 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+margin:0 auto;
+padding: 72px 96px;
+max-width:1440px;
 box-sizing:border-box;
 display: flex;
-padding: 72px 96px;
-margin:0 auto;
-max-width:1440px;
 `;
 
 export const MiniPicturesWrapper = styled.div`
+margin-right:20px;
 display:flex;
 flex-direction:column;
-margin-right:20px;
 `;
 
 export const MainPictureWrapper = styled.div`
+margin-right:100px;
 width:610px;
 height:511px;
-margin-right:100px;
 overflow:hidden;
 `;
 export const MiniImageThumb = styled.div`
@@ -33,15 +33,15 @@ height:100%;
 object-fit: contain;
 `;
 export const AttributesList = styled.ul`
-padding:0;
 margin-bottom:24px;
+padding:0;
 list-style:none;
 `;
 
 export const List = styled.ul`
-list-style:none;
-padding:0;
 margin:0;
+padding:0;
+list-style:none;
 `;
 
 export const Item = styled.li`
@@ -94,6 +94,8 @@ margin-bottom:20px;
 `;
 
 export const DescriptionText = styled.div`
+max-height:200px;
+overflow: auto;
 font-family: 'Roboto', sans-serif;
 font-weight: 400;
 font-size: 16px;
@@ -102,13 +104,13 @@ color: var(--text-color);
 `;
 
 export const AddToCartButton = styled.button`
+padding:16px 32px;
+margin-bottom:40px;
 width:100%;
 height:52px;
 background-color:#5ECE7B;
 color: white;
 border:none;
-padding:16px 32px;
-margin-bottom:40px;
 cursor: pointer;
 `;
 

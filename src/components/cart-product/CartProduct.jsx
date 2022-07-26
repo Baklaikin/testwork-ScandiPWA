@@ -20,7 +20,8 @@ export default class CartProduct extends Component {
                         const inState = itemName && this.props.cart.find(item => {
                             if (item[itemName]) {
                             return item[itemName].id === itemName
-                        }
+                            }
+                            return
                         })
                         const canRender = inState && idx === inState[itemName].value;  
                         if (itemName === "color") {

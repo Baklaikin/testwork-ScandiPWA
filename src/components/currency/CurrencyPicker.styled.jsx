@@ -63,4 +63,5 @@ width:114px;
 list-style:none;
 box-shadow:0px 4px 35px rgba(168, 172, 176, 0.19);
 z-index:1;
+background-color: #FFF;
 `;

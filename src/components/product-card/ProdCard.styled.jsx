@@ -11,6 +11,9 @@ box-shadow: ${props => props.inCart ? "0px 4px 35px rgba(168, 172, 176, 0.19)": 
 
 export const Thumb = styled.div`
 position: relative;
+display: flex;
+justify-content: center;
+align-items: center;
 width:100%;
 width: 354px;
 height:330px;
@@ -21,7 +24,7 @@ margin-bottom: 24px;
 export const Image = styled.img`
 max-width:100%;
 display:block;
-height:auto;
+height:100%;
 object-fit:cover;
 `;
 
@@ -36,7 +39,6 @@ color: var(--text-color);
 export const OutOfStockText = styled.p`
 font-size: 24px;
 color: #8D8F9A;
-
 `;
 
 export const OutOfStockContainer = styled.div`
