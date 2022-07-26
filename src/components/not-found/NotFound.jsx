@@ -1,9 +1,11 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+import { Container, Title, Link } from "./NotFound.styled";
 
 export default class NotFound extends Component {
     render(){
-        return <><h1>No match found</h1>
-        <Link to="/">Return to Home Page</Link></>;
+        return <Container>
+            <Title>No match found</Title>
+            <Link to="/">Return to Home Page</Link>
+        </Container>;
 }
 }

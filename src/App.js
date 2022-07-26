@@ -52,7 +52,6 @@ class App extends Component {
       localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
     }
     if (this.state.category !== prevState.category) {
-      console.log("changed category");
       localStorage.setItem(
         "category",
         `${JSON.stringify(this.state.category)}`
@@ -107,7 +106,7 @@ class App extends Component {
           onChoice={this.currencyHandler}
           cartAmountHandler={this.cartAmountHandler}
         />
-        <Suspense fallback={<h1 className="suspense"></h1>}>
+        <Suspense>
           <Routes>
             <Route
               exact
