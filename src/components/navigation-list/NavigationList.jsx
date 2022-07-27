@@ -9,7 +9,7 @@ export default class NavigationList extends Component{
                             .map(prop => {
                                 const activeLink = this.props.category === prop.name ? "active" : '';
                                 return <Item key={prop.name} className={activeLink}>
-                                    <NavItem to={`/${prop.name}`} onClick={() => this.props.onChange(`${prop.name}`)}> {prop.name.toUpperCase()}</NavItem>
+                                    <NavItem to={`/testwork-scandipwa/${prop.name}`} onClick={() => this.props.onChange(`${prop.name}`)}> {prop.name.toUpperCase()}</NavItem>
                                 </Item>
                             })}
                     </List>

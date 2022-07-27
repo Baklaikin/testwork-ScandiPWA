@@ -110,7 +110,7 @@ class App extends Component {
           <Routes>
             <Route
               exact
-              path="/"
+              path="/testwork-scandipwa/"
               element={
                 <ProductListPage
                   category={category}
@@ -122,7 +122,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/:routeName"
+              path="/testwork-scandipwa/:routeName"
               element={
                 <ProductListPage
                   category={category}
@@ -134,7 +134,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/all"
+              path="/testwork-scandipwa/all"
               element={
                 <ProductListPage
                   category={"all"}
@@ -146,7 +146,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/clothes"
+              path="/testwork-scandipwa/clothes"
               element={
                 <ProductListPage
                   category={"clothes"}
@@ -158,7 +158,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/tech"
+              path="/testwork-scandipwa/tech"
               element={
                 <ProductListPage
                   category={"tech"}
@@ -170,7 +170,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/cart"
+              path="/testwork-scandipwa/cart"
               element={
                 <CartPage
                   currency={currency}
@@ -181,7 +181,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/all/:id"
+              path="/testwork-scandipwa/all/:id"
               element={
                 <ProductPage
                   product={product}
@@ -193,7 +193,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/clothes/:id"
+              path="/testwork-scandipwa/clothes/:id"
               element={
                 <ProductPage
                   product={product}
@@ -205,7 +205,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/tech/:id"
+              path="/testwork-scandipwa/tech/:id"
               element={
                 <ProductPage
                   product={product}

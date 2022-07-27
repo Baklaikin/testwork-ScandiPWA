@@ -32,7 +32,7 @@ export default class ProductListPage extends Component{
               const price = prod.prices.find(price => price.currency.symbol === this.props.currency.trim())
               return(
               <ItemLi key={prod.id}>
-                <Item to={`/${this.props.category}/${prod.id}`} key={prod.id}>
+                <Item to={`/testwork-scandipwa/${this.props.category}/${prod.id}`} key={prod.id}>
                     <ProdCard value={prod} price={price.amount} currency={this.props.currency} handleClick={
                       this.props.setProduct} inCart={this.props.inCart} />
                 </Item>
