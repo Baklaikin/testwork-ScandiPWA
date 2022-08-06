@@ -16,70 +16,56 @@ export default class Header extends Component{
     }
 
     componentDidMount() {
-        const currency = `{currencies
-            { 
-        label
-        symbol
-        }
-    }`;
+        const currency = `
+        {currencies
+            { label
+              symbol
+            }}`;
         getInfo(currency).then(res => this.setState({ currencies: res.currencies }))
-        window.addEventListener('keydown', this.closeCurrencyHandler)
+        window.addEventListener('keydown', this.closeCurrencyHandler);
     }
 
     componentDidUpdate() {
-        
+        // if(this.state.isVisible) window.addEventListener('click', this.closeCurrencyHandler)
     }
 
     componentWillUnmount() {
         window.removeEventListener('keydown', this.closeCurrencyHandler)
+        // window.addEventListener('click', this.closeCurrencyHandler)
     }
 
     closeCurrencyHandler = (e) => {
         if (this.state.isVisible && e.code === "Escape") this.openCurrenciesHandler();
-        if (this.state.isVisible && e.target.nodeName === "DIV") this.setState({ isVisible: false });
         if (this.state.shouldModalOpen && e.code === "Escape") this.openModal();
-        if (this.state.shouldModalOpen && e.target.id === "modalBackground") this.openModal();
     }
 
     openCurrenciesHandler = (e) => {
-         if (this.state.shouldModalOpen) {
-            this.openModal(e);
-        }
+        if (this.state.shouldModalOpen) this.openModal(e)
         this.setState({ isVisible: !this.state.isVisible })
     };
 
     setCurrencyHandler = (e) => {
-        this.props.onChoice( e.target.textContent.slice(0, 2));
         this.setState({ isVisible: !this.state.isVisible });
+        this.props.onChoice( e.target.textContent.slice(0, 2));
     };
 
     closeModal = (e) => {
-        if (e.target.id === "modalWindow") return;
-        if (this.state.shouldModalOpen && e.target.id === "modalBackground") {
-            this.setState({ shouldModalOpen: false })
+        if (this.state.shouldModalOpen && e.target === e.currentTarget) this.setState({ shouldModalOpen: false }) 
+        if (this.state.shouldModalOpen && e.target.id === "view-bag") this.setState({ shouldModalOpen: false })
+        if (this.state.shouldModalOpen && e.target.id === "header") this.setState({ shouldModalOpen: false })
+        if (this.state.isVisible && e.target === e.currentTarget) this.setState({ isVisible: !this.state.isVisible }) 
         }
-        if (this.state.shouldModalOpen && e.target.id === "view-bag") {
-            this.setState({
-                shouldModalOpen:false
-            })
-        }
-        
-    }
 
     openModal = (e) => {
-        if (this.state.isVisible) {
-            this.setState({ isVisible: !this.state.isVisible })
-        }
-        if (e.target.id === "modalWindow" ) {
-            return;
-        }
+        if (this.state.isVisible) this.setState({ isVisible: !this.state.isVisible })
+        if (e.target.id === "modalWindow" ) return
         this.setState({ shouldModalOpen: !this.state.shouldModalOpen })
 
     }
 
     render() {
         return (
-            <Container>
+            <Container id="header" onClick={this.closeModal}>
                 <Navigation>
                     <NavigationList { ...this.props} />
                 </Navigation>
@@ -88,8 +74,10 @@ export default class Header extends Component{
                     <CurrencyPicker id="currency"
                         onClick={this.setCurrencyHandler}
                         openCurrencyHandler={this.openCurrenciesHandler}
-                        currencies={this.state.currencies} isVisible={this.state.isVisible}
+                        currencies={this.state.currencies}
+                        isVisible={this.state.isVisible}
                         currency={this.props.currency}
+                        onClose={this.closeModal}
                     />
                         {this.state.shouldModalOpen && <Modal id="modal"{...this.props } onClose={this.closeModal} />}
                         {this.props.inCart.length !== 0 &&
@@ -102,3 +90,6 @@ export default class Header extends Component{
         )
     }
 }
+
+        // if (this.state.isVisible && e.target.nodeName === "DIV") this.setState({ isVisible: false });
+        // if (this.state.shouldModalOpen && e.target.id === "modalBackground") this.openModal();

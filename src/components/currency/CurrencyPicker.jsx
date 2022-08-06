@@ -1,4 +1,5 @@
 import { Component } from "react";
+import CurrencyList from "components/currency-list/CurrencyList";
 import {Currency,CurrencyWrapper, CurrencyItem, Select, CurrencyTitle } from "./CurrencyPicker.styled";
 
 export default class CurrencyPicker extends Component{
@@ -6,16 +7,23 @@ export default class CurrencyPicker extends Component{
         const { currencies, isVisible } = this.props;
         const currencyViewClosed = <Currency onClick={this.props.openCurrencyHandler}>{this.props.currency}</Currency>;
         const CurrencyViewOpened = <Currency className="is-open" onClick={this.props.openCurrencyHandler}>{this.props.currency}</Currency>;
-        return  <CurrencyWrapper id="currency">
+        return  <CurrencyWrapper>
                         {!isVisible ? currencyViewClosed : CurrencyViewOpened}
-                            <Select>
+                        {isVisible &&  <CurrencyList id="currencySelect"
+                            isVisible={isVisible}
+                            currencies={currencies}
+                onClick={this.props.onClick}
+                onClose={this.props.onClose}
+                        />}
+                    </CurrencyWrapper>
+    }
+}
+
+ {/* <Select>
                         {isVisible && currencies && currencies.map((cur) =>
                                 <CurrencyItem key={cur.label} >
                                     <CurrencyTitle onClick={this.props.onClick}>{cur.symbol} {cur.label}</CurrencyTitle>
                                 </CurrencyItem>
                            
                            )}
-                           </Select>                            
-                    </CurrencyWrapper>
-    }
-}
+                </Select> */}

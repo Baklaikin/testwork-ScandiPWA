@@ -20,7 +20,12 @@ export default class Modal extends Component {
                             <TotalParagraph>{currency }{this.props && inCart.map((item) => item.prices.find(it => it.currency.symbol === currency.trim())).reduce((acc, item) => acc + item.amount, 0).toFixed(2)}</TotalParagraph>
                         </TotalContainer>
                         <ButtonsList>
-                            <li><ViewBagButton to="/testwork-scandipwa/cart" onClick={onClose}><Button id="view-bag">View Bag</Button></ViewBagButton></li>
+                            <li>
+                                <ViewBagButton to="/testwork-scandipwa/cart"
+                                    onClick={onClose}>
+                                    <Button id="view-bag">View Bag</Button>
+                                </ViewBagButton>
+                            </li>
                             <li><CheckButton>Check out</CheckButton></li>
                         </ButtonsList>
                     </ModalList>
