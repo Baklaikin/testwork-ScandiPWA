@@ -9,35 +9,26 @@ import {
 } from "./ProductPage.styled";
 
 export default class ProuctPage extends Component {
-   
     state = {
         product: null,
         currency: '',
     };
     
-
     componentDidMount() {
         if (!this.props.product) {
             const product = JSON.parse(localStorage.getItem('product'));
-            if (product !== null) {
-                getInfo(getProduct(product)).then(res => this.setState({ product: res.product }))
-            }
+            if (product !== null) getInfo(getProduct(product)).then(res => this.setState({ product: res.product }))
         }
-
-        if (this.props.product) {
-            getInfo(getProduct(this.props.product)).then(res => this.setState({ product: res.product }))
-        }
+        if (this.props.product) getInfo(getProduct(this.props.product)).then(res => this.setState({ product: res.product }));
         this.setState({ currency: this.props.currency })
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
         if (this.state.product === null) {
             const product = JSON.parse(localStorage.getItem('product'));
             getInfo(getProduct(product)).then(res => this.setState({ product: res.product }))
         }
-        if (this.props.currency !== prevProps.currency) {
-            this.setState({ currency: this.props.currency })
-        }
+        if (this.props.currency !== prevProps.currency) this.setState({ currency: this.props.currency });     
     }
 
     productSpecsChoise = (e, idx) => {
@@ -47,46 +38,49 @@ export default class ProuctPage extends Component {
                 [e.currentTarget.dataset.name.toLowerCase()]: {
                 id: e.currentTarget.dataset.name.toLowerCase(),
                 value: idx
-            }
+                }
             }
         })
     }
 
-    mainImageHandler = (index) => {
-        const img = document.getElementById("main-image");
-        img.src=`${this.state.product.gallery[index]}`;
-    }
-
+    mainImageHandler = (index) => document.getElementById("main-image").src=`${this.state.product.gallery[index]}`;
+    
     productPriceHandler = (prices) => {
-      return prices.map((price) => {
+        return prices.map((price) => {
             if (price.currency.symbol === this.props.currency.trim()) {
                 return `${this.state.currency} ${price.amount}`
-          }
-          return null;
-      })
+            }
+          return null
+        })
     }
 
     render() {
         const { product } = this.state;
-        
         return (
-         
             <Container>
                 <MiniPicturesWrapper>
                     <div>
                         <List>
                             {product && product.gallery.map((item, index) => {
-                                return (<Item key={item} >
+                                return (
+                                    <Item key={item}>
                                     <MiniImageThumb>
                                         <Image src={item} alt={product.description} onClick={()=>this.mainImageHandler(index)} />
-                                </MiniImageThumb>
-                                </Item>)
+                                    </MiniImageThumb>
+                                    </Item>
+                                )
                             })}
                         </List>
                     </div>
                 </MiniPicturesWrapper>
                 <MainPictureWrapper>
-                    {product && <Image id="main-image" src={product.gallery[0]} alt={product.description} />}
+                    {product &&
+                        <Image
+                            id="main-image"
+                            src={product.gallery[0]}
+                            alt={product.description}
+                        />
+                    }
                 </MainPictureWrapper>
                 <ProductContainer>
                     {product &&
@@ -95,20 +89,29 @@ export default class ProuctPage extends Component {
                             <ProductSubTitle>{product.name}</ProductSubTitle>
                             <ProductText>{product.attributes.name}</ProductText>
                             {product.attributes &&
-                            <AttributesList>
-                                <Attributtes
-                                    attributes={product.attributes}
-                                    state={this.state}
-                                    productSpecsChoise={this.productSpecsChoise}
-                                />
+                                <AttributesList>
+                                    <Attributtes
+                                        attributes={product.attributes}
+                                        state={this.state}
+                                        productSpecsChoise={this.productSpecsChoise}
+                                    />
                                 </AttributesList>
                             }
                             <ProductText>Price:</ProductText>
-                        <ProductPrice>{(this.productPriceHandler(product.prices))}</ProductPrice>
-                        {product.inStock === true ?
-                            <AddToCartButton type="button" onClick={() => this.props.handleClick(product)}>Add to cart</AddToCartButton>
+                            <ProductPrice>{(this.productPriceHandler(product.prices))}</ProductPrice>
+                            {product.inStock === true ?
+                            <AddToCartButton
+                                type="button"
+                                onClick={() => this.props.handleClick(product)}
+                            >Add to cart
+                            </AddToCartButton>
                             :
-                            <AddToCartButtonDisabled type="button" disabled >Add to cart</AddToCartButtonDisabled>}
+                            <AddToCartButtonDisabled
+                                type="button"
+                                disabled
+                            >Add to cart
+                            </AddToCartButtonDisabled>
+                            }
                             <DescriptionText dangerouslySetInnerHTML={{ __html: product.description }}></DescriptionText>
                         </>
                     }

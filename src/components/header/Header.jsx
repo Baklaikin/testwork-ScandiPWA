@@ -1,7 +1,8 @@
 import { Component, lazy } from "react";
 import { ReactComponent as CartIcon } from "../../images/cart.svg";
 import { getInfo } from "../../api/api";
-import { Container, Navigation, Cart, CartQuantity, CartQuantityText} from "./Header.styled";
+import { Container, Navigation, Cart, CartQuantity, CartQuantityText } from "./Header.styled";
+import { getCurrencyQuerry } from "queries/queries";
 import NavigationList from "components/navigation-list/NavigationList";
 import Logotype from "components/logo/Logo";
 import Modal from "components/modal/Modal";
@@ -16,22 +17,12 @@ export default class Header extends Component{
     }
 
     componentDidMount() {
-        const currency = `
-        {currencies
-            { label
-              symbol
-            }}`;
-        getInfo(currency).then(res => this.setState({ currencies: res.currencies }))
+        getInfo(getCurrencyQuerry).then(res => this.setState({ currencies: res.currencies }))
         window.addEventListener('keydown', this.closeCurrencyHandler);
-    }
-
-    componentDidUpdate() {
-        // if(this.state.isVisible) window.addEventListener('click', this.closeCurrencyHandler)
     }
 
     componentWillUnmount() {
         window.removeEventListener('keydown', this.closeCurrencyHandler)
-        // window.addEventListener('click', this.closeCurrencyHandler)
     }
 
     closeCurrencyHandler = (e) => {
@@ -52,17 +43,14 @@ export default class Header extends Component{
     closeModal = (e) => {
         if (this.state.shouldModalOpen && e.target === e.currentTarget) this.setState({ shouldModalOpen: false }) 
         if (this.state.shouldModalOpen && e.target.id === "view-bag") this.setState({ shouldModalOpen: false })
-        if (this.state.shouldModalOpen && e.target.id === "header") this.setState({ shouldModalOpen: false })
         if (this.state.isVisible && e.target === e.currentTarget) this.setState({ isVisible: !this.state.isVisible }) 
-        }
+    }
 
     openModal = (e) => {
         if (this.state.isVisible) this.setState({ isVisible: !this.state.isVisible })
-        if (e.target.id === "modalWindow" ) return
         this.setState({ shouldModalOpen: !this.state.shouldModalOpen })
-
+        // if (e.target.id === "modalWindow" ) return
     }
-
     render() {
         return (
             <Container id="header" onClick={this.closeModal}>
@@ -79,17 +67,18 @@ export default class Header extends Component{
                         currency={this.props.currency}
                         onClose={this.closeModal}
                     />
-                        {this.state.shouldModalOpen && <Modal id="modal"{...this.props } onClose={this.closeModal} />}
-                        {this.props.inCart.length !== 0 &&
-                            <CartQuantity onClick={this.openModal}>
-                                <CartQuantityText>{this.props.inCart.length}</CartQuantityText>
-                            </CartQuantity>}
-                        <CartIcon onClick={this.openModal}/>
+                    {this.state.shouldModalOpen &&
+                        <Modal
+                            id="modal"{...this.props}
+                            onClose={this.closeModal}
+                        />}
+                    {this.props.inCart.length !== 0 &&
+                        <CartQuantity onClick={this.openModal}>
+                            <CartQuantityText>{this.props.inCart.length}</CartQuantityText>
+                        </CartQuantity>}
+                    <CartIcon onClick={this.openModal}/>
                 </Cart>
             </Container>
         )
     }
 }
-
-        // if (this.state.isVisible && e.target.nodeName === "DIV") this.setState({ isVisible: false });
-        // if (this.state.shouldModalOpen && e.target.id === "modalBackground") this.openModal();

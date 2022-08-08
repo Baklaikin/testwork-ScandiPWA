@@ -1,74 +1,88 @@
 export const getAllProductsQuerry = `{
- categories{
-  name
-  products{
-    id
+  categories{
     name
-    gallery
-    description
-    inStock
-    prices{
-    currency{
-      label
-      symbol
+    products{
+      id
+      name
+      gallery
+      description
+      inStock
+      prices{
+        currency{
+          label
+          symbol
+        }
+      amount
+      }
+      brand
     }
-    amount
-    }
-    brand
   }
-}
 }`;
 
 export const getCategory = (category) => {
   return `{
- category(input:{title: "${category}"}){
-  name
-  products{
-    name
-    id
-    gallery
-    description
-    inStock
-    prices{
-      currency{
-        label
-        symbol
+    category(input:{title: "${category}"}){
+      name
+      products{
+        name
+        id
+        gallery
+        description
+        inStock
+        prices{
+          currency{
+            label
+            symbol
+          }
+        amount
+        }
+        brand
+        }
+      }
     }
-      amount
-    }
-      brand
-  }
-}
-}
 `};
 
 export const getProduct = (product) => {
   const data = `"${product}"`;
- return `{
-  product(id:${data}){
-    id
-    name
-    inStock
-    gallery
-    description
-    category
-    attributes{id
+  return `{
+    product(id:${data}){
+      id
       name
-      type
-      items{
-        displayValue
-        value
+      inStock
+      gallery
+      description
+      category
+      attributes{
         id
+        name
+        type
+        items{
+          displayValue
+          value
+          id
+        }
       }
-    }
-    prices{
-      currency{
-        symbol
-        label
+      prices{
+        currency {
+          symbol
+          label
+        }
+        amount
       }
-      amount
+      brand
     }
-    brand
+  }`
+}
+
+export const getCategoriesQuerry = `{
+  categories {
+    name
   }
 }`
-}
+
+export const getCurrencyQuerry = `
+  {currencies
+    { label
+      symbol
+    }
+  }`

@@ -21,7 +21,7 @@ export default class CartProduct extends Component {
                             if (item[itemName]) {
                             return item[itemName].id === itemName
                             }
-                            return
+                            return null
                         })
                         const canRender = inState && idx === inState[itemName].value;  
                         if (itemName === "color") {
@@ -34,7 +34,7 @@ export default class CartProduct extends Component {
                     })}
               </AttributesList>
             </Item>
-    })
+        })
     }
              
     render() {
@@ -63,11 +63,13 @@ export default class CartProduct extends Component {
                                     </TextContainer>
                                     <QuantityContainer>
                                     <Plus
-                                        id="plus" onClick={e => cartAmountHandler(e, item)}
+                                        id="plus"
+                                        onClick={e => cartAmountHandler(e, item)}
                                     ></Plus>
                                         <div>{this.props.cart.filter(prod => prod.id === item.id).length}</div>
                                     <Minus
-                                        id="minus" onClick={e => cartAmountHandler(e, item)}
+                                        id="minus"
+                                        onClick={e => cartAmountHandler(e, item)}
                                     ></Minus>
                                     </QuantityContainer>
                                 <PhotoThumb>
@@ -77,6 +79,6 @@ export default class CartProduct extends Component {
                         </CartListItem>
                     })}
                 </CartList>
-        );
-}
+             )
+    }
 }

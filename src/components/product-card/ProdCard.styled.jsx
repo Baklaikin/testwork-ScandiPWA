@@ -6,7 +6,12 @@ height: auto;
 flex-grow: 1;
 padding:16px;
 cursor: pointer;
-box-shadow: ${props => props.inCart ? "0px 4px 35px rgba(168, 172, 176, 0.19)": "0"};
+&:hover{
+  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
+}
+&:hover div {
+  visibility: visible;
+}
 `;
 
 export const Thumb = styled.div`
@@ -54,12 +59,12 @@ background-color: rgba(255,255,255,0.5);
 `;
 
 export const Item = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  flex-basis: calc((100% / 3) - 30px);
-  margin-left: 10px;
-  margin-top: 10px;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+flex-basis: calc((100% / 3) - 30px);
+margin-left: 10px;
+margin-top: 10px;
 `;
 
 export const InCart = styled.div`
@@ -73,8 +78,6 @@ width:52px;
 height: 52px;
 border-radius: 50%;
 background-color: var(--button-color);
-
-& Container{
-  box-shadow: 0px 4px 35px rgba(168, 172, 176, 0.19);
-}
+visibility: hidden;
+z-index:1;
 `;

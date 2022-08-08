@@ -1,29 +1,31 @@
 import { Component } from "react";
+import {Currency,CurrencyWrapper} from "./CurrencyPicker.styled";
 import CurrencyList from "components/currency-list/CurrencyList";
-import {Currency,CurrencyWrapper, CurrencyItem, Select, CurrencyTitle } from "./CurrencyPicker.styled";
 
 export default class CurrencyPicker extends Component{
     render() {
         const { currencies, isVisible } = this.props;
-        const currencyViewClosed = <Currency onClick={this.props.openCurrencyHandler}>{this.props.currency}</Currency>;
-        const CurrencyViewOpened = <Currency className="is-open" onClick={this.props.openCurrencyHandler}>{this.props.currency}</Currency>;
+        const currencyViewClosed =
+            <Currency
+                onClick={this.props.openCurrencyHandler}
+            >{this.props.currency}
+            </Currency>;
+        const CurrencyViewOpened =
+            <Currency
+                className="is-open"
+                onClick={this.props.openCurrencyHandler}
+            >{this.props.currency}
+            </Currency>;
         return  <CurrencyWrapper>
-                        {!isVisible ? currencyViewClosed : CurrencyViewOpened}
-                        {isVisible &&  <CurrencyList id="currencySelect"
+                    {!isVisible ? currencyViewClosed : CurrencyViewOpened}
+                    {isVisible &&
+                        <CurrencyList
+                            id="currencySelect"
                             isVisible={isVisible}
                             currencies={currencies}
-                onClick={this.props.onClick}
-                onClose={this.props.onClose}
+                            onClick={this.props.onClick}
+                            onClose={this.props.onClose}
                         />}
-                    </CurrencyWrapper>
+                </CurrencyWrapper>
     }
 }
-
- {/* <Select>
-                        {isVisible && currencies && currencies.map((cur) =>
-                                <CurrencyItem key={cur.label} >
-                                    <CurrencyTitle onClick={this.props.onClick}>{cur.symbol} {cur.label}</CurrencyTitle>
-                                </CurrencyItem>
-                           
-                           )}
-                </Select> */}

@@ -6,7 +6,6 @@ text-align:center;
 &:first-of-type{
     margin-top:13px;
 }
-
 `;
 
 export const CurrencyTitle = styled.p`

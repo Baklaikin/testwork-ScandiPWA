@@ -1,7 +1,10 @@
 import React, { Component, lazy, Suspense } from "react";
 import Header from "./components/header/Header";
 import { getInfo } from "./api/api";
+import { getCategoriesQuerry } from "./queries/queries";
 import { getAllProductsQuerry } from "./queries/queries";
+import { getCategory } from "queries/queries";
+import { getProduct } from "queries/queries";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 const ProductListPage = lazy(() =>
@@ -23,24 +26,25 @@ class App extends Component {
     inCart: [],
     currency: "$",
     color: null,
+    products: [],
   };
 
   componentDidMount() {
-    //Basicly fetching "all" category of goods to our page
-    getInfo(getAllProductsQuerry).then((res) =>
-      this.setState({ categories: [...res.categories] })
-    );
-    const cartData = JSON.parse(localStorage.getItem("cart"));
-    if (cartData) {
-      this.setState({ inCart: cartData });
-    }
     const previousCategory = JSON.parse(localStorage.getItem("category"));
     if (previousCategory) {
       this.setState({ category: previousCategory });
     }
+    const cartData = JSON.parse(localStorage.getItem("cart"));
+    if (cartData) {
+      this.setState({ inCart: cartData });
+    }
+    //Fetching category names for header navigation
+    getInfo(getCategoriesQuerry).then((res) =>
+      this.setState({ categories: [...res.categories] })
+    );
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     //Checking if there is previos product in localStorage and setting it to state, because App provides it to ProductPage
     if (this.state.product === null) {
       const prod = JSON.parse(localStorage.getItem("product"));
@@ -63,7 +67,11 @@ class App extends Component {
     this.setState({ inCart: [...this.state.inCart, data] });
   };
 
-  handleProduct = (id) => {
+  handleProduct = (e, id) => {
+    if (e.target.id === "addToCart") {
+      e.preventDefault();
+      getInfo(getProduct(id)).then((res) => this.handleClick(res.product));
+    }
     this.setState({ product: id });
     localStorage.setItem("product", `${JSON.stringify(id)}`);
   };

@@ -27,36 +27,46 @@ export default class CartPage extends Component{
 
     attributesRender = (attributes) => {
         return attributes.map((attribute) => {
-                                            return <Item key={uuidv4()}>
-                                                <Size>{attribute.name}:</Size>
-                                                <AttributesList>
-                                                    {attribute.items.map((item, idx) => {
-                                                        const itemName = attribute.id.toLowerCase();
-                                                        const inState = itemName && this.props.cart.find(item => {
-                                                        if (item[itemName]) {
-                                                        return item[itemName].id === itemName
-                                                            }
-                                                            return
-                                                        })
-                                                        const canRender = inState && idx === inState[itemName].value;
-                                                        if (itemName === "color") {
-                                                            return itemName && canRender ?
-                                                                <AttributesColorItem
-                                                                onClick={e => this.props.cartAmountHandler(e, item)}
-                                                                key={uuidv4()} border
-                                                                ><ColorWrapper color={`${item.value}`}
-                                                                >{item.value}
-                                                                </ColorWrapper>
-                                                            </AttributesColorItem> :
-                                                            <AttributesColorItem key={uuidv4()} color={`${item.value}`}><ColorWrapper color={`${item.value}`}>{item.value}</ColorWrapper></AttributesColorItem>
-                                                        } else {
-                                                            return itemName && canRender ? <AttributesItem chosen key={uuidv4()}>{item.value}</AttributesItem> : <AttributesItem key={uuidv4()}>{item.value}</AttributesItem>
-                                                        }
-                                                        
-                                                    })}
-                                                </AttributesList>
-                                            </Item>
-                                        })
+            return <Item key={uuidv4()}>
+                <Size>{attribute.name}:</Size>
+                <AttributesList>
+                    {attribute.items.map((item, idx) => {
+                        const itemName = attribute.id.toLowerCase();
+                        const inState = itemName && this.props.cart.find(item => {
+                            if (item[itemName]) {
+                            return item[itemName].id === itemName
+                                }
+                            return null})
+                                const canRender = inState && idx === inState[itemName].value;
+                                if (itemName === "color") {
+                                    return itemName && canRender ?
+                                        <AttributesColorItem
+                                            onClick={e => this.props.cartAmountHandler(e, item)}
+                                            key={uuidv4()} border
+                                        >
+                                            <ColorWrapper color={`${item.value}`}
+                                            >{item.value}
+                                            </ColorWrapper>
+                                        </AttributesColorItem> :
+                                        <AttributesColorItem
+                                            key={uuidv4()}
+                                            color={`${item.value}`}
+                                        ><ColorWrapper color={`${item.value}`}>{item.value}</ColorWrapper>
+                                        </AttributesColorItem>
+                                } else {
+                                    return itemName && canRender ?
+                                        <AttributesItem
+                                            chosen
+                                            key={uuidv4()}
+                                        >{item.value}
+                                        </AttributesItem>
+                                        :
+                                        <AttributesItem key={uuidv4()}>{item.value}</AttributesItem>
+                                }
+                    })}
+                </AttributesList>
+            </Item>
+        })
     }
 
     render() {

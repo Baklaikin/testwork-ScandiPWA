@@ -23,7 +23,6 @@ line-height: 1.25;
 `;
 
 export const CartList = styled.ul`
-
 `;
 
 export const CartListItem = styled.li`
@@ -70,7 +69,6 @@ width:108px;
 font-weight: 400;
 font-size: 24px;
 line-height: 1.1666;
-
 `;
 
 export const CartButton = styled.button`

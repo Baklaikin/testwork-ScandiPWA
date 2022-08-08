@@ -12,7 +12,6 @@ export const List = styled.ul`
 `;
 
 export const Item = styled(NavLink)`
-
 `;
 
 export const Container = styled.div`
