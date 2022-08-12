@@ -1,5 +1,5 @@
 import { Component } from "react";
-import ProdCard from "../product-card/ProdCart";
+import ProdCard from "../product-card/ProdCard";
 import { getInfo } from "../../api/api";
 import { getCategory } from "../../queries/queries";
 import { List, Item, Container, CategoryTitle, ItemLi } from "../product-list/ProductListPage.styled";
@@ -35,9 +35,16 @@ export default class ProductListPage extends Component{
                 const price = prod.prices.find(price => price.currency.symbol === this.props.currency.trim())
                 return(
                   <ItemLi key={prod.id}>
-                    <Item to={`/testwork-scandipwa/${this.props.category}/${prod.id}`} key={prod.id}>
-                      <ProdCard value={prod} price={price.amount} currency={this.props.currency} handleClick={
-                        this.props.setProduct} inCart={this.props.inCart} />
+                    <Item
+                      to={`/testwork-scandipwa/${this.props.category}/${prod.id}`}
+                      key={prod.id}
+                    >
+                      <ProdCard
+                        value={prod}
+                        price={price.amount}
+                        currency={this.props.currency}
+                        handleClick={this.props.setProduct}
+                        inCart={this.props.inCart} />
                     </Item>
                   </ItemLi>)
                 }

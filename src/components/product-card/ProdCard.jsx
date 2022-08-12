@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { ReactComponent as CartIcon } from "../../images/cart.svg";
+import { ReactComponent as CartIcon } from "../../images/cart-plp.svg";
 import {
     Container, Thumb, Image, Title, OutOfStockText,
     OutOfStockContainer, InCart
@@ -18,22 +18,26 @@ export default class ProdCard extends Component {
         const { gallery, description, name, inStock, id, brand } = this.props.value;
         const {currency, price, handleClick} = this.props;
         return <Container inCart onClick={(e) => handleClick(e, id)}>
+                    {!inStock &&
+                        <OutOfStockContainer>
+                            <OutOfStockText>
+                                Out of Stock
+                            </OutOfStockText>
+                        </OutOfStockContainer>
+                    }
                     <Thumb>
                         <Image src={gallery[0]} alt={description} />
-                            {!inStock &&
-                                <OutOfStockContainer>
-                                    <OutOfStockText>
-                                        Out of Stock
-                                    </OutOfStockText>
-                            </OutOfStockContainer>
-                            }
                     </Thumb>
-                    {inStock &&
-                    <InCart >
-                        <CartIcon id="addToCart" />
-                    </InCart>}
-                    <Title>{brand} {name }</Title>
-                    <Title>{currency}{price}</Title>
+            {inStock &&
+                <InCart
+                    id="addToCart"
+                    onClick={(e) => handleClick(e, id)}
+                >
+                    <CartIcon />
+                </InCart>
+            }
+                        <Title>{brand} {name}</Title>
+                        <Title>{currency}{price}</Title>
                 </Container >
     }
 

@@ -2,8 +2,8 @@ import React, { Component, lazy, Suspense } from "react";
 import Header from "./components/header/Header";
 import { getInfo } from "./api/api";
 import { getCategoriesQuerry } from "./queries/queries";
-import { getAllProductsQuerry } from "./queries/queries";
-import { getCategory } from "queries/queries";
+// import { getAllProductsQuerry } from "./queries/queries";
+// import { getCategory } from "queries/queries";
 import { getProduct } from "queries/queries";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
@@ -68,7 +68,7 @@ class App extends Component {
   };
 
   handleProduct = (e, id) => {
-    if (e.target.id === "addToCart") {
+    if (e.currentTarget.id === "addToCart") {
       e.preventDefault();
       getInfo(getProduct(id)).then((res) => this.handleClick(res.product));
     }

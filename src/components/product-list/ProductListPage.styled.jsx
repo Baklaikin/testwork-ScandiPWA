@@ -9,6 +9,13 @@ export const List = styled.ul`
   list-style: none;
   padding:0;
   width: 100%;
+
+  -ms-overflow-style: none;
+scrollbar-width: none;
+
+&::-webkit-scrollbar{
+    display: none;
+}
 `;
 
 export const Item = styled(NavLink)`
@@ -18,6 +25,12 @@ export const Container = styled.div`
 max-width:1440px;
 margin:0 auto;
 padding:80px 101px;
+// -ms-overflow-style: none;
+// scrollbar-width: none;
+
+// &::-webkit-scrollbar{
+//     display: none;
+// }
 `;
 
 export const CategoryTitle = styled.h1`

@@ -5,7 +5,15 @@
 }
 
 html{
-  overflow-y: overlay;
+  /* overflow-y: overlay; */
+}
+body{
+    /* -ms-overflow-style: none;
+      scrollbar-width: none;
+    
+      &::-webkit-scrollbar {
+        display: none;
+      } */
 }
 
 :root{

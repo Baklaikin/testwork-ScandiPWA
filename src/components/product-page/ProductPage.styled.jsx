@@ -15,11 +15,22 @@ flex-direction:column;
 `;
 
 export const MainPictureWrapper = styled.div`
-margin-right:100px;
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
 width:610px;
 height:511px;
+margin-right:100px;
+`;
+
+export const MainPictureBlock = styled.div`
+// position: relative;
+width:100%;
+height:100%;
 overflow:hidden;
 `;
+
 export const MiniImageThumb = styled.div`
 width:80px;
 height:80px;
@@ -101,6 +112,12 @@ font-weight: 400;
 font-size: 16px;
 line-height: 1.6;
 color: var(--text-color);
+-ms-overflow-style: none;
+scrollbar-width: none;
+
+&::-webkit-scrollbar{
+    display: none;
+}
 `;
 
 export const AddToCartButton = styled.button`
@@ -125,4 +142,24 @@ background-color:grey;
 
 export const ColorText = styled.p`
 visibility:hidden;
+`;
+
+export const OutOfStockText = styled.p`
+position: absolute;
+bottom: -34px;
+margin: 0;
+font-size: 24px;
+color: #8D8F9A;
+`;
+
+export const OutOfStockContainer = styled.div`
+position: absolute;
+display:flex;
+align-items:center;
+justify-content:center;
+width:100%;
+height:100%;
+top: 0;
+left: 0;
+background-color: rgba(255,255,255,0.5);
 `;

@@ -4,7 +4,7 @@ import { getProduct } from "../../queries/queries";
 import Attributtes from "components/attributes/Attributes";
 import {
     Container, MiniPicturesWrapper, MainPictureWrapper, MiniImageThumb, Image, List, Item,
-    ProductContainer, AttributesList, ProductTitle,
+    ProductContainer, AttributesList, ProductTitle, OutOfStockText, OutOfStockContainer,MainPictureBlock,
     ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, AddToCartButtonDisabled
 } from "./ProductPage.styled";
 
@@ -60,7 +60,7 @@ export default class ProuctPage extends Component {
             <Container>
                 <MiniPicturesWrapper>
                     <div>
-                        <List>
+                        <List> 
                             {product && product.gallery.map((item, index) => {
                                 return (
                                     <Item key={item}>
@@ -74,8 +74,18 @@ export default class ProuctPage extends Component {
                     </div>
                 </MiniPicturesWrapper>
                 <MainPictureWrapper>
-                    {product &&
-                        <Image
+                    {product && !product.inStock &&
+                        <MainPictureBlock><Image
+                            id="main-image"
+                            src={product.gallery[0]}
+                            alt={product.description}
+                        />   <OutOfStockContainer>
+                                <OutOfStockText>
+                                    Out of Stock
+                                </OutOfStockText>
+                            </OutOfStockContainer>
+                        </MainPictureBlock>}
+                    {product && product.inStock && <Image
                             id="main-image"
                             src={product.gallery[0]}
                             alt={product.description}

@@ -44,6 +44,7 @@ color: var(--text-color);
 export const OutOfStockText = styled.p`
 font-size: 24px;
 color: #8D8F9A;
+z-index: 1;
 `;
 
 export const OutOfStockContainer = styled.div`
@@ -51,11 +52,12 @@ position: absolute;
 display:flex;
 align-items:center;
 justify-content:center;
-width:100%;
-height:100%;
 top: 0;
 left: 0;
+width:100%;
+height:100%;
 background-color: rgba(255,255,255,0.5);
+z-index: 1;
 `;
 
 export const Item = styled.li`
@@ -79,5 +81,5 @@ height: 52px;
 border-radius: 50%;
 background-color: var(--button-color);
 visibility: hidden;
-z-index:1;
+z-index: 10;
 `;
