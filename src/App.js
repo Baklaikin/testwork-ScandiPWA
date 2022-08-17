@@ -92,8 +92,12 @@ class App extends Component {
     if (minus || del) {
       const cart = [...this.state.inCart];
       const data = this.state.inCart.indexOf(
-        this.state.inCart.find((item) => item.id === id.id)
+        this.state.inCart.find((item) => {
+          // console.log(Object.values(item));
+          return item.id === id.id;
+        })
       );
+
       const filteredCart = cart.filter((_, index) => index !== data);
       this.setState({ inCart: filteredCart });
     }

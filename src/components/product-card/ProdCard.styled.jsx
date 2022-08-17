@@ -31,6 +31,7 @@ max-width:100%;
 display:block;
 height:100%;
 object-fit:cover;
+z-index: -1;
 `;
 
 export const Title = styled.p`
@@ -44,7 +45,6 @@ color: var(--text-color);
 export const OutOfStockText = styled.p`
 font-size: 24px;
 color: #8D8F9A;
-z-index: 1;
 `;
 
 export const OutOfStockContainer = styled.div`
@@ -57,7 +57,6 @@ left: 0;
 width:100%;
 height:100%;
 background-color: rgba(255,255,255,0.5);
-z-index: 1;
 `;
 
 export const Item = styled.li`

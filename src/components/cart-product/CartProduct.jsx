@@ -11,7 +11,7 @@ import {
 export default class CartProduct extends Component {
 
     attributesSearch = (attributes, item) => {
-       return attributes.map((attribute) => {
+        return attributes.map((attribute) => {
             return <Item key={uuidv4()}>
                 <Size>{attribute.name}:</Size>
                 <AttributesList>
@@ -25,11 +25,35 @@ export default class CartProduct extends Component {
                         })
                         const canRender = inState && idx === inState[itemName].value;  
                         if (itemName === "color") {
-                            return itemName && canRender ? <AttributesColorItem onClick={e => this.props.cartAmountHandler(e, item)}
-                                key={uuidv4()} border><ColorWrapper color={`${att.value}`}>{att.value}</ColorWrapper>
-                            </AttributesColorItem> : <AttributesColorItem key={uuidv4()} color={`${att.value}`}><ColorWrapper color={`${att.value}`}>{att.value}</ColorWrapper></AttributesColorItem>
+                            return itemName && canRender ?
+                                <AttributesColorItem
+                                    onClick={e => this.props.cartAmountHandler(e, item)}
+                                    key={uuidv4()}
+                                    border>
+                                    <ColorWrapper
+                                        color={`${att.value}`}
+                                    >{att.value}
+                                    </ColorWrapper>
+                                </AttributesColorItem>
+                                : <AttributesColorItem
+                                    key={uuidv4()}
+                                    color={`${att.value}`}>
+                                    <ColorWrapper
+                                        color={`${att.value}`}
+                                    >{att.value}
+                                    </ColorWrapper>
+                                </AttributesColorItem>
                         } else {
-                            return itemName && canRender ? <AttributesItem key={uuidv4()} chosen>{att.value}</AttributesItem> : <AttributesItem key={uuidv4()}>{att.value}</AttributesItem>
+                            return itemName && canRender ?
+                                <AttributesItem
+                                    key={uuidv4()}
+                                    chosen
+                                >{att.value}
+                                </AttributesItem>
+                                : <AttributesItem
+                                    key={uuidv4()}
+                                >{att.value}
+                                </AttributesItem>
                         }
                     })}
               </AttributesList>

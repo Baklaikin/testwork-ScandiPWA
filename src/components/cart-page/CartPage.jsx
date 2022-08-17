@@ -1,11 +1,15 @@
 import { Component } from "react";
 import { Container } from "./CartPage.styled";
 import { v4 as uuidv4 } from "uuid";
-import { CartList, CartListItem, CartTitle, CartTotalSpan,CartTotalContainer,
+import {
+    CartList, CartListItem, CartTitle, CartTotalSpan, CartTotalContainer,
     CartContainer, QuantityContainer, ColorWrapper, CartButton,
-    Plus, Minus, AttributesList, TextContainer, CartTotal,
+    Plus, Minus, AttributesList, TextContainer, CartTotal,ProductAmountWrapper,
     Price, Item, Size, AttributesItem, List, NoProductTitle,
-    AttributesColorItem, PhotoImage, PhotoThumb, CartModel, PageName} from "./CartPage.styled"
+    AttributesColorItem, PhotoImage, PhotoThumb, CartModel, PageName
+} from "./CartPage.styled";
+import filterCart from "../../utils/filterCart";
+import productQuantity from "utils/productQuantity";
 
 export default class CartPage extends Component{
     state = {
@@ -25,19 +29,16 @@ export default class CartPage extends Component{
         }
     }
 
-    attributesRender = (attributes) => {
+    attributesRender = (product) => {
+        const { attributes } = product;
         return attributes.map((attribute) => {
             return <Item key={uuidv4()}>
                 <Size>{attribute.name}:</Size>
                 <AttributesList>
                     {attribute.items.map((item, idx) => {
                         const itemName = attribute.id.toLowerCase();
-                        const inState = itemName && this.props.cart.find(item => {
-                            if (item[itemName]) {
-                            return item[itemName].id === itemName
-                                }
-                            return null})
-                                const canRender = inState && idx === inState[itemName].value;
+                        const inState = itemName && product[itemName];
+                        const canRender = inState && idx === product[itemName].value;
                                 if (itemName === "color") {
                                     return itemName && canRender ?
                                         <AttributesColorItem
@@ -63,7 +64,8 @@ export default class CartPage extends Component{
                                         :
                                         <AttributesItem key={uuidv4()}>{item.value}</AttributesItem>
                                 }
-                    })}
+                        })
+                    }
                 </AttributesList>
             </Item>
         })
@@ -71,46 +73,42 @@ export default class CartPage extends Component{
 
     render() {
         const { currency } = this.props;
-        let items = [...this.props.cart];
         const tax = 0.21;
+        const noProduct = items.length === 0;
+        let items = [...this.props.cart];
         let cart = [];
-        for (let item of items) {
-            const inCart = cart.find(prod => prod.id === item.id)
-            if (!inCart) {
-                cart.push(item); 
-            }
-        }
+        filterCart(items, cart);
+                
         return <Container>
             <PageName>Cart</PageName>
-            {items.length === 0 ? <NoProductTitle>You haven't add any product in cart so far</NoProductTitle> : null}
+            {noProduct ? <NoProductTitle>You haven't add any product in cart so far</NoProductTitle> : null}
             <CartList>
-                    {this.props && cart.map((item) => {
+                {this.props && cart
+                    .map(item => {
                         return <CartListItem key={uuidv4()}>
-                            <CartContainer>
-                                <TextContainer>
-                                    <CartTitle>{item.brand}</CartTitle>
-                                    <CartModel>{item.name}</CartModel>
-                                    <Price>{currency}{this.findPrice(item.prices)}                                        
-                                    </Price>
-                                     <List>
-                                        {this.attributesRender(item.attributes)}
-                                    </List>
-                                </TextContainer>
-                                
-                                <QuantityContainer>
-                                        <Plus id="add" onClick={e => this.props.cartAmountHandler(e,item)}></Plus>
-                                        <div>{this.props.cart.filter(prod => prod.id === item.id).length}</div>
-                                        <Minus id="delete" onClick={e => this.props.cartAmountHandler(e,item)}></Minus>
-                                </QuantityContainer>
-                                
-                                <PhotoThumb>
-                                    <PhotoImage src={item.gallery[0]} alt={item.id} />
-                                </PhotoThumb>
-                            </CartContainer>
-                        </CartListItem>
-                    })}
+                                <CartContainer>
+                                    <TextContainer>
+                                        <CartTitle>{item.brand}</CartTitle>
+                                        <CartModel>{item.name}</CartModel>
+                                        <Price>{currency}{this.findPrice(item.prices)}                                        
+                                        </Price>
+                                        <List>
+                                            {this.attributesRender(item)}
+                                        </List>
+                                    </TextContainer>                               
+                                    <QuantityContainer>
+                                            <Plus id="add" onClick={e => this.props.cartAmountHandler(e,item)}></Plus>
+                                            <ProductAmountWrapper>{productQuantity(this.props.cart, item)}</ProductAmountWrapper>
+                                            <Minus id="delete" onClick={e => this.props.cartAmountHandler(e,item)}></Minus>
+                                    </QuantityContainer>                              
+                                    <PhotoThumb>
+                                        <PhotoImage src={item.gallery[0]} alt={item.id} />
+                                    </PhotoThumb>
+                                </CartContainer>
+                            </CartListItem>
+                    })
+                }
             </CartList>
-
             {items.length > 0 ? <CartTotalContainer>
                 <CartTotal>
                     <CartTotalSpan>Tax 21%:</CartTotalSpan>
@@ -120,11 +118,14 @@ export default class CartPage extends Component{
                     <CartTotalSpan>Quantity:</CartTotalSpan> {items.length}
                 </CartTotal>
                 <CartTotal>
-                    <CartTotalSpan>Total: </CartTotalSpan>
-                    {currency}{this.countTax(items, currency)}
+                    <CartTotalSpan
+                    >Total:
+                    </CartTotalSpan>
+                        {currency}{this.countTax(items, currency)}
                 </CartTotal>
                 <CartButton type="button"
-                >Order</CartButton>
+                >Order
+                </CartButton>
             </CartTotalContainer> : null}
         </Container>;
     }

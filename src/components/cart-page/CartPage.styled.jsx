@@ -114,6 +114,8 @@ export const Minus = styled(QuantityAdjastment)`
 background-image: url(${MinusSquare});
 `;
 
+export const ProductAmountWrapper = styled.div``;
+
 export const AttributesList = styled.ul`
 display:flex;
 align-items: center;

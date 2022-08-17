@@ -39,6 +39,7 @@ export default class ProuctPage extends Component {
                 id: e.currentTarget.dataset.name.toLowerCase(),
                 value: idx
                 }
+                // [e.currentTarget.dataset.name.toLowerCase()]: idx
             }
         })
     }
