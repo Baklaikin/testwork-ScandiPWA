@@ -7,6 +7,8 @@ import {
     Price, Item, Size, AttributesItem, List,
     AttributesColorItem, PhotoImage, PhotoThumb, ColorWrapper
 } from "./CartProduct.styled";
+import productQuantity from "utils/productQuantity";
+import filterCart from "utils/filterCart";
 
 export default class CartProduct extends Component {
 
@@ -17,13 +19,14 @@ export default class CartProduct extends Component {
                 <AttributesList>
                     {attribute.items.map((att, idx) => {
                         const itemName = attribute.id.toLowerCase();
-                        const inState = itemName && this.props.cart.find(item => {
-                            if (item[itemName]) {
-                            return item[itemName].id === itemName
-                            }
-                            return null
-                        })
-                        const canRender = inState && idx === inState[itemName].value;  
+                        const inState = itemName && item[itemName];
+                        //     this.props.cart.find(item => {
+                        //     if (item[itemName]) {
+                        //     return item[itemName].id === itemName
+                        //     }
+                        //     return null
+                        // })
+                        const canRender = inState && idx === item[itemName].value;  
                         if (itemName === "color") {
                             return itemName && canRender ?
                                 <AttributesColorItem
@@ -65,15 +68,12 @@ export default class CartProduct extends Component {
         const { currency, cartAmountHandler } = this.props;
         let items = [...this.props.cart];
         let cart = [];
-        for (let item of items) {
-            const inCart = cart.find(prod => prod.id === item.id)
-            if (!inCart) {
-                cart.push(item); 
-            }
-        }
+        filterCart(items, cart);
+        console.log("cart",cart);
+    
         return (
                 <CartList>
-                    {this.props && cart.map((item) => {
+                    {this.props && cart.map((item,idx) => {
                         return <CartListItem key={uuidv4()}>
                             <CartContainer>
                                 <TextContainer>
@@ -90,7 +90,7 @@ export default class CartProduct extends Component {
                                         id="plus"
                                         onClick={e => cartAmountHandler(e, item)}
                                     ></Plus>
-                                        <div>{this.props.cart.filter(prod => prod.id === item.id).length}</div>
+                                        <div>{productQuantity(this.props.cart, item)}</div>
                                     <Minus
                                         id="minus"
                                         onClick={e => cartAmountHandler(e, item)}
@@ -106,3 +106,9 @@ export default class CartProduct extends Component {
              )
     }
 }
+  // for (let item of items) {
+            //     const inCart = cart.find(prod => prod.id === item.id)
+            //     if (!inCart) {
+                //         cart.push(item); 
+                //     }
+                // }

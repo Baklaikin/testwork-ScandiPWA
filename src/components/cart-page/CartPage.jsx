@@ -74,9 +74,9 @@ export default class CartPage extends Component{
     render() {
         const { currency } = this.props;
         const tax = 0.21;
-        const noProduct = items.length === 0;
         let items = [...this.props.cart];
         let cart = [];
+        const noProduct = items.length === 0;
         filterCart(items, cart);
                 
         return <Container>
