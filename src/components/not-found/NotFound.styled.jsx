@@ -6,6 +6,9 @@ display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
+& a{
+    border-bottom: none;
+}
 `;
 
 export const Title = styled.h1`
