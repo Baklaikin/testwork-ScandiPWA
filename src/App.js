@@ -100,7 +100,7 @@ class App extends Component {
           <Routes>
             <Route
               exact
-              path="/testwork-scandipwa/"
+              path="/"
               element={
                 <ProductListPage
                   category={category}
@@ -111,7 +111,7 @@ class App extends Component {
               }
             ></Route>
             <Route
-              path={`/testwork-scandipwa/${category}`}
+              path={`/${category}`}
               element={
                 <ProductListPage
                   category={`${category}`}
@@ -123,7 +123,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/testwork-scandipwa/cart"
+              path="/cart"
               element={
                 <CartPage
                   currency={currency}
@@ -134,7 +134,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path={`/testwork-scandipwa/${category}/:id`}
+              path={`/${category}/:id`}
               element={
                 <ProductPage
                   product={product}

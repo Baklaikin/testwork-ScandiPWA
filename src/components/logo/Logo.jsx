@@ -6,7 +6,7 @@ import {Logo} from "./Logo.styled";
 export default class Logotype extends Component{
     render() {
         return  <Logo>
-                    <NavLink to="/testwork-scandipwa/" onClick={() => this.props.onChange("all")}>
+                    <NavLink to="/" onClick={() => this.props.onChange("all")}>
                         <LogoIcon />
                     </NavLink>
                 </Logo>

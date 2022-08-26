@@ -13,7 +13,7 @@ export default class NavigationList extends Component{
                                 key={prop.name}
                                 className={activeLink}
                             >
-                                <NavItem to={`/testwork-scandipwa/${prop.name}`}
+                                <NavItem to={`/${prop.name}`}
                                     onClick={() => this.props.onChange(`${prop.name}`)}
                                     > {prop.name.toUpperCase()}
                                 </NavItem>

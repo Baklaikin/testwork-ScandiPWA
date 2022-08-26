@@ -39,7 +39,7 @@ export default class ProductListPage extends Component{
                 return(
                   <ItemLi key={prod.id}>
                     <Item
-                      to={`/testwork-scandipwa/${category}/${prod.id}`}
+                      to={`/${category}/${prod.id}`}
                       key={prod.id}
                     >
                       <ProdCard

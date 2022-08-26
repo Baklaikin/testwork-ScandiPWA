@@ -6,7 +6,7 @@ export default class NotFound extends Component {
         return (
             <Container>
                 <Title>No match found</Title>
-                <Link to="/testwork-scandipwa">Return to Home Page</Link>
+                <Link to="/">Return to Home Page</Link>
             </Container>
         )
     }

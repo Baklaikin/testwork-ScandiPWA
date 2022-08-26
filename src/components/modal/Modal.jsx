@@ -39,7 +39,7 @@ export default class Modal extends Component {
                         <ButtonsList>
                             <li>
                                 <ViewBagButton
-                                    to="/testwork-scandipwa/cart"
+                                    to="/cart"
                                     onClick={onClose}>
                                     <Button id="view-bag">View Bag</Button>
                                 </ViewBagButton>
