@@ -4,21 +4,17 @@
   box-sizing: border-box;
 }
 
-html{
-  overflow-y: overlay;
-}
 body{
-    /* -ms-overflow-style: none;
-      scrollbar-width: none;
-    
-      &::-webkit-scrollbar {
-        display: none;
-      } */
+  overflow-y: overlay;
+  padding-right: 15px;
 }
 
 :root{
   --text-color: #1D1F22;
   --button-color: #5ECE7B;
+  --light-color: #FFFFFF;
+  --border-accent-color: #E5E5E5;
+  --outOfStock-color: #8D8F9A;
 }
 
 ul{
@@ -28,7 +24,7 @@ ul{
 }
 
 a{
-  text-decoration: none;;
+  text-decoration: none;
 }
 
 h1,
@@ -53,15 +49,15 @@ img{
 }
 
 .active{
-  border-bottom:1px solid #5ECE7B;
+  border-bottom:1px solid var(--button-color);
 }
 
- .active > NavItem {
-   color: #5ECE7B;
- }
+.active > NavItem {
+   color: var(--button-color);
+}
 
- .suspense{
+.suspense{
   font-size:24px;
   font-weight:700;
   text-align: center;
- }
+}

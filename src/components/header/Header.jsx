@@ -43,38 +43,41 @@ export default class Header extends Component{
     closeModal = (e) => {
         if (this.state.shouldModalOpen && e.target === e.currentTarget) this.setState({ shouldModalOpen: false }) 
         if (this.state.shouldModalOpen && e.target.id === "view-bag") this.setState({ shouldModalOpen: false })
-        if (this.state.isVisible && e.target === e.currentTarget) this.setState({ isVisible: !this.state.isVisible }) 
+        if (this.state.isVisible && e.target === e.currentTarget) this.setState({ isVisible: !this.state.isVisible })
     }
 
-    openModal = (e) => {
+    openModal = () => {
         if (this.state.isVisible) this.setState({ isVisible: !this.state.isVisible })
         this.setState({ shouldModalOpen: !this.state.shouldModalOpen })
-        // if (e.target.id === "modalWindow" ) return
     }
     render() {
+        const { currencies, isVisible, shouldModalOpen} = this.state;
+        const { currency, onChange, inCart } = this.props;
+        const cartIsNotEmpty = inCart.length !== 0;
         return (
             <Container id="header" onClick={this.closeModal}>
                 <Navigation>
                     <NavigationList { ...this.props} />
                 </Navigation>
-                <Logotype onChange={this.props.onChange} />
+                <Logotype onChange={onChange} />
                 <Cart id="cart">
                     <CurrencyPicker id="currency"
                         onClick={this.setCurrencyHandler}
                         openCurrencyHandler={this.openCurrenciesHandler}
-                        currencies={this.state.currencies}
-                        isVisible={this.state.isVisible}
-                        currency={this.props.currency}
+                        currencies={currencies}
+                        isVisible={isVisible}
+                        currency={currency}
                         onClose={this.closeModal}
                     />
-                    {this.state.shouldModalOpen &&
+                    {shouldModalOpen &&
                         <Modal
-                            id="modal"{...this.props}
+                            id="modal"
                             onClose={this.closeModal}
+                            {...this.props}
                         />}
-                    {this.props.inCart.length !== 0 &&
+                    {cartIsNotEmpty &&
                         <CartQuantity onClick={this.openModal}>
-                            <CartQuantityText>{this.props.inCart.length}</CartQuantityText>
+                            <CartQuantityText>{inCart.length}</CartQuantityText>
                         </CartQuantity>}
                     <CartIcon onClick={this.openModal}/>
                 </Cart>

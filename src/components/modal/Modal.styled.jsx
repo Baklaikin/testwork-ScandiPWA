@@ -6,27 +6,30 @@ position: fixed;
 display: flex;
 justify-content: center;
 align-items: center;
-top: 80px;
+top: 0;
 left: 0;
 width: 100vw;
 height: 100vh;
 background-color: rgba(57, 55, 72, 0.22);
+background: linear-gradient(180deg, rgba(255,255,255, 0) 0px, 
+rgba(255,255,255, 0) 80px, rgba(57, 55, 72, 0.22) 80px,  
+rgba(57, 55, 72, 0.22) 100%);
 `;
 
 export const ModalWindow = styled.div`
-position:absolute;
-top:0px;
-right:72px;
+position: absolute;
+top: 80px;
+right: 320px;
 padding: 32px 16px;
 width: 325px;
-max-height: 700px;
-overflow:auto;
+max-height: 650px;
+overflow: auto;
 background-color: white;
 z-index: 1;
 `;
 
 export const ModalTitle = styled.h3`
-margin-top:0;
+margin-top: 0;
 font-weight: 700;
 color: var(--text-color);
 `;
@@ -41,25 +44,25 @@ color: var(--text-color);
 
 export const Button = styled.button`
 margin-right: 12px;
-width:140px;
-height:43px;
-padding:13px;
+width: 140px;
+height: 43px;
+padding: 13px;
 font-family: 'Raleway', sans-serif;
 font-weight: 600;
 font-size: 14px;
 line-height: 1.2;
 text-transform: uppercase;
 color: var(--text-color);
-background: #FFFFFF;
+background: var(--light-color);
 border: 1px solid var(--text-color);
 cursor: pointer;
 `;
 
 export const CheckButton = styled(Button)`
-margin-right:0;
+margin-right: 0;
 border-color: transparent;
-background: #5ECE7B;
-color: white;
+background: var(--button-color);
+color: var(--light-color);
 `;
 
 export const ButtonsList = styled.ul`

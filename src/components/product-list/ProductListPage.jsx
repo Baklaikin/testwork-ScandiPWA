@@ -25,26 +25,29 @@ export default class ProductListPage extends Component{
         .then(res => this.setState({ products: res.category.products }))
     }
   }
+
   render() {
+    const { category, currency, setProduct, inCart } = this.props;
+    const { products } = this.state;
       return (
         <Container>
-          <CategoryTitle>{ this.props.category}</CategoryTitle>
+          <CategoryTitle>{category}</CategoryTitle>
             <List> 
-            {this.state.products &&
-              this.state.products.map(prod => {
-                const price = prod.prices.find(price => price.currency.symbol === this.props.currency.trim())
+            {products &&
+              products.map(prod => {
+                const price = prod.prices.find(price => price.currency.symbol === currency.trim())
                 return(
                   <ItemLi key={prod.id}>
                     <Item
-                      to={`/testwork-scandipwa/${this.props.category}/${prod.id}`}
+                      to={`/testwork-scandipwa/${category}/${prod.id}`}
                       key={prod.id}
                     >
                       <ProdCard
                         value={prod}
                         price={price.amount}
-                        currency={this.props.currency}
-                        handleClick={this.props.setProduct}
-                        inCart={this.props.inCart} />
+                        currency={currency}
+                        handleClick={setProduct}
+                        inCart={inCart} />
                     </Item>
                   </ItemLi>)
                 }

@@ -4,28 +4,30 @@ import CurrencyList from "components/currency-list/CurrencyList";
 
 export default class CurrencyPicker extends Component{
     render() {
-        const { currencies, isVisible } = this.props;
+        const { currencies, isVisible, openCurrencyHandler, currency, onClick, onClose} = this.props;
         const currencyViewClosed =
             <Currency
-                onClick={this.props.openCurrencyHandler}
-            >{this.props.currency}
+                onClick={openCurrencyHandler}
+            >{currency}
             </Currency>;
         const CurrencyViewOpened =
             <Currency
                 className="is-open"
-                onClick={this.props.openCurrencyHandler}
-            >{this.props.currency}
+                onClick={openCurrencyHandler}
+            >{currency}
             </Currency>;
-        return  <CurrencyWrapper>
-                    {!isVisible ? currencyViewClosed : CurrencyViewOpened}
-                    {isVisible &&
-                        <CurrencyList
-                            id="currencySelect"
-                            isVisible={isVisible}
-                            currencies={currencies}
-                            onClick={this.props.onClick}
-                            onClose={this.props.onClose}
-                        />}
-                </CurrencyWrapper>
+        return (
+            <CurrencyWrapper>
+                {!isVisible ? currencyViewClosed : CurrencyViewOpened}
+                {isVisible &&
+                    <CurrencyList
+                        id="currencySelect"
+                        isVisible={isVisible}
+                        currencies={currencies}
+                        onClick={onClick}
+                        onClose={onClose}
+                    />}
+            </CurrencyWrapper>
+        )
     }
 }

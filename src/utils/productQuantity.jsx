@@ -1,3 +1,4 @@
+
 export default function productQuantity(cart, item) {
     let filteredAmount = [];
     cart.filter(product => product.id === item.id
@@ -7,7 +8,7 @@ export default function productQuantity(cart, item) {
                 const sameElement = Object.values(item)[index];
                 const productIsArray = Array.isArray(p);
                 const productIsObject = typeof p === "object" && p !== null;
-                if (productIsObject) return p.value === sameElement.value;
+                if (productIsObject && p.id === sameElement.id) return p.value === sameElement.value;
                 if (productIsArray && p.length === 1) return p[0] === sameElement[0];
                 if (productIsArray && p.length > 1) return true;
                 return p === sameElement;

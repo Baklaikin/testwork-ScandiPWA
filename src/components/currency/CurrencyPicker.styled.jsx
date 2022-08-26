@@ -2,22 +2,22 @@ import styled from "styled-components";
 import ArrowDown from "../../images/arrow-down.svg";
 
 export const Currency = styled.p`
-display:flex;
+display: flex;
 align-items: end;
-height:20px;
-margin:0;
+height: 20px;
+margin: 0;
 font-weight: 500;
 font-size: 18px;
 line-height: 1;
 
 &::after{
 content:'';
-display:block;
-width:12px;
-height:12px;
+display: block;
+width: 12px;
+height: 12px;
 background-image: url(${ArrowDown});
-background-repeat:no-repeat;
-background-position:center;
+background-repeat: no-repeat;
+background-position: center;
 transition: background-image, transform, 300ms, ease-in;
 }
 
@@ -31,6 +31,6 @@ transition: background-image, transform, 300ms, ease-in;
 `;
 
 export const CurrencyWrapper = styled.div`
-position:relative;
-margin-right:10px;
+position: relative;
+margin-right: 10px;
 `;

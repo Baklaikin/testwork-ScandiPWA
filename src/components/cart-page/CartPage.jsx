@@ -2,34 +2,34 @@ import { Component } from "react";
 import { Container } from "./CartPage.styled";
 import { v4 as uuidv4 } from "uuid";
 import {
-    CartList, CartListItem, CartTitle, CartTotalSpan, CartTotalContainer,
-    CartContainer, QuantityContainer, ColorWrapper, CartButton,
-    Plus, Minus, AttributesList, TextContainer, CartTotal,ProductAmountWrapper,
-    Price, Item, Size, AttributesItem, List, NoProductTitle,
-    AttributesColorItem, PhotoImage, PhotoThumb, CartModel, PageName
+    CartList, ColorWrapper, AttributesList, Item, Size,
+    AttributesItem, NoProductTitle,AttributesColorItem,PageName
 } from "./CartPage.styled";
 import filterCart from "../../utils/filterCart";
-import productQuantity from "utils/productQuantity";
+import CartTotal from "components/cart-total/CartTotal";
+import CartListItem from "components/cart-list-item/CartListItem";
 
 export default class CartPage extends Component{
     state = {
         totalPrice:[]
     }
     
-    findPrice = (prices) => {
-        const actualPrice = prices.find((price) => price.currency.symbol === this.props.currency.trim()).amount;
-        return actualPrice;
-    }
+    findPrice = prices => prices
+        .find((price) => price.currency.symbol === this.props.currency.trim()).amount;
     
     countTax = (items, currency, tax) => {
+        const currentCurrency = it => it.currency.symbol === currency.trim();
         if (tax) {
-            return (tax * items.map((item) => item.prices.find(it => it.currency.symbol === currency.trim())).reduce((acc, item) => acc + item.amount, 0)).toFixed(2)
-        } else {
-            return items.map((item) => item.prices.find(it => it.currency.symbol === currency.trim())).reduce((acc, item) => acc + item.amount, 0).toFixed(2);
-        }
+            return (tax * items
+                .map(item => item.prices.find(currentCurrency))
+                .reduce((acc, item) => acc + item.amount, 0)).toFixed(2)
+        };
+        return items
+            .map(item => item.prices.find(currentCurrency))
+            .reduce((acc, item) => acc + item.amount, 0).toFixed(2);
     }
 
-    attributesRender = (product) => {
+    attributesRender = product => {
         const { attributes } = product;
         return attributes.map((attribute) => {
             return <Item key={uuidv4()}>
@@ -72,61 +72,48 @@ export default class CartPage extends Component{
     }
 
     render() {
-        const { currency } = this.props;
-        const tax = 0.21;
         let items = [...this.props.cart];
         let cart = [];
+        const tax = 0.21;
+        const { currency } = this.props;
         const noProduct = items.length === 0;
         filterCart(items, cart);
+        const cartTotalProps = {
+            currency,
+            items,
+            tax,
+            countTax: this.countTax
+        }
+        const cartListItemProps = {
+            currency,
+            cartAmountHandler: this.props.cartAmountHandler,
+            cart: this.props.cart,
+            findPrice: this.findPrice,
+            attributesRender: this.attributesRender
+        }
                 
         return <Container>
             <PageName>Cart</PageName>
-            {noProduct ? <NoProductTitle>You haven't add any product in cart so far</NoProductTitle> : null}
+            {noProduct ?
+                <NoProductTitle>You haven't add any product in cart so far</NoProductTitle>
+                : null
+            }
             <CartList>
-                {this.props && cart
-                    .map(item => {
-                        return <CartListItem key={uuidv4()}>
-                                <CartContainer>
-                                    <TextContainer>
-                                        <CartTitle>{item.brand}</CartTitle>
-                                        <CartModel>{item.name}</CartModel>
-                                        <Price>{currency}{this.findPrice(item.prices)}                                        
-                                        </Price>
-                                        <List>
-                                            {this.attributesRender(item)}
-                                        </List>
-                                    </TextContainer>                               
-                                    <QuantityContainer>
-                                            <Plus id="add" onClick={e => this.props.cartAmountHandler(e,item)}></Plus>
-                                            <ProductAmountWrapper>{productQuantity(this.props.cart, item)}</ProductAmountWrapper>
-                                            <Minus id="delete" onClick={e => this.props.cartAmountHandler(e,item)}></Minus>
-                                    </QuantityContainer>                              
-                                    <PhotoThumb>
-                                        <PhotoImage src={item.gallery[0]} alt={item.id} />
-                                    </PhotoThumb>
-                                </CartContainer>
-                            </CartListItem>
-                    })
-                }
+                {this.props && cart.map((item, idx) =>
+                    <CartListItem
+                        key={uuidv4()}
+                        item={item}
+                        idx={idx}
+                        {...cartListItemProps}
+                    />
+                )}
             </CartList>
-            {items.length > 0 ? <CartTotalContainer>
-                <CartTotal>
-                    <CartTotalSpan>Tax 21%:</CartTotalSpan>
-                    {currency}{this.countTax(items, currency, tax)}
-                </CartTotal>
-                <CartTotal>
-                    <CartTotalSpan>Quantity:</CartTotalSpan> {items.length}
-                </CartTotal>
-                <CartTotal>
-                    <CartTotalSpan
-                    >Total:
-                    </CartTotalSpan>
-                        {currency}{this.countTax(items, currency)}
-                </CartTotal>
-                <CartButton type="button"
-                >Order
-                </CartButton>
-            </CartTotalContainer> : null}
+            {items.length > 0 ?
+                <CartTotal
+                    {...cartTotalProps}
+                />
+                : null
+            }
         </Container>;
     }
 }

@@ -20,17 +20,19 @@ export default class Attributtes extends Component{
                                             key={it.id}
                                             onClick={(e) => productSpecsChoise(e, idx, item)}
                                             data-name={item.id}
-                                            border color={`${it.value}`}
+                                            border
+                                            color={`${it.value}`}
                                         >
-                                            <ColorWrapper color={`${it.value}` !== "#FFFFFF" ? `${it.value}` : "#F2F2F2"}
+                                            <ColorWrapper color={`${it.value}` !== "var(--light-color)" ? `${it.value}` : "#F2F2F2"}
                                             >{it.value}</ColorWrapper>
                                         </AttItemColor>
                                         : <AttItemColor
                                             onClick={(e) => productSpecsChoise(e, idx, item)}
-                                            key={it.id} data-name={item.id}
+                                            key={it.id}
+                                            data-name={item.id}
                                             color={`${it.value}`}
-                                        >
-                                            <ColorWrapper color={`${it.value}` !== "#FFFFFF" ? `${it.value}` : "#F2F2F2"}
+                                            >
+                                            <ColorWrapper color={`${it.value}` !== "var(--light-color)" ? `${it.value}` : "#F2F2F2"}
                                                 >{it.value}
                                             </ColorWrapper>
                                         </AttItemColor>
@@ -40,11 +42,13 @@ export default class Attributtes extends Component{
                                             onClick={(e) => productSpecsChoise(e, idx, item)}
                                             key={it.id}
                                             data-name={item.id}
-                                            chosen>{it.value}
+                                            chosen
+                                        >{it.value}
                                         </AttItem> :
                                         <AttItem
                                             onClick={(e) => productSpecsChoise(e, idx, item)}
-                                            key={it.id} data-name={item.id}
+                                            key={it.id}
+                                            data-name={item.id}
                                         >{it.value}
                                         </AttItem>
                                     }

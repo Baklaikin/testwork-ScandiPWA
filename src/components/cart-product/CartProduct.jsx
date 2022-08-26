@@ -20,12 +20,6 @@ export default class CartProduct extends Component {
                     {attribute.items.map((att, idx) => {
                         const itemName = attribute.id.toLowerCase();
                         const inState = itemName && item[itemName];
-                        //     this.props.cart.find(item => {
-                        //     if (item[itemName]) {
-                        //     return item[itemName].id === itemName
-                        //     }
-                        //     return null
-                        // })
                         const canRender = inState && idx === item[itemName].value;  
                         if (itemName === "color") {
                             return itemName && canRender ?
@@ -69,16 +63,15 @@ export default class CartProduct extends Component {
         let items = [...this.props.cart];
         let cart = [];
         filterCart(items, cart);
-        console.log("cart",cart);
     
         return (
                 <CartList>
-                    {this.props && cart.map((item,idx) => {
+                    {this.props && cart.map(item => {
                         return <CartListItem key={uuidv4()}>
                             <CartContainer>
                                 <TextContainer>
                                     <CartTitle>{item.name}</CartTitle>
-                                    <Price>{currency}{item.prices.find((price) => 
+                                    <Price>{currency}{item.prices.find(price => 
                                         price.currency.symbol === currency.trim()).amount}                                        
                                     </Price>
                                     <List>
@@ -106,9 +99,3 @@ export default class CartProduct extends Component {
              )
     }
 }
-  // for (let item of items) {
-            //     const inCart = cart.find(prod => prod.id === item.id)
-            //     if (!inCart) {
-                //         cart.push(item); 
-                //     }
-                // }

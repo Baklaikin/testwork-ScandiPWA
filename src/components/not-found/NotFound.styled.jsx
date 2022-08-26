@@ -16,7 +16,7 @@ color: var(--text-color);
 
 export const Link = styled(NavLink)`
 font-weight: 500;
-font-size:28px;
+font-size: 28px;
 color: var(--text-color);
 text-decoration: underline;
 `;

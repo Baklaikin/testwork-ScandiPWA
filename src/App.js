@@ -2,10 +2,9 @@ import React, { Component, lazy, Suspense } from "react";
 import Header from "./components/header/Header";
 import { getInfo } from "./api/api";
 import { getCategoriesQuerry } from "./queries/queries";
-// import { getAllProductsQuerry } from "./queries/queries";
-// import { getCategory } from "queries/queries";
 import { getProduct } from "queries/queries";
 import { Routes, Route } from "react-router-dom";
+import findPosition from "utils/findPosition";
 import "./App.css";
 const ProductListPage = lazy(() =>
   import("./components/product-list/ProductListPage")
@@ -13,10 +12,6 @@ const ProductListPage = lazy(() =>
 const ProductPage = lazy(() => import("./components/product-page/ProductPage"));
 const CartPage = lazy(() => import("./components/cart-page/CartPage"));
 const NotFound = lazy(() => import("./components/not-found/NotFound"));
-// import ProductListPage from "components/product-list/ProductListPage";
-// import ProductPage from "components/product-page/ProductPage";
-// import CartPage from "components/cart-page/CartPage";
-// import NotFound from "components/not-found/NotFound";
 
 class App extends Component {
   state = {
@@ -31,13 +26,9 @@ class App extends Component {
 
   componentDidMount() {
     const previousCategory = JSON.parse(localStorage.getItem("category"));
-    if (previousCategory) {
-      this.setState({ category: previousCategory });
-    }
+    if (previousCategory) this.setState({ category: previousCategory });
     const cartData = JSON.parse(localStorage.getItem("cart"));
-    if (cartData) {
-      this.setState({ inCart: cartData });
-    }
+    if (cartData) this.setState({ inCart: cartData });
     //Fetching category names for header navigation
     getInfo(getCategoriesQuerry).then((res) =>
       this.setState({ categories: [...res.categories] })
@@ -48,9 +39,7 @@ class App extends Component {
     //Checking if there is previos product in localStorage and setting it to state, because App provides it to ProductPage
     if (this.state.product === null) {
       const prod = JSON.parse(localStorage.getItem("product"));
-      if (prod !== null) {
-        this.setState({ product: prod });
-      }
+      if (prod !== null) this.setState({ product: prod });
     }
     if (this.state.inCart.length !== prevState.inCart.length) {
       localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
@@ -83,27 +72,18 @@ class App extends Component {
     this.setState({ currency });
   };
 
-  cartAmountHandler = (e, id) => {
+  cartAmountHandler = (e, item) => {
     const plus = e.target.id === "plus";
     const add = e.target.id === "add";
     const minus = e.target.id === "minus";
     const del = e.target.id === "delete";
-
     if (minus || del) {
-      const cart = [...this.state.inCart];
-      const data = this.state.inCart.indexOf(
-        this.state.inCart.find((item) => {
-          // console.log(Object.values(item));
-          return item.id === id.id;
-        })
+      const filteredCart = this.state.inCart.filter(
+        (_, index) => index !== findPosition(this.state.inCart, item)
       );
-
-      const filteredCart = cart.filter((_, index) => index !== data);
       this.setState({ inCart: filteredCart });
     }
-    if (plus || add) {
-      this.handleClick(id);
-    }
+    if (plus || add) this.handleClick(item);
   };
 
   render() {
@@ -132,46 +112,10 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/testwork-scandipwa/:routeName"
+              path={`/testwork-scandipwa/${category}`}
               element={
                 <ProductListPage
-                  category={category}
-                  currency={currency}
-                  setProduct={this.handleProduct}
-                  inCart={inCart}
-                />
-              }
-            ></Route>
-            <Route
-              exact
-              path="/testwork-scandipwa/all"
-              element={
-                <ProductListPage
-                  category={"all"}
-                  currency={currency}
-                  setProduct={this.handleProduct}
-                  inCart={inCart}
-                />
-              }
-            ></Route>
-            <Route
-              exact
-              path="/testwork-scandipwa/clothes"
-              element={
-                <ProductListPage
-                  category={"clothes"}
-                  currency={currency}
-                  setProduct={this.handleProduct}
-                  inCart={inCart}
-                />
-              }
-            ></Route>
-            <Route
-              exact
-              path="/testwork-scandipwa/tech"
-              element={
-                <ProductListPage
-                  category={"tech"}
+                  category={`${category}`}
                   currency={currency}
                   setProduct={this.handleProduct}
                   inCart={inCart}
@@ -191,31 +135,7 @@ class App extends Component {
             ></Route>
             <Route
               exact
-              path="/testwork-scandipwa/all/:id"
-              element={
-                <ProductPage
-                  product={product}
-                  currency={currency}
-                  handleClick={this.handleClick}
-                  cartHandler={this.cartAmountHandler}
-                />
-              }
-            ></Route>
-            <Route
-              exact
-              path="/testwork-scandipwa/clothes/:id"
-              element={
-                <ProductPage
-                  product={product}
-                  currency={currency}
-                  handleClick={this.handleClick}
-                  cartHandler={this.cartAmountHandler}
-                />
-              }
-            ></Route>
-            <Route
-              exact
-              path="/testwork-scandipwa/tech/:id"
+              path={`/testwork-scandipwa/${category}/:id`}
               element={
                 <ProductPage
                   product={product}

@@ -7,6 +7,7 @@ import {
     ProductContainer, AttributesList, ProductTitle, OutOfStockText, OutOfStockContainer,MainPictureBlock,
     ProductSubTitle, ProductText, ProductPrice, DescriptionText, AddToCartButton, AddToCartButtonDisabled
 } from "./ProductPage.styled";
+import ProductDescription from "./ProductDescription";
 
 export default class ProuctPage extends Component {
     state = {
@@ -39,7 +40,6 @@ export default class ProuctPage extends Component {
                 id: e.currentTarget.dataset.name.toLowerCase(),
                 value: idx
                 }
-                // [e.currentTarget.dataset.name.toLowerCase()]: idx
             }
         })
     }
@@ -123,7 +123,9 @@ export default class ProuctPage extends Component {
                             >Add to cart
                             </AddToCartButtonDisabled>
                             }
-                            <DescriptionText dangerouslySetInnerHTML={{ __html: product.description }}></DescriptionText>
+                        <DescriptionText id="description">
+                            <ProductDescription text={product.description} />
+                        </DescriptionText>
                         </>
                     }
                 </ProductContainer>

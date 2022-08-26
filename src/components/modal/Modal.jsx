@@ -7,6 +7,13 @@ import {
 } from "./Modal.styled";
 
 export default class Modal extends Component {
+
+    componentDidMount() {
+        document.body.style.overflow = "hidden";
+    }
+    componentWillUnmount() {
+        document.body.style.overflow = "overlay";
+    }
     render() {
         const { inCart, currency, onClose, cartAmountHandler } = this.props;
         const amount = inCart.length !== 0 ? inCart.length : 0;
