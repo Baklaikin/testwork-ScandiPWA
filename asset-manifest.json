@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/testwork-scandipwa/static/css/main.e65027b6.css",
-    "main.js": "/testwork-scandipwa/static/js/main.9246f45d.js",
+    "main.js": "/testwork-scandipwa/static/js/main.8fbc8ca6.js",
     "static/js/540.b17f6110.chunk.js": "/testwork-scandipwa/static/js/540.b17f6110.chunk.js",
     "static/js/584.546f1477.chunk.js": "/testwork-scandipwa/static/js/584.546f1477.chunk.js",
     "static/js/350.e3dea4cf.chunk.js": "/testwork-scandipwa/static/js/350.e3dea4cf.chunk.js",
@@ -18,7 +18,7 @@
     "static/media/right-arrow.svg": "/testwork-scandipwa/static/media/right-arrow.bfe71cb51a428ecea44356bb1599979f.svg",
     "static/media/arrow-down.svg": "/testwork-scandipwa/static/media/arrow-down.90b7f0836b7a96a43d28bb4629d28801.svg",
     "main.e65027b6.css.map": "/testwork-scandipwa/static/css/main.e65027b6.css.map",
-    "main.9246f45d.js.map": "/testwork-scandipwa/static/js/main.9246f45d.js.map",
+    "main.8fbc8ca6.js.map": "/testwork-scandipwa/static/js/main.8fbc8ca6.js.map",
     "540.b17f6110.chunk.js.map": "/testwork-scandipwa/static/js/540.b17f6110.chunk.js.map",
     "584.546f1477.chunk.js.map": "/testwork-scandipwa/static/js/584.546f1477.chunk.js.map",
     "350.e3dea4cf.chunk.js.map": "/testwork-scandipwa/static/js/350.e3dea4cf.chunk.js.map",
@@ -28,6 +28,6 @@
   },
   "entrypoints": [
     "static/css/main.e65027b6.css",
-    "static/js/main.9246f45d.js"
+    "static/js/main.8fbc8ca6.js"
   ]
 }
