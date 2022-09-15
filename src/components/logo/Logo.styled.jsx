@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Logo = styled.div`
 width: 33px;
-& > a{
+& > a {
     border-bottom: none;
 }
 `;

@@ -9,6 +9,7 @@ margin: 0 auto;
 padding: 0 101px;
 max-width: 1440px;
 height: 80px;
+outline: none;
 `;
 
 export const Navigation = styled.nav`

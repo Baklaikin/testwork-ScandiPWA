@@ -19,11 +19,11 @@ rgba(57, 55, 72, 0.22) 100%);
 export const ModalWindow = styled.div`
 position: absolute;
 top: 80px;
-right: 320px;
+right: 100px;
 padding: 32px 16px;
 width: 325px;
-max-height: 650px;
-overflow: auto;
+max-height: 680px;
+// overflow: auto;
 background-color: white;
 z-index: 1;
 `;
@@ -77,6 +77,9 @@ border-bottom: none;
 export const ModalList = styled.div`
 display: flex;
 flex-direction: column;
+max-height: 460px;
+margin-bottom: 32px;
+overflow: overlay;
 `;
 
 export const TotalContainer = styled.div`

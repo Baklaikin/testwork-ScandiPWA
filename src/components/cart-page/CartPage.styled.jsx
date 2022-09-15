@@ -68,6 +68,7 @@ line-height: 1.6;
 color: var(--text-color);
 color: ${props => props.chosen ? "var(--light-color)" : "var(--text-color)"};
 background-color: ${props=>props.chosen ? "var(--text-color)" : "var(--light-color)"};
+cursor: pointer;
 `;
 
 export const AttributesColorItem = styled(AttributesItem)`
@@ -79,6 +80,7 @@ min-width: 36px;
 width: 36px;
 height: 36px;
 border: 1px solid ${props => props.border ? "var(--button-color)" : "transparent"};
+cursor: pointer;
 `;
 
 export const Item = styled.li`

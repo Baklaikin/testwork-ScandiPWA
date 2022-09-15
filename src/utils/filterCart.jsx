@@ -1,4 +1,4 @@
-export default function filterCart(items, cart){
+ export default function filterCart(items, cart){
     return items.forEach((item) => { 
         const filteredProduct = cart
             .filter(product => product.id === item.id)

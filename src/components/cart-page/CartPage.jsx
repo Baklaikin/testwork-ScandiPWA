@@ -30,44 +30,65 @@ export default class CartPage extends Component{
     }
 
     attributesRender = product => {
-        const { attributes } = product;
-        return attributes.map((attribute) => {
-            return <Item key={uuidv4()}>
-                <Size>{attribute.name}:</Size>
-                <AttributesList>
-                    {attribute.items.map((item, idx) => {
-                        const itemName = attribute.id.toLowerCase();
-                        const inState = itemName && product[itemName];
-                        const canRender = inState && idx === product[itemName].value;
+        return product.attributes.map((attribute) => {
+            return (
+                <Item key={uuidv4()}>
+                    <Size>{attribute.name}:</Size>
+                    <AttributesList>
+                        {attribute.items.map((item, idx) => {
+                            const itemName = attribute.id.toLowerCase();
+                            const inState = itemName && product[itemName];
+                            const canRender = inState && idx === product[itemName].value;
+                            const handleAttributesChange = this.props.handleAttributesChange;
                                 if (itemName === "color") {
                                     return itemName && canRender ?
                                         <AttributesColorItem
-                                            onClick={e => this.props.cartAmountHandler(e, item)}
-                                            key={uuidv4()} border
+                                            onClick={e => {
+                                                handleAttributesChange(e, product, idx)
+                                                this.props.cartAmountHandler(e, item)
+                                                }
+                                            }
+                                            key={uuidv4()}
+                                            border
+                                            data-name={itemName}   
                                         >
-                                            <ColorWrapper color={`${item.value}`}
+                                            <ColorWrapper
+                                                color={`${item.value}`}
                                             >{item.value}
                                             </ColorWrapper>
-                                        </AttributesColorItem> :
+                                        </AttributesColorItem>
+                                        :
                                         <AttributesColorItem
                                             key={uuidv4()}
                                             color={`${item.value}`}
-                                        ><ColorWrapper color={`${item.value}`}>{item.value}</ColorWrapper>
+                                            data-name={itemName}
+                                            onClick={e => handleAttributesChange(e, product, idx)}
+                                        ><ColorWrapper
+                                            color={`${item.value}`}
+                                            >{item.value}
+                                            </ColorWrapper>
                                         </AttributesColorItem>
                                 } else {
                                     return itemName && canRender ?
                                         <AttributesItem
                                             chosen
                                             key={uuidv4()}
-                                        >{item.value}
+                                            data-name={itemName}
+                                            onClick={e => handleAttributesChange(e, product, idx)}
+                                            >{item.value}
                                         </AttributesItem>
                                         :
-                                        <AttributesItem key={uuidv4()}>{item.value}</AttributesItem>
+                                        <AttributesItem key={uuidv4()}
+                                            data-name={itemName}
+                                            onClick={e => handleAttributesChange(e, product, idx)}
+                                            >{item.value}
+                                        </AttributesItem>
                                 }
-                        })
-                    }
-                </AttributesList>
-            </Item>
+                            })
+                        }
+                    </AttributesList>
+                </Item>
+            )
         })
     }
 
@@ -92,28 +113,29 @@ export default class CartPage extends Component{
             attributesRender: this.attributesRender
         }
                 
-        return <Container>
-            <PageName>Cart</PageName>
-            {noProduct ?
-                <NoProductTitle>You haven't add any product in cart so far</NoProductTitle>
-                : null
-            }
-            <CartList>
-                {this.props && cart.map((item, idx) =>
-                    <CartListItem
-                        key={uuidv4()}
-                        item={item}
-                        idx={idx}
-                        {...cartListItemProps}
-                    />
-                )}
-            </CartList>
-            {items.length > 0 ?
+        return (
+            <Container>
+                <PageName>Cart</PageName>
+                {noProduct ?
+                    <NoProductTitle>You haven't add any product in cart so far</NoProductTitle>
+                    : null
+                }
+                <CartList>
+                    {this.props && cart.map((item, idx) =>
+                        <CartListItem
+                            key={uuidv4()}
+                            item={item}
+                            idx={idx}
+                            {...cartListItemProps}
+                        />
+                    )}
+                </CartList>
+                {items.length > 0 ?
                 <CartTotal
                     {...cartTotalProps}
                 />
                 : null
-            }
-        </Container>;
+                }
+            </Container>)
     }
 }

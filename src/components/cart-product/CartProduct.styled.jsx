@@ -18,6 +18,10 @@ font-weight: 300;
 color: var(--text-color);
 `;
 
+export const CartTitleBrand = styled(CartTitle)`
+margin-bottom: 8px;
+`;
+
 export const CartContainer = styled.div`
 display: flex;
 height: auto;
@@ -94,7 +98,8 @@ font-weight: 400;
 font-size: 14px;
 line-height: 1.6;
 color: ${props => props.chosen ? "white" : "var(--text-color)"};
-background-color: ${props=>props.chosen ? "black" : "white"};
+background-color: ${props => props.chosen ? "black" : "white"};
+cursor: pointer;
 `;
 
 export const ColorWrapper = styled.div`

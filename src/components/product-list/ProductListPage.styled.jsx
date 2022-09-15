@@ -2,20 +2,13 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const List = styled.ul`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-column-gap: 40px;
-  grid-row-gap: 40px;
-  list-style: none;
-  padding: 0;
-  width: 100%;
-
-//   -ms-overflow-style: none;
-// scrollbar-width: none;
-
-// &::-webkit-scrollbar{
-//     display: none;
-// }
+display: grid;
+grid-template-columns: 1fr 1fr 1fr;
+grid-column-gap: 40px;
+grid-row-gap: 40px;
+list-style: none;
+padding: 0;
+width: 100%;
 `;
 
 export const Item = styled(NavLink)`
@@ -38,7 +31,7 @@ text-transform: capitalize;
 `;
 
 export const ItemLi = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
 `;

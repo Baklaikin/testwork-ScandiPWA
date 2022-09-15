@@ -56,7 +56,7 @@ list-style: none;
 
 export const Item = styled.li`
 &:not(:last-of-type){
-    margin-bottom:32px;
+margin-bottom:32px;
 }
 `;
 
@@ -100,11 +100,10 @@ font-family: 'Raleway';
 font-weight: 700;
 font-size: 24px;
 color: var(--text-color);
-margin-bottom:20px;
+margin-bottom: 20px;
 `;
 
 export const DescriptionText = styled.div`
-max-height: 203px;
 overflow: auto;
 font-family: 'Roboto', sans-serif;
 font-weight: 400;
@@ -122,8 +121,8 @@ font-size: 18px;
 }
 
 & ul {
-    list-style: initial;
-    padding-left: 20px;
+list-style: initial;
+padding-left: 20px;
 }
 `;
 

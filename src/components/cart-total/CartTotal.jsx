@@ -4,7 +4,9 @@ import {CartTotalContainer,CartTotalText,CartTotalSpan,CartButton } from "./Cart
 
 export default class CartTotal extends Component{
     render() {
-        const {currency, countTax, items, tax} = this.props;
+        const { currency, countTax, items, tax } = this.props;
+        const alertMessage = `You have product in cart that doesn't have chosen parameters, please choose parameters`;
+        const successMessage = 'Order is successful';
         return <CartTotalContainer>
                 <CartTotalText>
                     <CartTotalSpan>Tax 21%:</CartTotalSpan>
@@ -19,7 +21,21 @@ export default class CartTotal extends Component{
                     </CartTotalSpan>
                         {currency}{countTax(items, currency)}
                 </CartTotalText>
-                <CartButton type="button"
+            <CartButton
+                type="button"
+                onClick={() => {
+                    const productWithoutChosenAttribute = items.filter(item => Object.keys(item).length === 9).length;
+                    if (productWithoutChosenAttribute > 0) {
+                        return (
+                            setTimeout(() => {
+                                    alert(alertMessage)
+                            }, 500)
+                        )
+                    }
+                    setTimeout(() => {
+                        alert(successMessage)
+                    }, 500)
+                }}
                 >Order
                 </CartButton>
             </CartTotalContainer>

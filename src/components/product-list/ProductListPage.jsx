@@ -19,7 +19,7 @@ export default class ProductListPage extends Component{
     }    
   }
   
-  componentDidUpdate(prevProps,_) {
+  componentDidUpdate(prevProps, _) {
     if (prevProps.category !== this.props.category) {
       getInfo(getCategory(this.props.category))
         .then(res => this.setState({ products: res.category.products }))
@@ -35,7 +35,8 @@ export default class ProductListPage extends Component{
             <List> 
             {products &&
               products.map(prod => {
-                const price = prod.prices.find(price => price.currency.symbol === currency.trim())
+                const price = prod.prices
+                  .find(price => price.currency.symbol === currency.trim())
                 return(
                   <ItemLi key={prod.id}>
                     <Item
@@ -47,7 +48,8 @@ export default class ProductListPage extends Component{
                         price={price.amount}
                         currency={currency}
                         handleClick={setProduct}
-                        inCart={inCart} />
+                        inCart={inCart}
+                      />
                     </Item>
                   </ItemLi>)
                 }

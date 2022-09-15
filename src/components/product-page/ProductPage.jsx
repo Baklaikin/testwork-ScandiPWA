@@ -13,6 +13,7 @@ export default class ProuctPage extends Component {
     state = {
         product: null,
         currency: '',
+        imageSource: null
     };
     
     componentDidMount() {
@@ -44,7 +45,8 @@ export default class ProuctPage extends Component {
         })
     }
 
-    mainImageHandler = (index) => document.getElementById("main-image").src=`${this.state.product.gallery[index]}`;
+    mainImageHandler = (index) =>
+    this.setState({ imageSource: `${this.state.product.gallery[index]}` });
     
     productPriceHandler = (prices) => {
         return prices.map((price) => {
@@ -66,7 +68,11 @@ export default class ProuctPage extends Component {
                                 return (
                                     <Item key={item}>
                                     <MiniImageThumb>
-                                        <Image src={item} alt={product.description} onClick={()=>this.mainImageHandler(index)} />
+                                            <Image
+                                                src={item}
+                                                alt={product.description}
+                                                onClick={() => this.mainImageHandler(index)}
+                                            />
                                     </MiniImageThumb>
                                     </Item>
                                 )
@@ -76,11 +82,13 @@ export default class ProuctPage extends Component {
                 </MiniPicturesWrapper>
                 <MainPictureWrapper>
                     {product && !product.inStock &&
-                        <MainPictureBlock><Image
+                        <MainPictureBlock>
+                            <Image
                             id="main-image"
-                            src={product.gallery[0]}
+                            src={this.state.imageSource ? this.state.imageSource : product.gallery[0]}
                             alt={product.description}
-                        />   <OutOfStockContainer>
+                            />
+                            <OutOfStockContainer>
                                 <OutOfStockText>
                                     Out of Stock
                                 </OutOfStockText>
@@ -88,7 +96,7 @@ export default class ProuctPage extends Component {
                         </MainPictureBlock>}
                     {product && product.inStock && <Image
                             id="main-image"
-                            src={product.gallery[0]}
+                            src={this.state.imageSource ? this.state.imageSource : product.gallery[0]}
                             alt={product.description}
                         />
                     }

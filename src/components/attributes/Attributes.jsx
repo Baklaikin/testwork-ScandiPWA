@@ -52,7 +52,8 @@ export default class Attributtes extends Component{
                                         >{it.value}
                                         </AttItem>
                                     }
-                            })}
+                                })
+                            }
                         </ItemsList>
                     </AttributeItemContainer>
                 </AttributeItem>)

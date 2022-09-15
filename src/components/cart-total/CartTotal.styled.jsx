@@ -24,6 +24,11 @@ height: 43px;
 color: var(--light-color);
 background-color: var(--button-color);
 border: none;
+transform: scale(1);
+transition: transform 0.5s ease;
+&:active {
+ transform: scale(0.9);
+}
 `;
 
 export const CartTotalContainer = styled.div`

@@ -11,18 +11,12 @@ const CurrencyPicker = lazy(() => import("../currency/CurrencyPicker"));
 export default class Header extends Component{
     state = {
         currencies:null,
-        currency: "",
         isVisible: false,
         shouldModalOpen: false
     }
 
     componentDidMount() {
         getInfo(getCurrencyQuerry).then(res => this.setState({ currencies: res.currencies }))
-        window.addEventListener('keydown', this.closeCurrencyHandler);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.closeCurrencyHandler)
     }
 
     closeCurrencyHandler = (e) => {
@@ -32,6 +26,7 @@ export default class Header extends Component{
 
     openCurrenciesHandler = (e) => {
         if (this.state.shouldModalOpen) this.openModal(e)
+        if(!this.state.shouldModalOpen && this.state.isVisible) this.setState({shouldModalOpen: !this.state.shouldModalOpen, isVisible: !this.state.isVisible})
         this.setState({ isVisible: !this.state.isVisible })
     };
 
@@ -51,17 +46,21 @@ export default class Header extends Component{
         this.setState({ shouldModalOpen: !this.state.shouldModalOpen })
     }
     render() {
-        const { currencies, isVisible, shouldModalOpen} = this.state;
+        const { currencies, isVisible, shouldModalOpen } = this.state;
         const { currency, onChange, inCart } = this.props;
         const cartIsNotEmpty = inCart.length !== 0;
         return (
-            <Container id="header" onClick={this.closeModal}>
+            <Container id="header"
+                onClick={this.closeModal}
+                onKeyDown={this.closeCurrencyHandler}
+                tabIndex={-1}>
                 <Navigation>
                     <NavigationList { ...this.props} />
                 </Navigation>
                 <Logotype onChange={onChange} />
                 <Cart id="cart">
-                    <CurrencyPicker id="currency"
+                    <CurrencyPicker
+                        id="currency"
                         onClick={this.setCurrencyHandler}
                         openCurrencyHandler={this.openCurrenciesHandler}
                         currencies={currencies}

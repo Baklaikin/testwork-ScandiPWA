@@ -1,14 +1,15 @@
-import { Component } from "react"
+import { Component } from "react";
+import { DescriptionText } from './ProductPage.styled';
+import DOMPurify from 'dompurify';
+
 export default class ProductDescription extends Component {
     state = {
         text: ``
     }
     componentDidMount() {
-    if(this.props.text) this.setState({text: this.props.text})
+        if (this.props.text) this.setState({ text: DOMPurify.sanitize(this.props.text)})
     }
-    
     render() {
-        const textBlock = document.getElementById("description");
-        if (textBlock) return textBlock.innerHTML = this.state.text
+        return <DescriptionText dangerouslySetInnerHTML={{ __html: this.state.text}}></DescriptionText>
     }    
 }

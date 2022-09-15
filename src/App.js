@@ -56,6 +56,53 @@ class App extends Component {
     this.setState({ inCart: [...this.state.inCart, data] });
   };
 
+  handleAttributesChange = (e, data, idx) => {
+    let newArr = [];
+    // Looking for products with the same id and same attributes names to gather them in one array and to change the choice parameters further
+    this.state.inCart
+      .filter((item) => item.id === data.id)
+      .filter((item) => Object.keys(item).length === Object.keys(data).length)
+      .filter((elem) =>
+        Object.values(elem)
+          .map((element, index) => {
+            // Checking if attribute values match
+            const sameElementInItem = Object.values(data)[index];
+            const productIsArray = Array.isArray(element);
+            const productIsObject =
+              typeof element === "object" && element !== null;
+            if (productIsObject)
+              return element.value === sameElementInItem.value;
+            if (productIsArray && element.length === 1)
+              return element[0] === sameElementInItem[0];
+            if (productIsArray && element.length > 1) return true;
+            return element === sameElementInItem;
+          })
+          .every((el) => el === true)
+      )
+      .forEach((el) => {
+        // Adding chosen product indexes to new array that will be used to find and change products in cart
+        const indx = this.state.inCart.findIndex((elem) => elem === el);
+        newArr.push(indx);
+      });
+    let changedProducts = [...this.state.inCart];
+    newArr.forEach((product) => {
+      // Reading new choice parameters and changing products in our state cart
+      changedProducts[product] = {
+        ...this.state.inCart[product],
+        [e.currentTarget.dataset.name.toLowerCase()]: {
+          id: e.currentTarget.dataset.name.toLowerCase(),
+          value: idx,
+        },
+      };
+    });
+    // Writing to state new cart only once, after all changes
+    this.setState({
+      inCart: changedProducts,
+    });
+    // Adding to local storage new cart, to make sure we have chosen products in cart after page reload
+    localStorage.setItem("cart", `${JSON.stringify(this.state.inCart)}`);
+  };
+
   handleProduct = (e, id) => {
     if (e.currentTarget.id === "addToCart") {
       e.preventDefault();
@@ -95,6 +142,7 @@ class App extends Component {
           onChange={this.handleCategoryChange}
           onChoice={this.currencyHandler}
           cartAmountHandler={this.cartAmountHandler}
+          handleAttributesChange={this.handleAttributesChange}
         />
         <Suspense>
           <Routes>
@@ -129,6 +177,7 @@ class App extends Component {
                   currency={currency}
                   cart={inCart}
                   cartAmountHandler={this.cartAmountHandler}
+                  handleAttributesChange={this.handleAttributesChange}
                 />
               }
             ></Route>

@@ -5,10 +5,15 @@ import {Logo} from "./Logo.styled";
 
 export default class Logotype extends Component{
     render() {
-        return  <Logo>
-                    <NavLink to="/" onClick={() => this.props.onChange("all")}>
-                        <LogoIcon />
-                    </NavLink>
-                </Logo>
+        return (
+            <Logo>
+                <NavLink
+                    to="/"
+                    onClick={() => this.props.onChange("all")}
+                >
+                    <LogoIcon />
+                </NavLink>
+            </Logo>
+        )
     }
 }

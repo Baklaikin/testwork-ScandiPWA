@@ -20,7 +20,7 @@ cursor: pointer;
 export const Select = styled.ul`
 position: absolute;
 top: 60px;
-right: 317px;
+right: 125px;
 padding: 0;
 margin: 0;
 width: 114px;
